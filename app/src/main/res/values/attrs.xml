@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <declare-styleable name="GradientStrokedTextView">-->
+<!--        <attr name="strokeThickness" format="dimension"/>-->
+<!--        <attr name="strokeColor" format="color"/>-->
+<!--        <attr name="gradientStartColor" format="color"/>-->
+<!--        <attr name="gradientEndColor" format="color"/>-->
+<!--    </declare-styleable>-->
+
+    <declare-styleable name="StrokedTextView">
+        <attr name="strokeThickness" format="dimension"/>
+        <attr name="strokeColor" format="color"/>
+        <attr name="gradientStartColor" format="color"/>
+        <attr name="gradientEndColor" format="color"/>
+        <attr name="fontWeight" format="integer"/>
+    </declare-styleable>
+
+</resources>

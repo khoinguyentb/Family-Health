@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name" translatable="false">Family Health</string>
+
+    <string name="setting">Setting</string>
+    <string name="cancel">Cancel</string>
+    <string name="title_dialog_permission">Feature Permission</string>
+    <string name="content_dialog_permission">You have chosen not to ask for the notifications permission again. Please go to the app settings to grant permission.</string>
+
+</resources>
