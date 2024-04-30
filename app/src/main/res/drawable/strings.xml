@@ -1,11 +1,10 @@
 <resources>
-    <string name="app_name" translatable="false">Family Health</string>
+    <string name="app_name" translatable="false">BMI Calculator</string>
+    <string name="BMI" translatable="false">BMI</string>
 
-
-    <string name="Next">Next</string>
-    <string name="desSplash">This action can contain ads</string>
     <string name="splash">This action can contain ads</string>
     <string name="Language">Language</string>
+    <string name="Next">Next</string>
     <string name="NormalWeight">Normal weight</string>
     <string name="Difference">Difference</string>
     <string name="BodyComposition">Body Composition</string>
@@ -25,8 +24,7 @@
     <string name="desIntro3">Save your information and access it whenever you want</string>
 
     <string name="Notification">Notification</string>
-    <string name="Camera">Camera</string>
-    <string name="Location">Location</string>
+    <string name="Storage">Storage</string>
     <string name="permission13">requires permission to use the Notification.</string>
     <string name="permissionOther">requires permission to use the Storage.</string>
     <string name="Continue">Continue</string>
@@ -35,5 +33,7 @@
     <string name="cancel">Cancel</string>
     <string name="title_dialog_permission">Feature Permission</string>
     <string name="content_dialog_permission">You have chosen not to ask for the storage and notification permission again. Please go to the app settings to grant permission.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

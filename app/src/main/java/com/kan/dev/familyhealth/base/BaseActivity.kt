@@ -18,9 +18,9 @@ import androidx.viewbinding.ViewBinding
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.utils.SystemUtils
 
-abstract class BaseActivity<T : ViewBinding?> : AppCompatActivity() {
+abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     val PERMISSION_REQUEST_CODE = 112
-    protected var binding: T? = null
+    protected lateinit var binding: T
     protected abstract fun setViewBinding(): T
     protected abstract fun initData()
     protected abstract fun initView()
@@ -45,7 +45,6 @@ abstract class BaseActivity<T : ViewBinding?> : AppCompatActivity() {
             window.decorView.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
             window.decorView.windowInsetsController!!.setSystemBarsAppearance(APPEARANCE_LIGHT_STATUS_BARS, APPEARANCE_LIGHT_STATUS_BARS)
-
         }else{
             window.decorView.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR

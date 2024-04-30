@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@color/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.PermissionActivity">
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/poppinsBold_22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:text="@string/Permission"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="@dimen/_170sdp"
+        android:layout_height="@dimen/_130sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:src="@drawable/permission"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/tvDes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/poppins_14"
+        android:textColor="@color/white"
+        android:paddingHorizontal="@dimen/_30sdp"
+        android:gravity="center"
+        android:text="@string/permissionOther"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Location"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_language_selector"
+        app:layout_constraintTop_toBottomOf="@id/tvDes"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:elevation="@dimen/_5sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/Location"
+            android:textColor="@color/white"
+            style="@style/poppinsMedium_14"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/swLocation"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:src="@drawable/switch_on"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Camera"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_language_selector"
+        app:layout_constraintTop_toBottomOf="@id/Location"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:elevation="@dimen/_5sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/Camera"
+            android:textColor="@color/white"
+            style="@style/poppinsMedium_14"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/swCamera"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:src="@drawable/switch_on"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Notification"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_language_selector"
+        app:layout_constraintTop_toBottomOf="@id/Camera"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:elevation="@dimen/_5sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/Notification"
+            android:textColor="@color/white"
+            style="@style/poppinsMedium_14"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/swNotification"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:src="@drawable/switch_on"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/Continue"
+        style="@style/poppinsMedium_16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Continue"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:textColor="@color/YellowFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Notification" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.kan.dev.familyhealth.base.BaseActivity
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 
@@ -22,13 +21,6 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     open fun handlerBackPressed(){}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        callback = object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                handlerBackPressed()
-//            }
-//        }
-//
-//        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
     protected fun addDispose(disposable: Disposable?) {

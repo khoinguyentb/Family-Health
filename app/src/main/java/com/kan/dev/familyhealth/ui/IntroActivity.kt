@@ -1,49 +1,53 @@
 package com.kan.dev.familyhealth.ui
 
-import android.os.Bundle
-import android.util.Log
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.kan.dev.familyhealth.R
+import android.content.Intent
+import com.kan.dev.familyhealth.adapter.IntroAdapter
+import com.kan.dev.familyhealth.base.BaseActivity
+import com.kan.dev.familyhealth.data.Data.Companion.introModelList
+import com.kan.dev.familyhealth.databinding.ActivityIntroBinding
+import com.kan.dev.familyhealth.utils.SharePreferencesUtils
+import com.kan.dev.familyhealth.utils.handler
+import com.kan.dev.familyhealth.utils.isClick
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class IntroActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_intro)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+class IntroActivity : BaseActivity<ActivityIntroBinding>() {
+    override fun setViewBinding(): ActivityIntroBinding {
+        return ActivityIntroBinding.inflate(layoutInflater)
+    }
+    @Inject
+    lateinit var sharePre : SharePreferencesUtils
+    private lateinit var adapter : IntroAdapter
+    private lateinit var intent: Intent
+    override fun initData() {
+        adapter = IntroAdapter(this)
+        adapter.setItems(introModelList)
+    }
+
+    override fun initView() {
+        binding.apply {
+            viewpagerIntro.adapter = adapter
+            wormDotsIndicator.attachTo(viewpagerIntro)
         }
     }
 
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("Kan","onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("Kan","onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("Kan","onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("Kan","onStop")
-    }
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("Kan","onDestroy")
+    override fun initListener() {
+        binding.apply {
+            Next.setOnClickListener{
+                if (isClick) {
+                    isClick = false
+                    val page: Int = viewpagerIntro.getCurrentItem()
+                    if (page == 2) {
+                        intent = Intent(this@IntroActivity,PermissionActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        viewpagerIntro.currentItem = page + 1
+                    }
+                    handler.postDelayed(Runnable { isClick = true }, 500)
+                }
+            }
+        }
     }
 }

@@ -5,6 +5,54 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ui.IntroActivity">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpagerIntro"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="@dimen/_3ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
+        tools:ignore="MissingConstraints">
+
+    </androidx.viewpager2.widget.ViewPager2>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75"/>
+
+    <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+        android:id="@+id/wormDotsIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:dotsColor="@color/YellowFF"
+        app:dotsCornerRadius="@dimen/_10sdp"
+        app:dotsSize="@dimen/_6sdp"
+        app:dotsSpacing="4dp"
+        app:dotsStrokeColor="@color/white"
+        app:dotsStrokeWidth="@dimen/_3sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"/>
+
+    <TextView
+        android:id="@+id/Next"
+        style="@style/poppins_16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Next"
+        android:textColor="@color/YellowFF"
+        android:layout_marginEnd="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/wormDotsIndicator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/wormDotsIndicator" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

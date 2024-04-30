@@ -22,6 +22,20 @@ fun Activity.requestAppPermissionNotification(requestCode: Int) {
 fun Activity.requestAppPermissionCamera(requestCode: Int) {
     ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), requestCode)
 }
+fun Activity.requestAppPermissionLocation(requestCode: Int) {
+    if (Build.VERSION.SDK_INT >= 29){
+        ActivityCompat.requestPermissions(this, arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_NETWORK_STATE,
+            Manifest.permission.ACCESS_BACKGROUND_LOCATION), requestCode)
+    }else{
+        ActivityCompat.requestPermissions(this, arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_NETWORK_STATE), requestCode)
+    }
+}
 
 fun Activity.checkPermissionCamera(): Boolean {
     if (ContextCompat.checkSelfPermission(
@@ -33,6 +47,22 @@ fun Activity.checkPermissionCamera(): Boolean {
     }
     return true
 }
+
+fun Activity.checkPermissionLocation(): Boolean {
+    if (ContextCompat.checkSelfPermission(
+            this,
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION).toString()
+        ) != PackageManager.PERMISSION_GRANTED
+    ) {
+        return false
+    }
+    return true
+}
+
 fun Activity.checkPermissionNotification(): Boolean {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         val notificationPermission = ContextCompat.checkSelfPermission(this,
