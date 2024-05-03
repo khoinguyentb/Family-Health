@@ -3,7 +3,20 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="main">#6C5CE7</color>
-
+    <color name="transfer">#00000000</color>
     <color name="background">#1C1B30</color>
     <color name="YellowFF">#FFDA66</color>
+
+    <color name="underweight">#82D142</color>
+    <color name="underweight20">#30C1FD</color>
+    <color name="very_severely_underweight">#00658F</color>
+    <color name="severely_underweight">#26A1A9</color>
+    <color name="normal">#8DC03F</color>
+    <color name="normal20">#36FF27</color>
+    <color name="overweight">#F68121</color>
+    <color name="overweight20">#FAC90D</color>
+    <color name="obese_class_I">#CA6E2F</color>
+    <color name="obese_class_I20">#FD7308</color>
+    <color name="obese_class_II">#E34D28</color>
+    <color name="obese_class_III">#F03C25</color>
 </resources>

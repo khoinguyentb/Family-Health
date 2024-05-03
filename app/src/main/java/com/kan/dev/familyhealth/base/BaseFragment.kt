@@ -49,12 +49,16 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initData()
         initView()
+        initListener()
     }
 
     abstract fun getBinding(inflater: LayoutInflater, container: ViewGroup?): T
 
+    abstract fun initData()
     abstract fun initView()
+    abstract fun initListener()
     fun replaceFullViewFragment(fragment: Fragment, addToBackStack: Boolean){
         (requireActivity()  as BaseActivity<*>).replaceBackStackFragment(fragment, android.R.id.content, addToBackStack)
     }

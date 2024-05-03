@@ -4,15 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ui.MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/app_name"
+        style="@style/poppinsBold_20"
+        android:textColor="@color/white"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/_30sdp"/>
+
+    <TextView
+        android:id="@+id/btnExercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        style="@style/poppinsBold_22"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:textColor="@color/YellowFF"
+        android:background="@drawable/bg_item_home"
+        android:paddingVertical="@dimen/_30sdp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:gravity="center"
+        android:text="@string/Exercise"/>
+
+    <TextView
+        android:id="@+id/btnBMI"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        style="@style/poppinsBold_22"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:textColor="@color/YellowFF"
+        android:background="@drawable/bg_item_home"
+        android:paddingVertical="@dimen/_30sdp"
+        app:layout_constraintTop_toBottomOf="@id/btnExercise"
+        android:gravity="center"
+        android:text="@string/BMI"/>
+
+    <TextView
+        android:id="@+id/btnMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        style="@style/poppinsBold_22"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:textColor="@color/YellowFF"
+        android:background="@drawable/bg_item_home"
+        android:paddingVertical="@dimen/_30sdp"
+        app:layout_constraintTop_toBottomOf="@id/btnBMI"
+        android:gravity="center"
+        android:text="@string/MAP" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

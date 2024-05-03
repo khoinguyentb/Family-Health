@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name" translatable="false">Family Health</string>
 
+    <string name="lb" translatable="false">lb</string>
+    <string name="kg" translatable="false">kg</string>
+    <string name="st" translatable="false">st</string>
+
+    <string name="cm" translatable="false">cm</string>
+    <string name="ft" translatable="false">ft</string>
 
     <string name="Next">Next</string>
     <string name="desSplash">This action can contain ads</string>
@@ -23,6 +29,24 @@
     <string name="desIntro1">By using your weight and height information, you can easily calculate your body mass index and view your status</string>
     <string name="desIntro2">Allows statistics of calculated data. And all your information is kept confidential</string>
     <string name="desIntro3">Save your information and access it whenever you want</string>
+    <string name="Exercise">Exercise</string>
+    <string name="BMI">BMI</string>
+    <string name="MAP">MAP</string>
+
+    <string name="Year">Year</string>
+    <string name="Month">Month</string>
+    <string name="Day">Day</string>
+    <string name="Ok">OK</string>
+    <string name="Statistics">Statistics</string>
+    <string name="Daily">Daily</string>
+    <string name="Weekly">Weekly</string>
+    <string name="Monthly">Monthly</string>
+    <string name="Update">Update</string>
+
+
+    <string name="Adults">Adults</string>
+    <string name="Teenagers">Teenagers</string>
+    <string name="Date">Date</string>
 
     <string name="Notification">Notification</string>
     <string name="Camera">Camera</string>
@@ -35,5 +59,28 @@
     <string name="cancel">Cancel</string>
     <string name="title_dialog_permission">Feature Permission</string>
     <string name="content_dialog_permission">You have chosen not to ask for the storage and notification permission again. Please go to the app settings to grant permission.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
+    //rate
+    <string name="title_rate_0">Do you like the app?</string>
+    <string name="des_rate_0">Let us know your experience</string>
+
+    <string name="title_rate_1">Oh, no!</string>
+    <string name="des_rate_1">Please give us some feedback</string>
+
+    <string name="title_rate_2">Oh, no!</string>
+    <string name="des_rate_2">Please give us some feedback</string>
+
+    <string name="title_rate_3">Oh, no!</string>
+    <string name="des_rate_3">Please give us some feedback</string>
+
+    <string name="title_rate_4">We love you too!</string>
+    <string name="des_rate_4">Thanks for your feedback</string>
+
+    <string name="title_rate_5">We love you too!</string>
+    <string name="des_rate_5">Thanks for your feedback</string>
+    <string name="btn_rate">Rate</string>
+    <string name="btn_exit">Exit</string>
 </resources>

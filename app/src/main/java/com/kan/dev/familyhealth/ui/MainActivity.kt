@@ -1,14 +1,35 @@
 package com.kan.dev.familyhealth.ui
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.kan.dev.familyhealth.R
+import android.content.Intent
+import com.kan.dev.familyhealth.base.BaseActivity
+import com.kan.dev.familyhealth.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BaseActivity<ActivityMainBinding>() {
+    override fun setViewBinding(): ActivityMainBinding {
+        return ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    override fun initData() {
+
+    }
+
+    override fun initView() {
+
+    }
+
+    override fun initListener() {
+        binding.apply {
+            btnExercise.setOnClickListener {
+                startActivity(Intent(this@MainActivity,ExerciseActivity::class.java))
+            }
+            btnBMI.setOnClickListener {
+                startActivity(Intent(this@MainActivity,BMIActivity::class.java))
+            }
+            btnMap.setOnClickListener {
+                startActivity(Intent(this@MainActivity,BMIActivity::class.java))
+            }
+        }
     }
 }

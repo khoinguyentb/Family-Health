@@ -2,7 +2,6 @@ package com.kan.dev.familyhealth.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import java.util.Random
 import java.util.StringTokenizer
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -10,7 +9,7 @@ import javax.inject.Singleton
 @Singleton
 class SharePreferencesUtils @Inject constructor(context: Context) {
 
-    private var mSharePref: SharedPreferences? = context.getSharedPreferences(Constance.APPLICATION, Context.MODE_PRIVATE)
+    private var mSharePref: SharedPreferences? = context.getSharedPreferences(APPLICATION, Context.MODE_PRIVATE)
 
     fun putString(str: String?, str2: String?) {
         val edit = mSharePref!!.edit()
@@ -84,17 +83,6 @@ class SharePreferencesUtils @Inject constructor(context: Context) {
             i++
             k--
         }
-    }
-
-    fun generateCompareCode(): String {
-        val random = Random()
-        val codeBuilder: StringBuilder = StringBuilder(10)
-        for (i in 0 until 10) {
-            val randomIndex = random.nextInt(Constance.CHARACTERS.length)
-            val randomChar: Char = Constance.CHARACTERS[randomIndex]
-            codeBuilder.append(randomChar)
-        }
-        return codeBuilder.toString()
     }
 
 }

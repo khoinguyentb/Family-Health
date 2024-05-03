@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragment.CalculatorFragment">
+
+    <TextView
+        android:id="@+id/tv_title_calculator"
+        style="@style/poppinsBold_22"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_32sdp"
+        android:text="@string/Calculator"
+        android:textColor="@color/white"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/img_Reload"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_13sdp"
+        android:src="@drawable/reset"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_title_calculator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_title_calculator"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/img_Recent"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_13sdp"
+        android:src="@drawable/recent"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_title_calculator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_title_calculator"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_calculator"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="-16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="invisible"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <LinearLayout
+                android:id="@+id/Time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    style="@style/poppinsMedium_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="2024.4.12"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:src="@drawable/down_fill" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Female"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginHorizontal="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/selector_sex"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Time"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:id="@+id/img_male"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:src="@drawable/female" />
+
+                <TextView
+                    android:id="@+id/tv_male"
+                    style="@style/poppins_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:text="@string/Female"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Male"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginHorizontal="@dimen/_13sdp"
+                android:background="@drawable/unselector_sex"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Time"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:id="@+id/img_female"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:src="@drawable/male" />
+
+                <TextView
+                    android:id="@+id/tv_female"
+                    style="@style/poppins_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:text="@string/Male"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/frameAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_calculator"
+                android:layout_marginHorizontal="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/Female">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_margin="@dimen/_10sdp"
+                    style="@style/poppinsMedium_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Age"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgDrop"
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:src="@drawable/down_fill_yellow"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+                <com.shawnlin.numberpicker.NumberPicker
+                    android:id="@+id/number_picker"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imgDrop"
+                    app:np_dividerColor="#00000000"
+                    app:np_dividerDistance="@dimen/_30sdp"
+                    app:np_fadingEdgeStrength="0"
+                    app:np_max="150"
+                    app:np_min="1"
+                    app:np_orientation="horizontal"
+                    app:np_selectedTextColor="@color/YellowFF"
+                    app:np_selectedTextSize="@dimen/_22sdp"
+                    app:np_textColor="@color/white"
+                    app:np_textSize="@dimen/_16sdp"
+                    app:np_value="20"
+                    app:np_wheelItemCount="9"
+                    app:np_width="@dimen/_130sdp"
+                    tools:ignore="MissingConstraints" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/frameHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_item_calculator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frameAge">
+
+                <ImageView
+                    android:id="@+id/regular"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:src="@drawable/regular"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvHeight"
+                    style="@style/poppinsMedium_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:text="@string/Height"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/regular" />
+
+                <LinearLayout
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:padding="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/bg_line_unit"
+                    android:elevation="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+                    <TextView
+                        android:id="@+id/CM"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        style="@style/poppins_12"
+                        android:text="@string/cm"
+                        android:gravity="center"
+                        android:background="@drawable/bg_unit"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/FT"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        style="@style/poppins_12"
+                        android:text="@string/ft"
+                        android:gravity="center"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+
+
+                <com.kan.dev.familyhealth.utils.RularView
+                    android:id="@+id/rulerHeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvHeight"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    app:rv_alphaEnable="true"
+                    app:rv_defaultValue="100"
+                    app:rv_indcatorColor="@color/YellowFF"
+                    app:rv_indcatorType="line"
+                    app:rv_indcatorWidth="2dp"
+                    app:rv_itemSpacing="8dp"
+                    app:rv_maxLineColor="@color/white"
+                    app:rv_maxLineHeight="30dp"
+                    app:rv_maxLineWidth="3dp"
+                    app:rv_maxValue="300"
+                    app:rv_middleLineColor="@color/white"
+                    app:rv_middleLineHeight="20dp"
+                    app:rv_middleLineWidth="2dp"
+                    app:rv_minLineColor="@color/white"
+                    app:rv_minLineHeight="10dp"
+                    app:rv_minLineWidth="1dp"
+                    app:rv_minValue="60"
+                    app:rv_resultTextColor="@color/YellowFF"
+                    app:rv_resultTextSize="20sp"
+                    app:rv_scaleTextColor="#202036"
+                    app:rv_scaleTextSize="15sp"
+                    app:rv_unit="cm"
+                    app:rv_unitTextColor="@color/white"
+                    app:rv_unitTextSize="15sp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/frameWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_item_calculator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frameHeight">
+
+                <ImageView
+                    android:id="@+id/weight"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:src="@drawable/lineweight"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvWeight"
+                    style="@style/poppinsMedium_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:text="@string/Weight"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/weight" />
+
+                <LinearLayout
+                    android:layout_width="@dimen/_105sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:padding="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/bg_line_unit"
+                    android:elevation="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    >
+                    <TextView
+                        android:id="@+id/ST"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        style="@style/poppins_12"
+                        android:text="@string/st"
+                        android:gravity="center"
+                        android:background="@drawable/bg_unit"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/KG"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        style="@style/poppins_12"
+                        android:text="@string/kg"
+                        android:gravity="center"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/LB"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        style="@style/poppins_12"
+                        android:text="@string/lb"
+                        android:gravity="center"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+
+                <com.kan.dev.familyhealth.utils.RularView
+                    android:id="@+id/rulerWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvWeight"
+                    app:rv_alphaEnable="true"
+                    app:rv_defaultValue="100"
+                    app:rv_indcatorColor="@color/YellowFF"
+                    app:rv_indcatorType="line"
+                    app:rv_indcatorWidth="2dp"
+                    app:rv_itemSpacing="8dp"
+                    app:rv_maxLineColor="@color/white"
+                    app:rv_maxLineHeight="30dp"
+                    app:rv_maxLineWidth="3dp"
+                    app:rv_maxValue="500"
+                    app:rv_middleLineColor="@color/white"
+                    app:rv_middleLineHeight="20dp"
+                    app:rv_middleLineWidth="2dp"
+                    app:rv_minLineColor="@color/white"
+                    app:rv_minLineHeight="10dp"
+                    app:rv_minLineWidth="1dp"
+                    app:rv_minValue="3"
+                    app:rv_resultTextColor="@color/YellowFF"
+                    app:rv_resultTextSize="20sp"
+                    app:rv_scaleTextColor="#202036"
+                    app:rv_scaleTextSize="15sp"
+                    app:rv_unit="kg"
+                    app:rv_unitTextColor="@color/white"
+                    app:rv_unitTextSize="15sp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/btnCalculator"
+                style="@style/poppinsMedium_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_20sdp"
+                android:background="@drawable/bg_button_magenta"
+                android:elevation="@dimen/_10sdp"
+                android:paddingHorizontal="@dimen/_30sdp"
+                android:paddingVertical="@dimen/_10sdp"
+                android:text="@string/Calculator"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frameWeight" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

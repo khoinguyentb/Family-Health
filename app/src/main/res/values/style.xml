@@ -13,6 +13,12 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="poppins_12">
+        <item name="fontFamily">@font/poppins</item>
+        <item name="android:textSize">@dimen/_10ssp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
     <style name="poppinsMedium_14">
         <item name="fontFamily">@font/poppins_medium</item>
         <item name="android:textSize">@dimen/_12ssp</item>
@@ -30,7 +36,11 @@
         <item name="android:textSize">@dimen/_15ssp</item>
         <item name="android:textStyle">normal</item>
     </style>
-
+    <style name="poppinsBold_16">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">@dimen/_15ssp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     <style name="poppinsMedium_18">
         <item name="fontFamily">@font/poppins_medium</item>
         <item name="android:textSize">@dimen/_17ssp</item>
@@ -38,19 +48,19 @@
     </style>
 
     <style name="poppinsBold_20">
-        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="fontFamily">@font/poppins_bold</item>
         <item name="android:textSize">@dimen/_18ssp</item>
         <item name="android:textStyle">normal</item>
     </style>
 
     <style name="poppinsBold_22">
-        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="fontFamily">@font/poppins_bold</item>
         <item name="android:textSize">@dimen/_20ssp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="poppinsBold_48">
-        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="fontFamily">@font/poppins_bold</item>
         <item name="android:textSize">@dimen/_40ssp</item>
         <item name="android:textStyle">bold</item>
     </style>

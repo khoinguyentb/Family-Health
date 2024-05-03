@@ -92,3 +92,14 @@ fun Context.showPermissionSettingsDialog() {
         }
         .show()
 }
+
+fun Activity.showPermissionAgreeDialog() {
+    val builder = AlertDialog.Builder(this,R.style.YourCustomAlertDialogTheme)
+    builder.setMessage(getString(R.string.content_dialog_permission))
+        .setTitle(getString(R.string.title_dialog_permission))
+        .setCancelable(false)
+        .setPositiveButton(R.string.Agree) { p0, _ ->
+            p0.dismiss()
+        }
+    builder.show()
+}

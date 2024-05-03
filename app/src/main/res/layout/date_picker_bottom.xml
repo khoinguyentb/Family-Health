@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_date">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_300sdp"
+        android:orientation="vertical"
+        android:padding="@dimen/_20sdp"
+        android:elevation="@dimen/_5sdp"
+        android:background="@color/transfer"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/Date"
+            android:gravity="center"
+            style="@style/poppinsBold_16"/>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Year"
+                    android:textColor="@color/YellowFF"
+                    style="@style/poppins_14"
+                    />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/npYear"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_130sdp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        app:np_dividerColor="#00000000"
+                        app:np_dividerDistance="@dimen/_30sdp"
+                        app:np_itemSpacing="-30dp"
+                        app:np_fadingEdgeStrength="0"
+                        app:np_height="@dimen/_250sdp"
+                        app:np_selectedTextColor="@color/white"
+                        app:np_selectedTextSize="@dimen/_10sdp"
+                        app:np_textColor="#B3FFFFFF"
+                        app:np_textSize="@dimen/_8sdp"
+                        app:np_min="2019"
+                        app:np_max="2025"
+                        app:np_value="2024"
+                        app:np_wheelItemCount="3" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:src="@drawable/line_picker"
+                        android:translationY="-5dp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Month"
+                    android:textColor="@color/YellowFF"
+                    style="@style/poppins_14"
+                    />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/npMonths"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_130sdp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        app:np_dividerColor="#00000000"
+                        app:np_dividerDistance="@dimen/_30sdp"
+                        app:np_itemSpacing="-30dp"
+                        app:np_fadingEdgeStrength="0"
+                        app:np_height="@dimen/_250sdp"
+                        app:np_selectedTextColor="@color/white"
+                        app:np_selectedTextSize="@dimen/_10sdp"
+                        app:np_textColor="#B3FFFFFF"
+                        app:np_textSize="@dimen/_8sdp"
+                        app:np_min="1"
+                        app:np_max="12"
+                        app:np_value="4"
+                        app:np_wheelItemCount="3" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:src="@drawable/line_picker"
+                        android:translationY="-5dp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Day"
+                    android:textColor="@color/YellowFF"
+                    style="@style/poppins_14"
+                    />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/npDay"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_130sdp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        app:np_dividerColor="#00000000"
+                        app:np_dividerDistance="@dimen/_30sdp"
+                        app:np_fadingEdgeStrength="0"
+                        app:np_height="@dimen/_250sdp"
+                        app:np_itemSpacing="-30dp"
+                        app:np_max="30"
+                        app:np_min="1"
+                        app:np_selectedTextColor="@color/white"
+                        app:np_selectedTextSize="@dimen/_10sdp"
+                        app:np_textColor="#B3FFFFFF"
+                        app:np_textSize="@dimen/_8sdp"
+                        app:np_value="5"
+                        app:np_wheelItemCount="3" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:src="@drawable/line_picker"
+                        android:translationY="-4dp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:padding="@dimen/_5sdp">
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_40sdp"
+                android:elevation="@dimen/_5sdp"
+                android:text="@string/cancel"
+                style="@style/poppinsBold_16"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:background="@drawable/bg_button_cancle"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btnOke"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_40sdp"
+                android:elevation="@dimen/_5sdp"
+                android:text="@string/Ok"
+                style="@style/poppinsBold_16"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:background="@drawable/bg_button_magenta"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
