@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "816387959293",
+    "project_id": "family-healthy",
+    "storage_bucket": "family-healthy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816387959293:android:3a37992ae7f3b15cd65194",
+        "android_client_info": {
+          "package_name": "com.kan.dev.familyhealth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAr38rxJK1IlzvHEd7xEHRoVO1-AziweFY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

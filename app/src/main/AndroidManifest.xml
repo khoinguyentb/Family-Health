@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
     <application
         android:name=".base.Application"
         android:allowBackup="true"
@@ -26,6 +27,9 @@
         android:theme="@style/Theme.FamilyHealth"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.CalculatorBMIActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.RecentActivity"
             android:exported="false" />

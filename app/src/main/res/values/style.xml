@@ -59,6 +59,13 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="poppinsBold_40">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">@dimen/_35ssp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="lineHeight">@dimen/_10sdp</item>
+    </style>
+
     <style name="poppinsBold_48">
         <item name="fontFamily">@font/poppins_bold</item>
         <item name="android:textSize">@dimen/_40ssp</item>

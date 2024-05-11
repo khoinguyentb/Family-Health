@@ -83,4 +83,48 @@
     <string name="des_rate_5">Thanks for your feedback</string>
     <string name="btn_rate">Rate</string>
     <string name="btn_exit">Exit</string>
+
+    <string name="very_Severely_underweight">Very severely underweight</string>
+    <string name="tv_154">&lt; 15.4</string>
+    <string name="tv_154_255">15.4 – 25.5</string>
+    <string name="tv_226_263">22.6 – 26.3</string>
+    <string name="tv_264">&gt;= 26.4</string>
+
+
+    <string name="tv_16">&lt; 16</string>
+    <string name="severely_underweight">Severely underweight</string>
+    <string name="tv_16_169">16.0 – 16.9</string>
+    <string name="underweight">Underweight</string>
+    <string name="tv_17_184">17.0 – 18.4</string>
+    <string name="normal">Normal</string>
+    <string name="tv_185_249">18.5 – 24.9</string>
+    <string name="overweight">Overweight</string>
+    <string name="tv_25_299">25.0 – 29.9</string>
+    <string name="obese_Class_I">Obese Class I</string>
+    <string name="tv_30_349">30.0 – 34.9</string>
+    <string name="obese_Class_II">Obese Class II</string>
+    <string name="tv_35_399">35.0 – 39.9</string>
+    <string name="obese_class_III">Obese Class III</string>
+    <string name="tv_40"> &gt;= 40.0</string>
+
+
+    <string name="About">About</string>
+    <string name="BMIForAdults">BMI for Adults </string>
+    <string name="BMIForAdults1">(>21 years old)</string>
+    <string name="BMIForTeenagers">BMI for Teenagers </string>
+    <string name="BMIForTeenagers1">(&lt;=20 years old)</string>
+
+
+    <string name="Save">Save</string>
+
+    <string name="Centimeter">Centimeter</string>
+    <string name="Feet">Feet</string>
+    <string name="Kilogram">Kilogram</string>
+    <string name="Stone">Stone</string>
+    <string name="Pound">Pound</string>
+
+    <string name="SavedSuccessfully">Saved successfully</string>
+    <string name="DeleteConfirm">Delete confirm</string>
+    <string name="desDelete">Are you sure you want to delete this record?</string>
+    <string name="Delete">Delete</string>
 </resources>

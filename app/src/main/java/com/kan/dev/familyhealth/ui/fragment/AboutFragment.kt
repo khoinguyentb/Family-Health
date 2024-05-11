@@ -1,60 +1,62 @@
 package com.kan.dev.familyhealth.ui.fragment
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.kan.dev.familyhealth.R
+import com.kan.dev.familyhealth.adapter.AboutAdapter
+import com.kan.dev.familyhealth.base.BaseFragment
+import com.kan.dev.familyhealth.data.Data
+import com.kan.dev.familyhealth.databinding.FragmentAboutBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AboutFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class AboutFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class AboutFragment : BaseFragment<FragmentAboutBinding>() {
+    override fun getBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentAboutBinding {
+        return FragmentAboutBinding.inflate(layoutInflater)
+    }
+    private lateinit var adapter: AboutAdapter
+    override fun initData() {
+        adapter = AboutAdapter(requireActivity())
+        adapter.setItems(Data.aboutModelListAdults)
+        binding.rcvAbout.setAdapter(adapter)
+        binding.rcvAbout.setLayoutManager(
+            LinearLayoutManager(
+                requireActivity(),
+                RecyclerView.VERTICAL,
+                false
+            )
+        )
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun initView() {
+    }
+
+    override fun initListener() {
+        binding.Adults.setOnClickListener{
+            setAbout(true)
+        }
+        binding.Teenagers.setOnClickListener{
+            setAbout(false)
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about, container, false)
+    private fun setAbout(check: Boolean) {
+        binding.apply {
+            if (check) {
+                Adults.setBackgroundResource(R.drawable.bg_button_magenta)
+                Teenagers.setBackgroundResource(R.color.transfer)
+                adapter.setItems(Data.aboutModelListAdults)
+                des1.setText(R.string.BMIForAdults)
+                des2.setText(R.string.BMIForAdults1)
+            } else {
+                Teenagers.setBackgroundResource(R.drawable.bg_button_magenta)
+                Adults.setBackgroundResource(R.color.transfer)
+                adapter.setItems(Data.aboutModelListTeenagers)
+                des1.setText(R.string.BMIForTeenagers)
+                des2.setText(R.string.BMIForTeenagers1)
+            }
+        }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AboutFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AboutFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

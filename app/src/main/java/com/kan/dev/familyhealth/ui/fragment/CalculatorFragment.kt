@@ -15,7 +15,7 @@ import com.kan.dev.familyhealth.data.model.BMI
 import com.kan.dev.familyhealth.databinding.FragmentCalculatorBinding
 import com.kan.dev.familyhealth.dialog.DialogDate
 import com.kan.dev.familyhealth.interfacces.IDateClickListener
-import com.kan.dev.familyhealth.ui.BMIActivity
+import com.kan.dev.familyhealth.ui.CalculatorBMIActivity
 import com.kan.dev.familyhealth.ui.RecentActivity
 import com.kan.dev.familyhealth.utils.BMIS
 import com.kan.dev.familyhealth.utils.DATE_CHANGE
@@ -38,11 +38,11 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
         return FragmentCalculatorBinding.inflate(layoutInflater)
     }
     private lateinit var date: String
-    private lateinit var gender: String
+    private lateinit var genders: String
     private var age: Int = 0
     private var weight: Float = 0F
     private var height: Float = 0F
-    private var bmi: Double = 0.0
+    private var bmi: Float = 0f
     private var checkCm: Boolean = false
     private var checkSt: Boolean = false
     private var checkKg: Boolean = false
@@ -77,7 +77,7 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
     }
 
     private val maleClickListener = View.OnClickListener { v ->
-        gender = MALE
+        genders = MALE
         binding.Male.setBackground(ContextCompat.getDrawable(requireActivity(), R.drawable.selector_sex))
         binding.Female.setBackground(ContextCompat.getDrawable(requireActivity(), R.drawable.unselector_sex))
     }
@@ -91,7 +91,7 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
     }
 
     private val femaleClickListener = View.OnClickListener { v ->
-        gender = FEMALE
+        genders = FEMALE
         binding.Female.setBackground(ContextCompat.getDrawable(requireActivity(), R.drawable.selector_sex))
         binding.Male.setBackground(ContextCompat.getDrawable(requireActivity(), R.drawable.unselector_sex))
     }
@@ -110,7 +110,7 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
             isClick = false
             date = getCurrentDateFormatted()
             binding.tvTime.text = date
-            gender = MALE
+            genders = MALE
             binding.Male.background =
                 ContextCompat.getDrawable(requireActivity(), R.drawable.selector_sex)
             binding.Female.background =
@@ -146,9 +146,9 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
             } else if (checkSt) {
                 weight *= 6.350293f
             }
-            bmi = weight / (height.toDouble() / 100).pow(2.0)
+            bmi = weight / (height.toDouble() / 100).pow(2.0).toFloat()
 
-            bmi = (Math.round(bmi * 100) / 100).toString().toDouble()
+            bmi = (Math.round(bmi * 100) / 100).toString().toFloat()
 
             if (bmi > 70) {
                 Toast.makeText(requireContext(), getString(R.string.bmi_error), Toast.LENGTH_SHORT)
@@ -156,7 +156,7 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
             } else {
                 mBmi = BMI(
                     date,
-                    gender,
+                    genders,
                     age,
                     binding.rulerWeight.value,
                     checkCm,
@@ -165,9 +165,9 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
                     checkLb,
                     binding.rulerHeight.value,
                     bmi
-                )
+                    )
                 sharePre.putBoolean(DATE_CHANGE, true)
-                intent = Intent(requireContext(), BMIActivity::class.java)
+                intent = Intent(requireContext(), CalculatorBMIActivity::class.java)
                 intent.putExtra(BMIS, mBmi)
                 startActivity(intent)
             }
@@ -248,7 +248,7 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
         checkKg = false
         checkLb = false
         checkSt = true
-        gender = FEMALE
+        genders = FEMALE
         binding.rulerHeight.initViewParam(50f, 30f, 300f, 0.1f)
         binding.rulerWeight.initViewParam(20f, 0f, 48f, 0.1f)
         binding.rulerHeight.setUnit(getString(R.string.cm))
@@ -281,10 +281,6 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
         return dateFormat.format(date)
     }
 
-    private fun calculateBMI(weight: Float, height: Float): Double {
-        val heightInMeter = height / 100
-        return (weight / (heightInMeter * heightInMeter)).toDouble()
-    }
     override fun clickDateListener(date: String?) {
 
     }

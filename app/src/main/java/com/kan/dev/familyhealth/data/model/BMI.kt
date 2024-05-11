@@ -7,27 +7,27 @@ import java.io.Serializable
 
 @Entity(tableName = "bmi")
 data class BMI(
-    var time: String? = null,
+    var time: String,
 
-    var gender: String? = null,
+    var gender: String,
 
-    var age: Int = 0,
+    var age: Int,
 
-    var weight: Float? = null,
+    var weight: Float,
 
-    var checkCm: Boolean? = null,
+    var checkCm: Boolean,
 
-    var checkSt: Boolean? = null,
+    var checkSt: Boolean,
 
-    var checkKg: Boolean? = null,
+    var checkKg: Boolean,
 
-    var checkLb: Boolean? = null,
+    var checkLb: Boolean,
 
-    var height: Float? = null,
+    var height: Float,
 
-    var bmi: Double = 0.0,
+    var bmi: Float,
 
-    var isRecent: Boolean? = null
+    var isRecent: Boolean = false
 ) : Serializable{
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
