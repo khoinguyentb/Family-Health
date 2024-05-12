@@ -1,4 +1,4 @@
-package com.kan.dev.familyhealth.ui
+package com.kan.dev.familyhealth.ui.activity
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction

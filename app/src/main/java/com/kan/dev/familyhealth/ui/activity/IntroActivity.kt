@@ -1,4 +1,4 @@
-package com.kan.dev.familyhealth.ui
+package com.kan.dev.familyhealth.ui.activity
 
 import android.content.Intent
 import com.kan.dev.familyhealth.adapter.IntroAdapter
@@ -39,7 +39,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
                     isClick = false
                     val page: Int = viewpagerIntro.getCurrentItem()
                     if (page == 2) {
-                        intent = Intent(this@IntroActivity,PermissionActivity::class.java)
+                        intent = Intent(this@IntroActivity, PermissionActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {

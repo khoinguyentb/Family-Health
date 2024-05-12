@@ -15,8 +15,8 @@ import com.kan.dev.familyhealth.data.model.BMI
 import com.kan.dev.familyhealth.databinding.FragmentCalculatorBinding
 import com.kan.dev.familyhealth.dialog.DialogDate
 import com.kan.dev.familyhealth.interfacces.IDateClickListener
-import com.kan.dev.familyhealth.ui.CalculatorBMIActivity
-import com.kan.dev.familyhealth.ui.RecentActivity
+import com.kan.dev.familyhealth.ui.activity.CalculatorBMIActivity
+import com.kan.dev.familyhealth.ui.activity.RecentActivity
 import com.kan.dev.familyhealth.utils.BMIS
 import com.kan.dev.familyhealth.utils.DATE_CHANGE
 import com.kan.dev.familyhealth.utils.FEMALE
