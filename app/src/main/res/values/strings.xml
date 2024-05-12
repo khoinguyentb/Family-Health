@@ -133,4 +133,6 @@
     <string name="SignIn">Sign In</string>
     <string name="DontHave">Don’t have an account?</string>
     <string name="SignUp"> <u><i>Sign up </i></u></string>
+    <string name="SignUpNow">Sign up now</string>
+    <string name="PleaseSignUp">Please fill the details and create account</string>
 </resources>
