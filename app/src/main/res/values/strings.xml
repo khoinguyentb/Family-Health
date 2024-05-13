@@ -59,9 +59,6 @@
     <string name="cancel">Cancel</string>
     <string name="title_dialog_permission">Feature Permission</string>
     <string name="content_dialog_permission">You have chosen not to ask for the storage and notification permission again. Please go to the app settings to grant permission.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
     //rate
     <string name="title_rate_0">Do you like the app?</string>
@@ -133,6 +130,18 @@
     <string name="SignIn">Sign In</string>
     <string name="DontHave">Don’t have an account?</string>
     <string name="SignUp"> <u><i>Sign up </i></u></string>
+    <string name="AlreadyHave">Already have an account</string>
+    <string name="SignIn1"> <u><i>Sign in </i></u></string>
+    <string name="SignUp1">Sign up</string>
     <string name="SignUpNow">Sign up now</string>
     <string name="PleaseSignUp">Please fill the details and create account</string>
+
+    <string name="PhoneNumber">Phone Number</string>
+    <string name="hintEnterPhone">Enter your phone number</string>
+    <string name="UserName">User name</string>
+    <string name="hintUserName1">Enter your user name</string>
+    <string name="PassWord">Password</string>
+    <string name="hintPassWord">Enter your password</string>
+    <string name="ConfirmPass">Confirm password</string>
+    <string name="hintConfirmPass">Confirm your password</string>
 </resources>

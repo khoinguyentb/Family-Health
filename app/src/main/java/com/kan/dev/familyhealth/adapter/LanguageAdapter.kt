@@ -19,8 +19,10 @@ class LanguageAdapter(private val context: Context,private val listener : ILangu
             tvLanguge.text = item.language
             if (item.active){
                 root.setBackgroundResource(R.drawable.bg_language_selector)
+                imgSelect.setImageResource(R.drawable.icon_selector)
             }else{
                 root.setBackgroundResource(R.drawable.bg_language_unselector)
+                imgSelect.setImageResource(R.drawable.icon_unselector)
             }
             root.setOnClickListener{
                 setCheck(item.code)
