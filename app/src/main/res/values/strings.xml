@@ -153,4 +153,16 @@
     <string name="SignUpFailed">Sign Up failed</string>
     <string name="NoEmpty">You must fill out all information fields</string>
     <string name="Passwords_do_not_match">Passwords do not match</string>
+    <string name="provide_information">Provide Information</string>
+    <string name="avatar">Avatar:</string>
+    <string name="name">Name:</string>
+    <string name="sex">Sex:</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
+    <string name="later">Later</string>
+    <string name="save">Save</string>
+    <string name="enter_friend_nickname">Enter your friend\'s nickname</string>
+    <string name="write_your_name_here">Write your name here</string>
+    <string name="input_your_phone_number">Input your phone number</string>
 </resources>
