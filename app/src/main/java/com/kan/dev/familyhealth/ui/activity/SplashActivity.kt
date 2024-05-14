@@ -57,7 +57,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     private fun startActivity(){
         intent = if (viewModel.isFirstApp() &&
             viewModel.isFirstAppLang() && viewModel.isFirstAppPer()){
-            Intent(this, MainActivity::class.java)
+            Intent(this, SignInActivity::class.java)
         }else if (viewModel.isFirstAppLang() &&
             !viewModel.isFirstApp() &&
             !viewModel.isFirstAppPer()){

@@ -14,8 +14,6 @@ class LanguageViewModel @Inject constructor(
     private val systemUtils: SystemUtils
 ) : ViewModel(){
 
-    private lateinit var codeLang : String
-
     fun getCodeLang() : String{
         return systemUtils.getPreLanguage()
     }
