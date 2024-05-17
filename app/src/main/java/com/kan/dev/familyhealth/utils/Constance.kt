@@ -13,7 +13,13 @@ const val MALE = "MALE"
 const val FEMALE = "FEMALE"
 const val DATE_CHANGE = "DATE_CHANGE"
 const val BMIS = "BMI"
+const val CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQQRSTUVWXYZ0123456789"
+const val CODE_LENGTH = 10
 
+const val PHONE_PATTERN = "^[+]?[0-9]{10,13}$"
+
+const val OTHER = "OTHER"
+const val toastDuration = 2000
  var isClick = true
  val handler by lazy {
     Handler(Looper.getMainLooper())

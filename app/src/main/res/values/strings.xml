@@ -165,4 +165,8 @@
     <string name="enter_friend_nickname">Enter your friend\'s nickname</string>
     <string name="write_your_name_here">Write your name here</string>
     <string name="input_your_phone_number">Input your phone number</string>
+    <string name="over_25_char">Enter your image name 25 characters or less</string>
+    <string name="invalid_phone_number">Invalid phone number!</string>
+    <string name="enter_name">Enter your name!</string>
+    <string name="enter_phone_number">Enter your phone number!</string>
 </resources>

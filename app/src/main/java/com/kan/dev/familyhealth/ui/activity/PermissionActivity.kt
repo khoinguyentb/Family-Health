@@ -31,8 +31,7 @@ class PermissionActivity : BaseActivity<ActivityPermissionBinding>() {
         const val REQUEST_CODE_NOTIFICATION = 1001
         const val REQUEST_CODE_LOCATION = 1002
     }
-    @Inject
-    lateinit var sharePre : SharePreferencesUtils
+
     override fun initData() {
         sharePre.putBoolean(CHECK_PER,true)
     }

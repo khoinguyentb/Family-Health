@@ -16,8 +16,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     override fun setViewBinding(): ActivityIntroBinding {
         return ActivityIntroBinding.inflate(layoutInflater)
     }
-    @Inject
-    lateinit var sharePre : SharePreferencesUtils
+
     private lateinit var adapter : IntroAdapter
     private lateinit var intent: Intent
     override fun initData() {

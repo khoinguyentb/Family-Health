@@ -6,6 +6,7 @@ plugins {
     id 'androidx.navigation.safeargs'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -107,6 +108,10 @@ dependencies {
     implementation("com.tbuonomo:dotsindicator:5.0")
 
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-config'
 
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database")
