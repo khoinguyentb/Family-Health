@@ -172,4 +172,8 @@
 
     <string name="tv_Welcome">Welcome back!</string>
     <string name="Settings">Settings</string>
+    <string name="Share">Share</string>
+    <string name="Rate">Rate us</string>
+    <string name="Version">Version</string>
+    <string name="LogOut">Log Out</string>
 </resources>
