@@ -19,4 +19,7 @@
     <string name="native_all" translatable="false">ca-app-pub-1521386385189386/2562230256</string>
     <string name="banner_collap" translatable="false">ca-app-pub-3940256099942544/2014213617</string>
     <string name="inter_all" translatable="false">ca-app-pub-1521386385189386/1685182724</string>
+    <string name="link_share_app" translatable="false">https://play.google.com/store/apps/details?id=</string>
+
+    <string name="myAlphaNumeric" translatable="false">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</string>
 </resources>

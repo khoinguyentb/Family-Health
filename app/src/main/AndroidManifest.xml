@@ -31,6 +31,15 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.QRScanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.interaction.JoinWithFamilyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.interaction.ShareInformationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.VersionActivity"
             android:exported="false" />
         <activity
@@ -54,7 +63,7 @@
         </service>
 
         <activity
-            android:name=".ui.activity.InformationActivity"
+            android:name=".ui.activity.interaction.InformationActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.SignUpActivity"

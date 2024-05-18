@@ -6,13 +6,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.kan.dev.familyhealth.data.dao.BMIDao
+import com.kan.dev.familyhealth.data.dao.FriendDAO
 import com.kan.dev.familyhealth.data.model.BMI
+import com.kan.dev.familyhealth.data.model.FriendModel
 import java.util.concurrent.Executors
 
-@Database(entities = [BMI::class], version = 1, exportSchema = false)
+@Database(entities = [BMI::class,FriendModel::class], version = 1, exportSchema = false)
 abstract class DatabaseApp : RoomDatabase() {
     abstract fun bmiDAO() : BMIDao
-
+    abstract fun FriendDAO() : FriendDAO
     companion object{
         private var INSTANCE : DatabaseApp? = null
         fun getDatabase(context: Context) : DatabaseApp{

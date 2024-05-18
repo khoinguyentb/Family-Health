@@ -5,16 +5,21 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
+import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.EncodeHintType
+import com.google.zxing.WriterException
+import com.google.zxing.qrcode.QRCodeWriter
 import com.kan.dev.familyhealth.R
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-
+import java.util.EnumMap
 
 
 fun openWebPage(context: Context, url: String) {
@@ -41,6 +46,7 @@ fun shareApp(context: Context) {
     }
     context.startActivity(Intent.createChooser(sendIntent, null))
 }
+
 @SuppressLint("NewApi")
 fun formatDate(year: Int, month: Int, day: Int): String {
     val date = LocalDate.of(year, month, day)
@@ -65,4 +71,36 @@ fun reviewApp(context: Context) {
             System.exit(0)
         }
     }
+}
+
+
+@Throws(WriterException::class)
+fun generateQRCode(context: Context, textToEncode: String?, qrCodeWidthAndHeight: Int): Bitmap {
+    val hints: MutableMap<EncodeHintType, Any?> = EnumMap(
+        EncodeHintType::class.java
+    )
+    hints[EncodeHintType.CHARACTER_SET] = "UTF-8"
+    val qrCodeWriter = QRCodeWriter()
+    val bitMatrix = qrCodeWriter.encode(
+        textToEncode,
+        BarcodeFormat.QR_CODE,
+        qrCodeWidthAndHeight,
+        qrCodeWidthAndHeight,
+        hints
+    )
+    val width = bitMatrix.width
+    val height = bitMatrix.height
+    val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565)
+    for (x in 0 until width) {
+        for (y in 0 until height) {
+            bitmap.setPixel(
+                x,
+                y,
+                if (bitMatrix[x, y]) context.resources.getColor(R.color.black) else context.resources.getColor(
+                    R.color.white
+                )
+            )
+        }
+    }
+    return bitmap
 }

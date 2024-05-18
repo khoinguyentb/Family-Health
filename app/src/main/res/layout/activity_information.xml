@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".ui.activity.InformationActivity">
+    tools:context=".ui.activity.interaction.InformationActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -108,7 +108,7 @@
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="20dp"
                 android:singleLine="true"
-                android:textColor="@color/blue_408CFF"
+                android:textColor="@color/white"
                 android:textColorHint="@color/gray_777777"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -136,10 +136,257 @@
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="20dp"
                 android:singleLine="true"
-                android:textColor="@color/blue_408CFF"
+                android:textColor="@color/white"
                 android:textColorHint="@color/gray_777777"
                 android:textSize="14sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:fontFamily="@font/roboto"
+                android:paddingHorizontal="20dp"
+                android:text="@string/DateOfBirth"
+                android:textColor="#99FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp">
+
+                <TextView
+                    android:id="@+id/edtDatebirth"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/bg_stroke_light_blue_white"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="20dp"
+                    android:singleLine="true"
+                    android:text="10.11.2002"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/gray_777777"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:src="@drawable/calendar"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"/>
+            </RelativeLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/frameHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_item_calculator">
+
+                <ImageView
+                    android:id="@+id/regular"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:src="@drawable/regular"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvHeight"
+                    style="@style/poppinsMedium_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:text="@string/Height"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/regular" />
+
+                <LinearLayout
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:padding="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/bg_line_unit"
+                    android:elevation="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+                    <TextView
+                        android:id="@+id/CM"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        style="@style/poppins_12"
+                        android:text="@string/cm"
+                        android:gravity="center"
+                        android:background="@drawable/bg_unit"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/FT"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        style="@style/poppins_12"
+                        android:text="@string/ft"
+                        android:gravity="center"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+
+
+                <com.kan.dev.familyhealth.utils.RularView
+                    android:id="@+id/rulerHeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvHeight"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    app:rv_alphaEnable="true"
+                    app:rv_defaultValue="100"
+                    app:rv_indcatorColor="@color/YellowFF"
+                    app:rv_indcatorType="line"
+                    app:rv_indcatorWidth="2dp"
+                    app:rv_itemSpacing="8dp"
+                    app:rv_maxLineColor="@color/white"
+                    app:rv_maxLineHeight="30dp"
+                    app:rv_maxLineWidth="3dp"
+                    app:rv_maxValue="300"
+                    app:rv_middleLineColor="@color/white"
+                    app:rv_middleLineHeight="20dp"
+                    app:rv_middleLineWidth="2dp"
+                    app:rv_minLineColor="@color/white"
+                    app:rv_minLineHeight="10dp"
+                    app:rv_minLineWidth="1dp"
+                    app:rv_minValue="60"
+                    app:rv_resultTextColor="@color/YellowFF"
+                    app:rv_resultTextSize="20sp"
+                    app:rv_scaleTextColor="#202036"
+                    app:rv_scaleTextSize="15sp"
+                    app:rv_unit="cm"
+                    app:rv_unitTextColor="@color/white"
+                    app:rv_unitTextSize="15sp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/frameWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_item_calculator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frameHeight">
+
+                <ImageView
+                    android:id="@+id/weight"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:src="@drawable/lineweight"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvWeight"
+                    style="@style/poppinsMedium_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:text="@string/Weight"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/weight" />
+
+                <LinearLayout
+                    android:layout_width="@dimen/_105sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:padding="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/bg_line_unit"
+                    android:elevation="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    >
+                    <TextView
+                        android:id="@+id/ST"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        style="@style/poppins_12"
+                        android:text="@string/st"
+                        android:gravity="center"
+                        android:background="@drawable/bg_unit"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/KG"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        style="@style/poppins_12"
+                        android:text="@string/kg"
+                        android:gravity="center"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/LB"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        style="@style/poppins_12"
+                        android:text="@string/lb"
+                        android:gravity="center"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+
+                <com.kan.dev.familyhealth.utils.RularView
+                    android:id="@+id/rulerWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvWeight"
+                    app:rv_alphaEnable="true"
+                    app:rv_defaultValue="100"
+                    app:rv_indcatorColor="@color/YellowFF"
+                    app:rv_indcatorType="line"
+                    app:rv_indcatorWidth="2dp"
+                    app:rv_itemSpacing="8dp"
+                    app:rv_maxLineColor="@color/white"
+                    app:rv_maxLineHeight="30dp"
+                    app:rv_maxLineWidth="3dp"
+                    app:rv_maxValue="500"
+                    app:rv_middleLineColor="@color/white"
+                    app:rv_middleLineHeight="20dp"
+                    app:rv_middleLineWidth="2dp"
+                    app:rv_minLineColor="@color/white"
+                    app:rv_minLineHeight="10dp"
+                    app:rv_minLineWidth="1dp"
+                    app:rv_minValue="3"
+                    app:rv_resultTextColor="@color/YellowFF"
+                    app:rv_resultTextSize="20sp"
+                    app:rv_scaleTextColor="#202036"
+                    app:rv_scaleTextSize="15sp"
+                    app:rv_unit="kg"
+                    app:rv_unitTextColor="@color/white"
+                    app:rv_unitTextSize="15sp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -178,7 +425,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto"
                         android:text="@string/male"
-                        android:textColor="#99000000"
+                        android:textColor="@color/white"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -211,7 +458,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto"
                         android:text="@string/female"
-                        android:textColor="#99000000"
+                        android:textColor="@color/white"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatRadioButton
@@ -240,7 +487,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto"
                         android:text="@string/other"
-                        android:textColor="#99000000"
+                        android:textColor="@color/white"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatRadioButton
@@ -256,7 +503,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_4sdp"
+                android:layout_marginBottom="@dimen/_140sdp"
                 android:orientation="horizontal"
                 android:paddingHorizontal="20dp"
 
@@ -270,6 +517,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/tv_later"
                     android:fontFamily="@font/roboto"
+                    android:layout_marginVertical="@dimen/_2sdp"
+                    android:elevation="@dimen/_5sdp"
                     android:gravity="center"
                     android:padding="13dp"
                     android:text="@string/later"
@@ -287,10 +536,12 @@
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
                     android:padding="13dp"
+                    android:layout_marginVertical="@dimen/_2sdp"
+                    android:elevation="@dimen/_5sdp"
                     android:text="@string/save"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -301,9 +552,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_weight="1">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
         <include layout="@layout/ads_shimmer_small_btn_ads_bottom" />
     </FrameLayout>
 

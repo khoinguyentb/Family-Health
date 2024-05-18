@@ -1,11 +1,11 @@
-package com.kan.dev.familyhealth.ui.activity
+package com.kan.dev.familyhealth.ui.activity.interaction
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Typeface
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatRadioButton
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
+import com.google.zxing.WriterException
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.data.RealtimeDAO
@@ -23,15 +24,22 @@ import com.kan.dev.familyhealth.data.RealtimeDAO.generateMyCode
 import com.kan.dev.familyhealth.data.RealtimeDAO.initRealtimeData
 import com.kan.dev.familyhealth.data.RealtimeDAO.pushRealtimeData
 import com.kan.dev.familyhealth.databinding.ActivityInformationBinding
+import com.kan.dev.familyhealth.ui.activity.MainActivity
 import com.kan.dev.familyhealth.utils.FEMALE
+import com.kan.dev.familyhealth.utils.KEY_QR_BITMAP
 import com.kan.dev.familyhealth.utils.MALE
+import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.OTHER
 import com.kan.dev.familyhealth.utils.PHONE_PATTERN
+import com.kan.dev.familyhealth.utils.generateQRCode
 import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.utils.toastDuration
 import com.lvt.ads.callback.InterCallback
 import com.lvt.ads.callback.NativeCallback
 import com.lvt.ads.util.Admob
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 class InformationActivity : BaseActivity<ActivityInformationBinding>() {
     override fun setViewBinding(): ActivityInformationBinding {
@@ -41,29 +49,33 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
     private var code: String? = null
     private var name: String? = null
     private var phoneNumber:String? = null
+    private var dateOfBirth : String? = null
+    private var weight : Float? = null
+    private var height : Float? = null
     private var sex:String? = null
-    var listID= arrayListOf<String>()
+    var listID = arrayListOf<String>()
     override fun initData() {
         binding.apply {
-            listID.add(getString(R.string.native_intro_1))
-            listID.add(getString(R.string.native_intro_2))
-            Admob.getInstance().loadNativeAd(this@InformationActivity, listID, object : NativeCallback() {
-                override fun onNativeAdLoaded(nativeAd: NativeAd) {
-                    super.onNativeAdLoaded(nativeAd)
-                    val adView = LayoutInflater.from(
-                        applicationContext
-                    )
-                        .inflate(R.layout.ads_native_small_btn_ads_bottom,null) as NativeAdView
-                    nativeAds.removeAllViews()
-                    nativeAds.addView(adView)
-                    Admob.getInstance().pushAdsToViewCustom(nativeAd, adView)
-                }
+            Admob.getInstance()
+                .loadNativeAd(this@InformationActivity, getString(R.string.native_all), object : NativeCallback() {
+                    override fun onNativeAdLoaded(nativeAd: NativeAd) {
+                        super.onNativeAdLoaded(nativeAd)
+                        val adView = LayoutInflater.from(
+                            applicationContext
+                        ).inflate(
+                                com.lvt.ads.R.layout.ads_native_small_btn_ads_bottom,
+                                null
+                            ) as NativeAdView
+                        binding.nativeAds.removeAllViews()
+                        binding.nativeAds.addView(adView)
+                        Admob.getInstance().pushAdsToViewCustom(nativeAd, adView)
+                    }
 
-                override fun onAdFailedToLoad() {
-                    super.onAdFailedToLoad()
-                    nativeAds.visibility = View.INVISIBLE
-                }
-            })
+                    override fun onAdFailedToLoad() {
+                        super.onAdFailedToLoad()
+                        binding.nativeAds.visibility = View.INVISIBLE
+                    }
+                })
             initRealtimeData()
             actionOnTextChange()
             sex = MALE
@@ -71,6 +83,22 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
             checkExistUser(code,RealtimeDAO.valueEventListener{snapshot->
                 if (snapshot!!.exists()) code = generateMyCode()
             })
+
+            val qrCodeWidthAndHeight = 500
+            val tempFile = File(externalCacheDir, "qr_code.png")
+
+            try {
+                val bitmap: Bitmap = generateQRCode(applicationContext, code, qrCodeWidthAndHeight)
+                val outputStream = FileOutputStream(tempFile)
+                bitmap.compress(Bitmap.CompressFormat.PNG, 80, outputStream)
+                outputStream.flush()
+                outputStream.close()
+                sharePre.putString(KEY_QR_BITMAP, tempFile.path)
+            } catch (e: WriterException) {
+                throw RuntimeException(e)
+            } catch (e: IOException) {
+                throw RuntimeException(e)
+            }
         }
     }
 
@@ -168,13 +196,6 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
         }
     }
 
-
-    val listener = object : RealtimeDAO.onSuccessListener {
-        override fun onSuccess(result: Void?) {
-            startActivity(Intent(this@InformationActivity,MainActivity::class.java))
-            Log.d("pushRealtimeData", "Data pushed successfully")
-        }
-    }
     private fun actionSave() {
         if (binding.edtPhoneNumber.text.toString().trim().isEmpty()) {
             if (System.currentTimeMillis() - lastTime > toastDuration) {
@@ -206,7 +227,8 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
                 lastTime = System.currentTimeMillis()
             }
         } else {
-
+            weight = binding.rulerWeight.value
+            height = binding.rulerHeight.value
             Admob.getInstance().setOpenActivityAfterShowInterAds(false)
             Admob.getInstance().showInterAll(this, object : InterCallback() {
                 override fun onNextAction() {
@@ -214,8 +236,15 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
                     val users: MutableMap<String, Any> = HashMap()
                     users.put("name", name!!)
                     users.put("phoneNumber", phoneNumber!!)
+                    users.put("weight", weight!!)
+                    users.put("height", height!!)
+                    users.put("dateOfBirth", dateOfBirth!!)
                     users.put("gender",sex!!)
-                    pushRealtimeData(code!!,users,listener)
+                    pushRealtimeData(code!!,users,RealtimeDAO.onSuccessListener{result ->
+                        sharePre.putString(MY_CODE,code)
+                        startActivity(Intent(this@InformationActivity, MainActivity::class.java))
+                        finish()
+                    })
                 }
             })
         }

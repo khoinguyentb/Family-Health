@@ -176,4 +176,22 @@
     <string name="Rate">Rate us</string>
     <string name="Version">Version</string>
     <string name="LogOut">Log Out</string>
+    <string name="DateOfBirth">Date of birth</string>
+    <string name="security_detail">Follow the link sent on your family phone install the pingo app, and enter the code</string>
+    <string name="share_information">Share Information</string>
+
+    <string name="qr_detail">This code will connect the pingo app with your parenting find your friend app and everything will start working!</string>
+    <string name="share_code">Share code</string>
+    <string name="my_security">My Code</string>
+    <string name="share_qr">Share QR</string>
+    <string name="share_with">Share with</string>
+    <string name="download_app">Download application :</string>
+    <string name="start_join">Start join</string>
+    <string name="copied">Copied!</string>
+
+    <string name="join_the_friend">Join with Family</string>
+    <string name="join_friend_title">Enter the Family code to join with Family</string>
+    <string name="join_friend_detail">The code can be obtained from the Family\'s application that created the connection</string>
+    <string name="code">Code</string>
+
 </resources>

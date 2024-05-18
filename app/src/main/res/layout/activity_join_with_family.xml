@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="24dp"
+    android:background="@color/background"
+    android:weightSum="1"
+    tools:context=".ui.activity.interaction.JoinWithFamilyActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginBottom="4dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="23dp"
+                    android:src="@drawable/numb_3" />
+
+                <ImageView
+                    android:id="@+id/img_Back"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="23dp"
+                    android:src="@drawable/arrow_back"
+                    android:tint="@color/black"
+                    tools:ignore="UseAppTint" />
+
+                <TextView
+                    android:id="@+id/tv_Title_Join"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="center"
+                    android:paddingHorizontal="23dp"
+                    android:text="@string/join_the_friend"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/btnScan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="23dp"
+                    android:layout_marginEnd="10dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_scan" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:paddingHorizontal="20dp"
+                android:text="@string/join_friend_title"
+                android:textColor="@color/main"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/_40sdp"
+                android:text="@string/join_friend_detail"
+                android:textColor="@color/gray_A3A3A3"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edtCode"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="200dp"
+                    android:background="@drawable/bg_stroke_light_blue_tran"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:elevation="1dp"
+                    android:digits="@string/myAlphaNumeric"
+                    android:paddingHorizontal="40dp"
+                    android:paddingVertical="15dp"
+                    android:inputType="textCapWords"
+                    android:singleLine="true"
+                    android:maxLength="10"
+                    android:textCursorDrawable="@drawable/custom_cursor_edit"
+                    android:textColor="@color/main"
+                    android:textSize="36sp" />
+                <TextView
+                    android:id="@+id/txtHintCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="0dp"
+                    android:layout_alignStart="@+id/edtCode"
+                    android:layout_alignTop="@+id/edtCode"
+                    android:layout_alignEnd="@+id/edtCode"
+                    android:layout_alignBottom="@+id/edtCode"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:hint="@string/code"
+                    android:letterSpacing="0.3"
+                    android:textColorHint="@color/gray_777777"
+                    android:textSize="36sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/btnStartJoin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:ellipsize="marquee"
+                    android:background="@drawable/tv_start_join"
+                    android:backgroundTint="@color/gray_B0B9C8"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="center"
+                    android:padding="13dp"
+                    android:text="@string/start_join"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/btnContinue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:ellipsize="marquee"
+                    android:background="@drawable/tv_continue_blue"
+                    android:fontFamily="@font/roboto_medium"
+                    android:maxLength="10"
+                    android:gravity="center"
+                    android:padding="13dp"
+                    android:text="@string/Continue"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/native_ads"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_weight="1">
+        <include layout="@layout/ads_shimmer_small_btn_ads_bottom" />
+    </FrameLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

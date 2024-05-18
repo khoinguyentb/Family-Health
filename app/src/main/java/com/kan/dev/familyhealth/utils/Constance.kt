@@ -15,7 +15,9 @@ const val DATE_CHANGE = "DATE_CHANGE"
 const val BMIS = "BMI"
 const val CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQQRSTUVWXYZ0123456789"
 const val CODE_LENGTH = 10
-
+const val MY_CODE = "CODE"
+const val KEY_QR_BITMAP = "qr_bitmap_link"
+const val QR_REQUEST_CODE = 123
 const val PHONE_PATTERN = "^[+]?[0-9]{10,13}$"
 
 const val OTHER = "OTHER"

@@ -6,6 +6,7 @@
     <color name="transfer">#00000000</color>
     <color name="background">#1C1B30</color>
     <color name="YellowFF">#FFDA66</color>
+    <color name="item">#202036</color>
 
     <color name="light_blue_D2DFFF">#40D2DFFF</color>
     <color name="blue_049DEF">#049DEF</color>
@@ -31,6 +32,17 @@
     <color name="gray_939393">#939393</color>
     <color name="gray_FBFBFB">#FBFBFB</color>
     <color name="gray_FCFCFC">#FCFCFC</color>
+
+    <color name="black_1B1B1B">#1B1B1B</color>
+    <color name="black_4F4F4F">#4F4F4F</color>
+    <color name="black_242424">#242424</color>
+    <color name="black_131313">#131313</color>
+    <color name="black_3B3B3B">#3B3B3B</color>
+    <color name="black_252525">#252525</color>
+    <color name="black_141414_45">#73141414</color>
+    <color name="black_2B2B2B">#2B2B2B</color>
+    <color name="black_393939">#393939</color>
+    <color name="gray_8A8A8A">#8A8A8A</color>
 
     <color name="underweight">#82D142</color>
     <color name="underweight20">#30C1FD</color>

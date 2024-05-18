@@ -6,5 +6,7 @@
         <item>@font/poppins_bold</item>
         <item>@font/poppins_medium</item>
         <item>@font/roboto</item>
+        <item>@font/roboto_bold</item>
+        <item>@font/roboto_medium</item>
     </array>
 </resources>

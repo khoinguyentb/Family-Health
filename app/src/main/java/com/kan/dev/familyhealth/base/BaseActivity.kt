@@ -90,7 +90,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     open fun hideKeyboard() {
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(window.decorView.rootView.windowToken, 0)
-        clearFocusFromAllEditTexts(binding!!.getRoot())
+        clearFocusFromAllEditTexts(binding.root)
     }
 
     open fun hideNavigation(){
