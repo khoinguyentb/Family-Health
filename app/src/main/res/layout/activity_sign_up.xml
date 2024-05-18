@@ -125,6 +125,7 @@
                 android:hint="@string/hintPassWord"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textColor="@color/white"
+                android:inputType="textPassword"
                 android:textColorHint="#66FFFFFF"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:background="@drawable/bg_language_selector"/>
@@ -144,6 +145,7 @@
                 android:hint="@string/hintConfirmPass"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textColor="@color/white"
+                android:inputType="textPassword"
                 android:textColorHint="#66FFFFFF"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:background="@drawable/bg_language_selector"/>

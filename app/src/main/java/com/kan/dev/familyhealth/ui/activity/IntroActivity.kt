@@ -5,6 +5,7 @@ import com.kan.dev.familyhealth.adapter.IntroAdapter
 import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.data.Data.Companion.introModelList
 import com.kan.dev.familyhealth.databinding.ActivityIntroBinding
+import com.kan.dev.familyhealth.utils.CHECK_PER
 import com.kan.dev.familyhealth.utils.SharePreferencesUtils
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
@@ -38,7 +39,11 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
                     isClick = false
                     val page: Int = viewpagerIntro.getCurrentItem()
                     if (page == 2) {
-                        intent = Intent(this@IntroActivity, PermissionActivity::class.java)
+                        if (sharePre.getBoolean(CHECK_PER,false)){
+                            intent = Intent(this@IntroActivity, SignInActivity::class.java)
+                        }else{
+                            intent = Intent(this@IntroActivity, PermissionActivity::class.java)
+                        }
                         startActivity(intent)
                         finish()
                     } else {

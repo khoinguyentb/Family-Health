@@ -64,7 +64,7 @@ class PermissionActivity : BaseActivity<ActivityPermissionBinding>() {
     }
 
     override fun initListener() {
-        binding?.apply {
+        binding.apply {
             swCamera.setOnClickListener {
                 if (!checkPermissionCamera()){
                     requestAppPermissionCamera(REQUEST_CODE_CAMERA)
@@ -85,7 +85,7 @@ class PermissionActivity : BaseActivity<ActivityPermissionBinding>() {
             Continue.setOnClickListener{
                 if (checkPermissionCamera() && checkPermissionNotification()){
                     sharePre.putBoolean(LOG_APP,true)
-                    val intent = Intent(this@PermissionActivity, MainActivity::class.java)
+                    val intent = Intent(this@PermissionActivity, SignInActivity::class.java)
                     startActivity(intent)
                     finish()
                 }else{

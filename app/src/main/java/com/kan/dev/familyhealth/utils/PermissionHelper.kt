@@ -1,6 +1,7 @@
 package com.kan.dev.familyhealth.utils
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -38,42 +39,31 @@ fun Activity.requestAppPermissionLocation(requestCode: Int) {
 }
 
 fun Activity.checkPermissionCamera(): Boolean {
-    if (ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.CAMERA
-        ) != PackageManager.PERMISSION_GRANTED
-    ) {
-        return false
-    }
-    return true
+    return ContextCompat.checkSelfPermission(
+        this,
+        Manifest.permission.CAMERA
+    ) == PackageManager.PERMISSION_GRANTED
 }
 
+@SuppressLint("InlinedApi")
 fun Activity.checkPermissionLocation(): Boolean {
-    if (ContextCompat.checkSelfPermission(
-            this,
-            arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_NETWORK_STATE,
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION).toString()
-        ) != PackageManager.PERMISSION_GRANTED
-    ) {
-        return false
-    }
-    return true
+    return ContextCompat.checkSelfPermission(
+        this,
+        arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_NETWORK_STATE).toString()
+    ) == PackageManager.PERMISSION_GRANTED
 }
 
 fun Activity.checkPermissionNotification(): Boolean {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         val notificationPermission = ContextCompat.checkSelfPermission(this,
             Manifest.permission.POST_NOTIFICATIONS
         )
-        if (notificationPermission != PackageManager.PERMISSION_GRANTED) {
-            return false
-        }
-        return true
+        notificationPermission == PackageManager.PERMISSION_GRANTED
     } else {
-        return true
+        true
     }
 }
 

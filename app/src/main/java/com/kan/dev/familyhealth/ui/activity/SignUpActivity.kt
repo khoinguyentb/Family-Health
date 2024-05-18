@@ -45,7 +45,12 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
                 if (isValueDate()){
                     setUser(email,pass)
                 }
-
+            }
+            imgBack.setOnClickListener {
+                finish()
+            }
+            btnSignIn.setOnClickListener {
+                finish()
             }
         }
     }
@@ -69,15 +74,15 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
     private fun isValueDate() :Boolean {
         binding.apply {
-            if (userName == "" || phoneNumber == "" || email == "" || pass == "" || conFirmPass == ""){
+            return if (userName == "" || phoneNumber == "" || email == "" || pass == "" || conFirmPass == ""){
                 Toast.makeText(this@SignUpActivity,getString(R.string.NoEmpty),Toast.LENGTH_SHORT).show()
-                return false
+                false
             }else{
                 if (pass == conFirmPass){
-                    return true
+                    true
                 }else{
                     Toast.makeText(this@SignUpActivity,getString(R.string.Passwords_do_not_match),Toast.LENGTH_SHORT).show()
-                    return false
+                    false
                 }
             }
         }

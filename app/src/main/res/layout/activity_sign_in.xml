@@ -41,10 +41,13 @@
         android:paddingHorizontal="@dimen/_10sdp"
         android:textColor="@color/white"
         android:maxLines="1"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_30sdp"
         android:textColorHint="#CCFFFFFF"
         android:background="@drawable/bg_language_selector"/>
+
     <EditText
         android:id="@+id/edtPass"
         android:layout_width="match_parent"

@@ -169,4 +169,7 @@
     <string name="invalid_phone_number">Invalid phone number!</string>
     <string name="enter_name">Enter your name!</string>
     <string name="enter_phone_number">Enter your phone number!</string>
+
+    <string name="tv_Welcome">Welcome back!</string>
+    <string name="Settings">Settings</string>
 </resources>
