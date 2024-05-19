@@ -1,7 +1,10 @@
 package com.kan.dev.familyhealth.ui.activity.BMI
 
 import android.content.Intent
+import android.view.View
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.adapter.RecentAdapter
 import com.kan.dev.familyhealth.base.BaseActivity
@@ -27,7 +30,15 @@ class RecentActivity : BaseActivity<ActivityRecentBinding>(),IRecentListener {
     }
     override fun initData() {
         viewModel.getAll.observe(this){
-
+            if (it.isNotEmpty()) {
+                binding.layoutNoData.root.visibility = View.INVISIBLE
+            } else {
+                binding.layoutNoData.root.visibility = View.VISIBLE
+            }
+            adapter.setItems(it)
+            binding.rcvRecent.adapter = adapter
+            binding.rcvRecent.layoutManager =
+                LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         }
     }
 
@@ -36,7 +47,7 @@ class RecentActivity : BaseActivity<ActivityRecentBinding>(),IRecentListener {
     }
 
     override fun initListener() {
-        
+        binding.icBack.setOnClickListener { finish() }
     }
 
     override fun deleteRecent(bmi: BMI) {

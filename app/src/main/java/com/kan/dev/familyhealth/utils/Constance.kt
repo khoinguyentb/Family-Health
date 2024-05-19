@@ -32,6 +32,8 @@ var daily : Boolean = true
 var weekly: Boolean = false
 var monthly: Boolean = false
 var date: String? = null
+var months = 0
+var years = 0
 @SuppressLint("NewApi")
 var currentMonth = LocalDate.now().monthValue
 

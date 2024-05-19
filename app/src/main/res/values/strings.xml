@@ -219,5 +219,6 @@
     <string name="October">October</string>
     <string name="November">November</string>
     <string name="December">December</string>
+    <string name="noStep">Step Counter Sensor not available!</string>
 
 </resources>
