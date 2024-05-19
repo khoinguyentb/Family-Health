@@ -8,12 +8,12 @@ import java.io.Serializable
 
 @Entity (tableName = "friend")
 data class FriendModel(
-    val code: Int,
+    val code: String,
     var avt: Int,
     var battery: Int,
     var name: String,
-    var weight: Int,
-    var height: Int,
+    var weight: Float,
+    var height: Float,
     var dateOfBirth : String,
     var nickname: String,
     var gender: String,

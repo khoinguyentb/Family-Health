@@ -46,6 +46,7 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
         return ActivityInformationBinding.inflate(layoutInflater)
     }
     var lastTime: Long = 0
+    private var avt : Int? = null
     private var code: String? = null
     private var name: String? = null
     private var phoneNumber:String? = null
@@ -53,7 +54,6 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
     private var weight : Float? = null
     private var height : Float? = null
     private var sex:String? = null
-    var listID = arrayListOf<String>()
     override fun initData() {
         binding.apply {
             Admob.getInstance()
@@ -235,11 +235,16 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
                     super.onNextAction()
                     val users: MutableMap<String, Any> = HashMap()
                     users.put("name", name!!)
+                    users.put("avt", avt!!)
                     users.put("phoneNumber", phoneNumber!!)
                     users.put("weight", weight!!)
                     users.put("height", height!!)
                     users.put("dateOfBirth", dateOfBirth!!)
                     users.put("gender",sex!!)
+                    users.put("latLng", "")
+                    users.put("isSos", false)
+                    users.put("isTracking",true)
+                    users.put("lastActive", "")
                     pushRealtimeData(code!!,users,RealtimeDAO.onSuccessListener{result ->
                         sharePre.putString(MY_CODE,code)
                         startActivity(Intent(this@InformationActivity, MainActivity::class.java))

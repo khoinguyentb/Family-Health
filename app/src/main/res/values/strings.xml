@@ -193,5 +193,8 @@
     <string name="join_friend_title">Enter the Family code to join with Family</string>
     <string name="join_friend_detail">The code can be obtained from the Family\'s application that created the connection</string>
     <string name="code">Code</string>
+    <string name="InvalidCode">The code is invalid</string>
+    <string name="join_with_friend">Join with friend successfully!</string>
+    <string name="invalid_friend_code">Invalid Friend code!</string>
 
 </resources>

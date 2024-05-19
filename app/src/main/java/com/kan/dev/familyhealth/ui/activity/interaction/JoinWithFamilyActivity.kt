@@ -9,28 +9,59 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.activity.viewModels
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.data.RealtimeDAO
+import com.kan.dev.familyhealth.data.RealtimeDAO.pushRealtimeData
+import com.kan.dev.familyhealth.data.model.FriendModel
 import com.kan.dev.familyhealth.databinding.ActivityJoinWithFamilyBinding
 import com.kan.dev.familyhealth.ui.activity.MainActivity
 import com.kan.dev.familyhealth.ui.activity.QRScanActivity
 import com.kan.dev.familyhealth.utils.CODE_LENGTH
+import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.QR_REQUEST_CODE
 import com.kan.dev.familyhealth.utils.isClick
+import com.kan.dev.familyhealth.utils.toastDuration
+import com.kan.dev.familyhealth.viewmodel.FriendViewModel
 import com.lvt.ads.callback.NativeCallback
 import com.lvt.ads.util.Admob
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class JoinWithFamilyActivity : BaseActivity<ActivityJoinWithFamilyBinding>() {
     override fun setViewBinding(): ActivityJoinWithFamilyBinding {
         return ActivityJoinWithFamilyBinding.inflate(layoutInflater)
     }
     private var friendCode: String? = null
-    private val lastTime: Long = 0
+    private var lastTime: Long = 0
+    private val viewModel : FriendViewModel by viewModels()
+    private var checkAdd = true
+    private var database: DatabaseReference? = null
+
+    private  var code = ""
+    private  var avtId = 0
+    private  var name = ""
+    private  var sex = ""
+    private  var weight = 0F
+    private  var height = 0F
+    private  var battery = 0
+    private  var phoneNumber = ""
+    private  var latLng = ""
+    private  var lastActive = 0L
+    private  var isTracking = true
+    private  var isSos = false
+    private lateinit var friend : FriendModel
     override fun initData() {
-        
+        database = FirebaseDatabase.getInstance().reference
     }
 
     override fun initView() {
@@ -125,7 +156,89 @@ class JoinWithFamilyActivity : BaseActivity<ActivityJoinWithFamilyBinding>() {
             hideKeyboard()
             binding.edtCode.clearFocus()
         }else{
+            viewModel.getAll.observe(this){friends ->
+                friends.forEach { friendModel ->
+                    if (friendModel.code == friendCode){
+                        checkAdd = false
+                        return@observe
+                    }
+                }
+            }
+            if (friendCode == sharePre.getString(MY_CODE,"")){
+                checkAdd = false
+            }
+            if (checkAdd){
+                database?.child(friendCode!!)?.addListenerForSingleValueEvent(object : ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            code = friendCode!!
+                            avtId = snapshot.child("avt").getValue(Int::class.java) ?: 0
+                            name = snapshot.child("name").getValue(String::class.java) ?: ""
+                            sex = snapshot.child("sex").getValue(String::class.java) ?: ""
+                            weight = snapshot.child("weight").getValue(Float::class.java) ?: 0F
+                            height = snapshot.child("height").getValue(Float::class.java) ?: 0F
+                            battery = snapshot.child("battery").getValue(Int::class.java) ?: 0
+                            phoneNumber = snapshot.child("phoneNumber").getValue(String::class.java) ?: ""
+                            latLng = snapshot.child("latLng").getValue(String::class.java) ?: ""
+                            lastActive = snapshot.child("lastActive").getValue(Long::class.java) ?: 0L
+                            isTracking = snapshot.child("isTracking").getValue(Boolean::class.java) ?: false
+                            isSos = snapshot.child("isSos").getValue(Boolean::class.java) ?: false
 
+
+
+                            val users = hashMapOf<String, Any>(
+                                "code" to code,
+                                "avt" to avtId,
+                                "battery" to battery,
+                                "name" to name,
+                                "nickname" to "",
+                                "sex" to sex,
+                                "phoneNumber" to phoneNumber,
+                                "latLng" to latLng,
+                                "visible" to true,
+                                "isSos" to isSos,
+                                "statusSos" to true,
+                                "isTracking" to isTracking,
+                                "lastActive" to lastActive,
+                                "online" to true
+                            )
+                            if (snapshot.key != sharePre.getString(MY_CODE,"")) {
+                                pushRealtimeData("${sharePre.getString(MY_CODE,"")}/friends/${users["code"]}", users) {
+                                    viewModel.insert(friend)
+
+                                    if (System.currentTimeMillis() - lastTime > toastDuration) {
+                                        Toast.makeText(
+                                            applicationContext,
+                                            getString(R.string.join_with_friend),
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        lastTime = System.currentTimeMillis()
+                                        binding.edtCode.setText("")
+                                        isClick = true
+                                    }
+                                }
+                            }else{
+                                if (System.currentTimeMillis() - lastTime > toastDuration) {
+                                    Toast.makeText(
+                                        applicationContext,
+                                        getString(R.string.join_with_friend),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    lastTime = System.currentTimeMillis()
+                                    binding.edtCode.setText("")
+                                    isClick = true
+                                }
+                            }
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+                })
+            }else{
+                Toast.makeText(this,getString(R.string.InvalidCode),Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
