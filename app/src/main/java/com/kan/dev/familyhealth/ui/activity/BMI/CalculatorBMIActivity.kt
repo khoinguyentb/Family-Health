@@ -221,7 +221,7 @@ class CalculatorBMIActivity : BaseActivity<ActivityCalculatorBmiactivityBinding>
     }
 
     override fun clickDelete() {
-
+        viewModel.delete(bmi)
     }
 
 }

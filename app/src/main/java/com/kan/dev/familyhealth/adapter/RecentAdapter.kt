@@ -9,17 +9,21 @@ import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.base.BaseAdapter
 import com.kan.dev.familyhealth.data.model.BMI
 import com.kan.dev.familyhealth.databinding.ItemRecentBinding
+import com.kan.dev.familyhealth.dialog.DialogDelete
+import com.kan.dev.familyhealth.interfacces.IDeleteClickListener
 import com.kan.dev.familyhealth.interfacces.IRecentListener
 import com.kan.dev.familyhealth.utils.FEMALE
 
-class RecentAdapter(private val context: Context,private val listener: IRecentListener) :BaseAdapter<BMI,ItemRecentBinding>() {
+class RecentAdapter(private val context: Context,private val listener: IRecentListener) :BaseAdapter<BMI,ItemRecentBinding>(),IDeleteClickListener {
     override fun createBinding(inflater: LayoutInflater, parent: ViewGroup): ItemRecentBinding {
         return ItemRecentBinding.inflate(inflater,parent,false)
     }
+    private lateinit var diaLog : DialogDelete
     private var gender: String? = null
     private var weight: String? = null
     private var height: String? = null
     private var intent: Intent? = null
+    private lateinit var bmi: BMI
     override fun bind(binding: ItemRecentBinding, item: BMI, position: Int) {
         binding.apply {
             tvTime.text = item.time
@@ -54,10 +58,13 @@ class RecentAdapter(private val context: Context,private val listener: IRecentLi
             tvWeight.text = weight
             tvHeight.text = height
             root.setOnClickListener {
+
                 listener.clickRecent(item)
             }
             root.setOnLongClickListener {
-                listener.deleteRecent(item)
+                bmi = item
+                diaLog = DialogDelete(context,this@RecentAdapter)
+                diaLog.show()
                 true
             }
             setStatusBMI(binding.tvStatusBmi, item.bmi, item.age)
@@ -106,5 +113,12 @@ class RecentAdapter(private val context: Context,private val listener: IRecentLi
                 tv.setTextColor(context.getColor(R.color.obese_class_I20))
             }
         }
+    }
+
+    override fun clickDelete() {
+        listener.deleteRecent(bmi)
+    }
+
+    override fun hideNavigation() {
     }
 }
