@@ -1,4 +1,4 @@
-package com.weighttracker.bmi.calculator.dialog
+package com.kan.dev.familyhealth.dialog
 
 import android.annotation.SuppressLint
 import android.app.Dialog
