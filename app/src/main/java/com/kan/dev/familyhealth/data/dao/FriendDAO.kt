@@ -17,7 +17,7 @@ interface FriendDAO  {
     val all: Flow<List<FriendModel>>
 
     @Query("select * from friend where id = :id")
-    fun getItem(id: Int): BMI
+    fun getItem(id: Int): FriendModel
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(friendModel: FriendModel)

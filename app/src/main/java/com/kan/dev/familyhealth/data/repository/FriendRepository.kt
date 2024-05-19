@@ -17,7 +17,7 @@ class FriendRepository @Inject constructor(
     }
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun getItem(id: Int) : BMI {
+    suspend fun getItem(id: Int) : FriendModel {
         return withContext(Dispatchers.IO) {
             dao.getItem(id)
         }

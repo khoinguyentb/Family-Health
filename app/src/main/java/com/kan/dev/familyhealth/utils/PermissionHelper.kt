@@ -20,6 +20,17 @@ fun Activity.requestAppPermissionNotification(requestCode: Int) {
     }
 }
 
+fun Activity.checkPerList(listPermission: Array<String>): Boolean {
+    for (per in listPermission) {
+        val allow = ActivityCompat.checkSelfPermission(
+            this,
+            per
+        ) == PackageManager.PERMISSION_GRANTED
+        if (!allow) return false
+    }
+    return true
+}
+
 fun Activity.requestAppPermissionCamera(requestCode: Int) {
     ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), requestCode)
 }

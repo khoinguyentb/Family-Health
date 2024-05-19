@@ -8,7 +8,7 @@
     android:background="@color/background"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".ui.activity.SignInActivity">
+    tools:context=".ui.activity.authen.SignInActivity">
 
     <ImageView
         android:layout_marginTop="@dimen/_30sdp"

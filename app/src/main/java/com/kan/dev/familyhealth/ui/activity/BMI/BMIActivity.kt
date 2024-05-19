@@ -1,4 +1,4 @@
-package com.kan.dev.familyhealth.ui.activity
+package com.kan.dev.familyhealth.ui.activity.BMI
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction

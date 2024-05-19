@@ -1,4 +1,4 @@
-package com.kan.dev.familyhealth.ui.activity
+package com.kan.dev.familyhealth.ui.activity.main
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -67,12 +67,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         val currentUser = mAuth.currentUser
         if (currentUser != null) {
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
         }else{
             if (!sharePre.getBoolean(IS_LANGUAGE,false)){
-                startActivity(Intent(this,LanguageActivity::class.java))
+                startActivity(Intent(this, LanguageActivity::class.java))
             }else{
-                startActivity(Intent(this,IntroActivity::class.java))
+                startActivity(Intent(this, IntroActivity::class.java))
             }
         }
         finish()

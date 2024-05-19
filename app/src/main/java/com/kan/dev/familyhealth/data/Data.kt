@@ -1,10 +1,14 @@
 package com.kan.dev.familyhealth.data
 
+import android.annotation.SuppressLint
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.data.model.AboutModel
+import com.kan.dev.familyhealth.data.model.FilterModel
 import com.kan.dev.familyhealth.data.model.IntroModel
 import com.kan.dev.familyhealth.data.model.LanguageModel
 import com.kan.dev.familyhealth.data.model.SettingModel
+import com.kan.dev.familyhealth.data.model.YearModel
+import java.time.LocalDate
 
 class Data {
     companion object {
@@ -63,6 +67,45 @@ class Data {
             SettingModel(R.drawable.rate, R.string.Rate),
             SettingModel(R.drawable.version, R.string.Version),
             SettingModel(R.drawable.logout, R.string.LogOut),
+        )
+
+        val filterList: List<FilterModel> = arrayListOf(
+            FilterModel(R.string.January, 1, false),
+            FilterModel(R.string.February, 2, false),
+            FilterModel(R.string.March, 3, false),
+            FilterModel(R.string.April, 4, false),
+            FilterModel(R.string.May, 5, false),
+            FilterModel(R.string.June, 6, false),
+            FilterModel(R.string.July, 7, false),
+            FilterModel(R.string.August, 8, false),
+            FilterModel(R.string.September, 9, false),
+            FilterModel(R.string.October, 10, false),
+            FilterModel(R.string.November, 11, false),
+            FilterModel(R.string.December, 12, false),
+        )
+
+        var yearList: List<YearModel> = arrayListOf(
+            YearModel(LocalDate.now().year - 10, false),
+            YearModel(LocalDate.now().year - 9, false),
+            YearModel(LocalDate.now().year - 8, false),
+            YearModel(LocalDate.now().year - 7, false),
+            YearModel(LocalDate.now().year - 6, false),
+            YearModel(LocalDate.now().year - 5, false),
+            YearModel(LocalDate.now().year - 4, false),
+            YearModel(LocalDate.now().year - 3, false),
+            YearModel(LocalDate.now().year - 2, false),
+            YearModel(LocalDate.now().year - 1, false),
+            YearModel(LocalDate.now().year, false),
+            YearModel(LocalDate.now().year + 1, false),
+            YearModel(LocalDate.now().year + 2, false),
+            YearModel(LocalDate.now().year + 3, false),
+            YearModel(LocalDate.now().year + 4, false),
+            YearModel(LocalDate.now().year + 5, false),
+            YearModel(LocalDate.now().year + 6, false),
+            YearModel(LocalDate.now().year + 7, false),
+            YearModel(LocalDate.now().year + 8, false),
+            YearModel(LocalDate.now().year + 9, false),
+            YearModel(LocalDate.now().year + 10, false),
         )
 
     }

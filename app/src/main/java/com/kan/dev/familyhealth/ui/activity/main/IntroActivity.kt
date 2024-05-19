@@ -1,16 +1,16 @@
-package com.kan.dev.familyhealth.ui.activity
+package com.kan.dev.familyhealth.ui.activity.main
 
 import android.content.Intent
 import com.kan.dev.familyhealth.adapter.IntroAdapter
 import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.data.Data.Companion.introModelList
 import com.kan.dev.familyhealth.databinding.ActivityIntroBinding
+import com.kan.dev.familyhealth.ui.activity.PermissionActivity
+import com.kan.dev.familyhealth.ui.activity.authen.SignInActivity
 import com.kan.dev.familyhealth.utils.CHECK_PER
-import com.kan.dev.familyhealth.utils.SharePreferencesUtils
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class IntroActivity : BaseActivity<ActivityIntroBinding>() {

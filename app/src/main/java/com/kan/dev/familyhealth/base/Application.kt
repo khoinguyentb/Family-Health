@@ -1,7 +1,7 @@
 package com.kan.dev.familyhealth.base
 
 import com.kan.dev.familyhealth.R
-import com.kan.dev.familyhealth.ui.activity.SplashActivity
+import com.kan.dev.familyhealth.ui.activity.main.SplashActivity
 import com.lvt.ads.util.AdsApplication
 import com.lvt.ads.util.AppOpenManager
 import dagger.hilt.android.HiltAndroidApp

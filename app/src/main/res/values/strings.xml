@@ -196,5 +196,28 @@
     <string name="InvalidCode">The code is invalid</string>
     <string name="join_with_friend">Join with friend successfully!</string>
     <string name="invalid_friend_code">Invalid Friend code!</string>
+    <string name="Summary"><u><i>Summary </i></u></string>
+    <string name="Moving">Moving</string>
+    <string name="Step">Step</string>
+    <string name="Distance">Distance</string>
+
+    <string name="Recent">Recent</string>
+    <string name="Gender">Gender</string>
+    <string name="noData">No recent records</string>
+    <string name="NoChartData">No Chart Data</string>
+    <string name="DeletedSuccessfully">Deleted successfully</string>
+
+    <string name="January">January</string>
+    <string name="February">February</string>
+    <string name="March">March</string>
+    <string name="April">April</string>
+    <string name="May">May</string>
+    <string name="June">June</string>
+    <string name="July">July</string>
+    <string name="August">August</string>
+    <string name="September">September</string>
+    <string name="October">October</string>
+    <string name="November">November</string>
+    <string name="December">December</string>
 
 </resources>

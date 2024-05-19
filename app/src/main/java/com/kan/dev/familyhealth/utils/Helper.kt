@@ -104,3 +104,24 @@ fun generateQRCode(context: Context, textToEncode: String?, qrCodeWidthAndHeight
     }
     return bitmap
 }
+
+
+fun getCurrentMonth(context: Context): String {
+    var monthName = ""
+    monthName = when (currentMonth) {
+        1 -> context.getString(R.string.January)
+        2 -> context.getString(R.string.February)
+        3 -> context.getString(R.string.March)
+        4 -> context.getString(R.string.April)
+        5 -> context.getString(R.string.May)
+        6 -> context.getString(R.string.June)
+        7 -> context.getString(R.string.July)
+        8 -> context.getString(R.string.August)
+        9 -> context.getString(R.string.September)
+        10 -> context.getString(R.string.October)
+        11 -> context.getString(R.string.November)
+        12 -> context.getString(R.string.December)
+        else -> ""
+    }
+    return monthName
+}

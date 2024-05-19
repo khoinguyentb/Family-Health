@@ -1,8 +1,10 @@
-package com.kan.dev.familyhealth.ui.activity
+package com.kan.dev.familyhealth.ui.activity.main
 
 import android.content.Intent
 import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.databinding.ActivityMainBinding
+import com.kan.dev.familyhealth.ui.activity.BMI.BMIActivity
+import com.kan.dev.familyhealth.ui.activity.ExerciseActivity
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
 import dagger.hilt.android.AndroidEntryPoint

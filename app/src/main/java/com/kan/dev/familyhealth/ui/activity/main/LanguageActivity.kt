@@ -1,4 +1,4 @@
-package com.kan.dev.familyhealth.ui.activity
+package com.kan.dev.familyhealth.ui.activity.main
 
 import android.content.Intent
 import android.util.Log

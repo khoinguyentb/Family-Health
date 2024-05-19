@@ -1,7 +1,9 @@
 package com.kan.dev.familyhealth.utils
 
+import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
+import java.time.LocalDate
 
 
 const val APPLICATION = "KEY"
@@ -26,3 +28,12 @@ const val toastDuration = 2000
  val handler by lazy {
     Handler(Looper.getMainLooper())
 }
+var daily : Boolean = true
+var weekly: Boolean = false
+var monthly: Boolean = false
+var date: String? = null
+@SuppressLint("NewApi")
+var currentMonth = LocalDate.now().monthValue
+
+@SuppressLint("NewApi")
+var currentYear = LocalDate.now().year

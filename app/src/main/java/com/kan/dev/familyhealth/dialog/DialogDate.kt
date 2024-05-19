@@ -1,4 +1,4 @@
-package com.kan.dev.familyhealth.dialog
+package com.weighttracker.bmi.calculator.dialog
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -12,6 +12,7 @@ import android.view.WindowManager
 import com.kan.dev.familyhealth.databinding.DatePickerBottomBinding
 import com.kan.dev.familyhealth.interfacces.IDateClickListener
 import com.kan.dev.familyhealth.utils.SharePreferencesUtils
+import com.kan.dev.familyhealth.utils.date
 import com.kan.dev.familyhealth.utils.formatDate
 import com.shawnlin.numberpicker.NumberPicker
 import java.time.LocalDate
@@ -23,7 +24,7 @@ class DialogDate (private val context: Context,private val listener : IDateClick
     private val binding by lazy {
         DatePickerBottomBinding.inflate(layoutInflater)
     }
-    private lateinit var date : String
+    private lateinit var _date : String
     @SuppressLint("NewApi")
     private var currentMonth = LocalDate.now().monthValue
     @SuppressLint("NewApi")
@@ -34,6 +35,9 @@ class DialogDate (private val context: Context,private val listener : IDateClick
     private var currentYear = LocalDate.now().year
     @SuppressLint("NewApi")
     private var currentDate = LocalDate.now().dayOfMonth
+
+    private var firstDotIndex = 0
+    private var secondDotIndex = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -66,6 +70,15 @@ class DialogDate (private val context: Context,private val listener : IDateClick
             }
         }
         sharePre = SharePreferencesUtils(context)
+
+        firstDotIndex = date!!.indexOf(".")
+        secondDotIndex = date!!.indexOf(".", firstDotIndex + 1)
+
+        currentYear = date!!.substring(0, 4).toInt()
+
+        currentMonth = date!!.substring(firstDotIndex + 1, secondDotIndex).toInt()
+
+        currentDate = date!!.substring(date!!.lastIndexOf('.') + 1).toInt()
 
         initNumberPickerYear()
         initNumberPickerYMonth()
@@ -110,8 +123,8 @@ class DialogDate (private val context: Context,private val listener : IDateClick
             dismiss()
         }
         binding.btnOke.setOnClickListener {
-            date = formatDate(currentYear,currentMonth,currentDate)
-            listener.clickDateListener(date)
+            _date = formatDate(currentYear,currentMonth,currentDate)
+            listener.clickDateListener(_date)
             dismiss()
         }
     }

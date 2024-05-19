@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_delete"
+    android:layout_margin="@dimen/_10sdp"
+
+    android:gravity="center"
+    android:padding="@dimen/_15sdp"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/YellowFF"
+        style="@style/poppinsMedium_14"
+        android:text="@string/DeleteConfirm"
+        android:layout_gravity="center_horizontal"
+        />
+    <TextView
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:text="@string/desDelete"
+        android:gravity="center"
+        android:textColor="@color/white"
+        style="@style/poppins_14"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:weightSum="2">
+        <TextView
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_35sdp"
+            android:background="@drawable/bg_button_cancle"
+            android:text="@string/cancel"
+            android:gravity="center"
+            android:layout_marginVertical="@dimen/_2sdp"
+            android:elevation="@dimen/_5sdp"
+            android:singleLine="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:ellipsize="marquee"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textColor="@color/white"
+            style="@style/poppinsMedium_14"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/btnDelete"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_35sdp"
+            android:background="@drawable/bg_button_magenta"
+            android:text="@string/Delete"
+            android:layout_marginVertical="@dimen/_2sdp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:ellipsize="marquee"
+            android:elevation="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:textColor="@color/white"
+            style="@style/poppinsMedium_14"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</LinearLayout>

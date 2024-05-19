@@ -43,7 +43,7 @@
             android:name=".ui.activity.VersionActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.SettingActivity"
+            android:name=".ui.activity.main.SettingActivity"
             android:exported="false" />
 
         <meta-data
@@ -66,19 +66,19 @@
             android:name=".ui.activity.interaction.InformationActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.SignUpActivity"
+            android:name=".ui.activity.authen.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.SignInActivity"
+            android:name=".ui.activity.authen.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.CalculatorBMIActivity"
+            android:name=".ui.activity.BMI.CalculatorBMIActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.RecentActivity"
+            android:name=".ui.activity.BMI.RecentActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.BMIActivity"
+            android:name=".ui.activity.BMI.BMIActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.ExerciseActivity"
@@ -87,16 +87,16 @@
             android:name=".ui.activity.PermissionActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.LanguageActivity"
+            android:name=".ui.activity.main.LanguageActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.IntroActivity"
+            android:name=".ui.activity.main.IntroActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".ui.activity.main.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.SplashActivity"
+            android:name=".ui.activity.main.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

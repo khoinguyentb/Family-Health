@@ -7,9 +7,10 @@ import android.os.Build
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.databinding.ActivityPermissionBinding
+import com.kan.dev.familyhealth.ui.activity.authen.SignInActivity
 import com.kan.dev.familyhealth.utils.CHECK_PER
 import com.kan.dev.familyhealth.utils.LOG_APP
-import com.kan.dev.familyhealth.utils.SharePreferencesUtils
+import com.kan.dev.familyhealth.utils.checkPerList
 import com.kan.dev.familyhealth.utils.checkPermissionCamera
 import com.kan.dev.familyhealth.utils.checkPermissionLocation
 import com.kan.dev.familyhealth.utils.checkPermissionNotification
@@ -19,7 +20,6 @@ import com.kan.dev.familyhealth.utils.requestAppPermissionNotification
 import com.kan.dev.familyhealth.utils.showPermissionAgreeDialog
 import com.kan.dev.familyhealth.utils.showPermissionSettingsDialog
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class PermissionActivity : BaseActivity<ActivityPermissionBinding>() {
@@ -32,6 +32,11 @@ class PermissionActivity : BaseActivity<ActivityPermissionBinding>() {
         const val REQUEST_CODE_LOCATION = 1002
     }
 
+    private var LOCATION = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION,
+        Manifest.permission.ACCESS_NETWORK_STATE
+    )
     override fun initData() {
         sharePre.putBoolean(CHECK_PER,true)
     }
@@ -52,7 +57,7 @@ class PermissionActivity : BaseActivity<ActivityPermissionBinding>() {
                 swCamera.setImageResource(R.drawable.switch_off)
             }
 
-            if (checkPermissionLocation()) {
+            if (checkPerList(LOCATION)) {
                 swLocation.setImageResource(R.drawable.switch_on)
             } else {
                 swLocation.setImageResource(R.drawable.switch_off)

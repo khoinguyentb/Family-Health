@@ -24,7 +24,7 @@ import com.kan.dev.familyhealth.data.RealtimeDAO
 import com.kan.dev.familyhealth.data.RealtimeDAO.pushRealtimeData
 import com.kan.dev.familyhealth.data.model.FriendModel
 import com.kan.dev.familyhealth.databinding.ActivityJoinWithFamilyBinding
-import com.kan.dev.familyhealth.ui.activity.MainActivity
+import com.kan.dev.familyhealth.ui.activity.main.MainActivity
 import com.kan.dev.familyhealth.ui.activity.QRScanActivity
 import com.kan.dev.familyhealth.utils.CODE_LENGTH
 import com.kan.dev.familyhealth.utils.MY_CODE
@@ -50,15 +50,20 @@ class JoinWithFamilyActivity : BaseActivity<ActivityJoinWithFamilyBinding>() {
     private  var code = ""
     private  var avtId = 0
     private  var name = ""
-    private  var sex = ""
+    private  var gender = ""
     private  var weight = 0F
     private  var height = 0F
     private  var battery = 0
+    private var dateOfBirth : String = ""
     private  var phoneNumber = ""
     private  var latLng = ""
     private  var lastActive = 0L
     private  var isTracking = true
     private  var isSos = false
+    private var checkCm: Boolean = false
+    private var checkSt: Boolean = false
+    private var checkKg: Boolean = false
+    private var checkLb: Boolean = false
     private lateinit var friend : FriendModel
     override fun initData() {
         database = FirebaseDatabase.getInstance().reference
@@ -174,17 +179,26 @@ class JoinWithFamilyActivity : BaseActivity<ActivityJoinWithFamilyBinding>() {
                             code = friendCode!!
                             avtId = snapshot.child("avt").getValue(Int::class.java) ?: 0
                             name = snapshot.child("name").getValue(String::class.java) ?: ""
-                            sex = snapshot.child("sex").getValue(String::class.java) ?: ""
+                            gender = snapshot.child("gender").getValue(String::class.java) ?: ""
                             weight = snapshot.child("weight").getValue(Float::class.java) ?: 0F
                             height = snapshot.child("height").getValue(Float::class.java) ?: 0F
                             battery = snapshot.child("battery").getValue(Int::class.java) ?: 0
+                            dateOfBirth = snapshot.child("dateOfBirth").getValue(String::class.java) ?: ""
                             phoneNumber = snapshot.child("phoneNumber").getValue(String::class.java) ?: ""
                             latLng = snapshot.child("latLng").getValue(String::class.java) ?: ""
                             lastActive = snapshot.child("lastActive").getValue(Long::class.java) ?: 0L
                             isTracking = snapshot.child("isTracking").getValue(Boolean::class.java) ?: false
                             isSos = snapshot.child("isSos").getValue(Boolean::class.java) ?: false
 
+                            checkCm = snapshot.child("checkCm").getValue(Boolean::class.java) ?: false
+                            checkLb = snapshot.child("checkLb").getValue(Boolean::class.java) ?: false
+                            checkKg = snapshot.child("checkKg").getValue(Boolean::class.java) ?: false
+                            checkSt = snapshot.child("checkSt").getValue(Boolean::class.java) ?: false
 
+                            friend = FriendModel(code = code, avt = avtId, battery = battery, name = name, weight = weight,
+                                height = height, dateOfBirth = dateOfBirth, nickname = "", gender = gender, phoneNumber = phoneNumber, latLng = latLng,
+                                visible = true, isSos = isSos, statusSos = true, isTracking = isTracking, lastActive = lastActive, online = true, checkCm = checkCm,
+                                checkKg = checkKg, checkLb = checkLb, checkSt = checkSt)
 
                             val users = hashMapOf<String, Any>(
                                 "code" to code,
@@ -192,7 +206,7 @@ class JoinWithFamilyActivity : BaseActivity<ActivityJoinWithFamilyBinding>() {
                                 "battery" to battery,
                                 "name" to name,
                                 "nickname" to "",
-                                "sex" to sex,
+                                "gender" to gender,
                                 "phoneNumber" to phoneNumber,
                                 "latLng" to latLng,
                                 "visible" to true,
@@ -200,12 +214,15 @@ class JoinWithFamilyActivity : BaseActivity<ActivityJoinWithFamilyBinding>() {
                                 "statusSos" to true,
                                 "isTracking" to isTracking,
                                 "lastActive" to lastActive,
-                                "online" to true
+                                "online" to true,
+                                "checkCm" to checkCm,
+                                "checkSt" to checkSt,
+                                "checkLb" to checkLb,
+                                "checkKg" to checkKg,
                             )
                             if (snapshot.key != sharePre.getString(MY_CODE,"")) {
                                 pushRealtimeData("${sharePre.getString(MY_CODE,"")}/friends/${users["code"]}", users) {
                                     viewModel.insert(friend)
-
                                     if (System.currentTimeMillis() - lastTime > toastDuration) {
                                         Toast.makeText(
                                             applicationContext,

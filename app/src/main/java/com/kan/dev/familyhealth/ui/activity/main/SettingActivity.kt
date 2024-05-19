@@ -1,4 +1,4 @@
-package com.kan.dev.familyhealth.ui.activity
+package com.kan.dev.familyhealth.ui.activity.main
 
 import android.content.Intent
 import android.view.View
@@ -10,6 +10,8 @@ import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.data.Data.Companion.settingModelList
 import com.kan.dev.familyhealth.databinding.ActivitySettingBinding
 import com.kan.dev.familyhealth.interfacces.ISettingClickListener
+import com.kan.dev.familyhealth.ui.activity.VersionActivity
+import com.kan.dev.familyhealth.ui.activity.authen.SignInActivity
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.utils.shareApp
@@ -64,7 +66,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(),ISettingClickList
                 }
                 R.drawable.logout -> {
                     FirebaseAuth.getInstance().signOut()
-                    startActivity(Intent(this,SignInActivity::class.java))
+                    startActivity(Intent(this, SignInActivity::class.java))
                     finishAffinity()
                 }
             }

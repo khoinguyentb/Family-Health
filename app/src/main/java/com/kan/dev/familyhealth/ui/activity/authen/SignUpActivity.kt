@@ -1,6 +1,5 @@
-package com.kan.dev.familyhealth.ui.activity
+package com.kan.dev.familyhealth.ui.activity.authen
 
-import android.R.attr.password
 import android.app.ProgressDialog
 import android.util.Log
 import android.widget.Toast
