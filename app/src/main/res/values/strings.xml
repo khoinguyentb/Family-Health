@@ -221,4 +221,48 @@
     <string name="December">December</string>
     <string name="noStep">Step Counter Sensor not available!</string>
 
+    <string name="friend_location">Friend Location</string>
+    <string name="start">Start</string>
+    <string name="turn_off">Turn Off</string>
+    <string name="enable_sos">Do you want to enable SOS alerts for other devices?</string>
+    <string name="disable_sos">Select the button to turn off SOS alerts on another device</string>
+    <string name="stop_sos">needs your help. Come see the status and help them!</string>
+
+
+    <string name="bank">Bank</string>
+    <string name="find">Find</string>
+    <string name="your_position">Your Position</string>
+    <string name="detail2">Detail</string>
+    <string name="address">Address</string>
+
+    <string name="detail"><u>detail</u> </string>
+    <string name="bus_stop">Bus Stop</string>
+    <string name="petrol_station">Petrol Station</string>
+    <string name="cafe">Cafe</string>
+    <string name="cinema">Cinema</string>
+    <string name="SELECT_AVATAR">SELECT AVATAR</string>
+    <string name="des_Dialog_avt">Choose the avatar you want and your friends will see this interface on the realtime tracker screen</string>
+    <string name="Save_avatar">Save Avatar</string>
+
+    <string name="coordinates">Coordinates</string>
+
+    <string name="search_for_friends_on_the_map">Search for friends on the map</string>
+    <string name="add_friend">Add Friend</string>
+    <string name="view_more">View More</string>
+    <string name="near_by_place">Near By Place</string>
+    <string name="header_warning_permission">Warning permission</string>
+    <string name="choose_a_map">Choose A Map</string>
+    <string name="terrain">Terrain</string>
+    <string name="satellite">Satellite</string>
+
+    <string name="connected_yourself">You have already connected yourself to this person</string>
+    <string name="qr_code">QR Code</string>
+    <string name="qr_instruct_2">Scanning will start automatically</string>
+    <string name="qr_instruct_1">Place QR code inside area</string>
+    <string name="qr_struct">Scan the QR code to connect and track the location of your loved ones and friends</string>
+    <string name="add_code">Add Code</string>
+    <string name="add_image">Add Image</string>
+    <string name="dialog_location">To continue, enable device location using Google location services</string>
+    <string name="no_results">No Results</string>
+    <string name="turn_off_all_notification"><u>Turn off all notifications</u></string>
 </resources>

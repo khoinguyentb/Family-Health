@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transfer"
+    android:layout_marginHorizontal="25dp">
+
+    <ImageView
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:layout_alignStart="@+id/relativeLayout"
+        android:layout_alignTop="@+id/relativeLayout"
+        android:elevation="1dp"
+        android:src="@drawable/ic_sos_ring"
+        android:translationX="-8dp"
+        android:translationY="-10dp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_dialog"
+        android:backgroundTint="@color/white"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:id="@+id/txtSosDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/layout"
+            android:fontFamily="@font/roboto"
+            android:lines="2"
+            android:text="@string/enable_sos"
+            android:textColor="@color/black_252525"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/txtSosDesc"
+            android:layout_alignBottom="@id/txtSosDesc"
+            android:layout_alignParentEnd="true"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/btnActive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_dialog"
+                android:backgroundTint="#E02E07"
+                android:fontFamily="@font/roboto"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:text="@string/start"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map_bottom"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transfer"
+    android:elevation="6dp"
+    android:orientation="vertical"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="220dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+   >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/online"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transfer">
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/rcvAddon"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingVertical="12dp"/>-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerOnlineFriend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_stroke_light_blue_gray"
+            android:paddingHorizontal="12dp">
+
+            <ImageView
+                android:id="@+id/line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="8dp"
+                android:paddingTop="5dp"
+                android:src="@drawable/ic_line" />
+
+            <RelativeLayout
+                android:id="@+id/headerMap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/line"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edtSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toStartOf="@+id/btnShareCode"
+                    android:background="@drawable/bg_edittext"
+                    android:drawableStart="@drawable/ic_magnifier"
+                    android:fontFamily="@font/roboto"
+                    android:hint="@string/search_for_friends_on_the_map"
+                    android:padding="8dp"
+                    android:ellipsize="end"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:imeOptions="actionDone"
+                    android:inputType="textCapWords"
+                    android:textColor="@color/blue_408CFF"
+                    android:textColorHint="@color/gray_656565"
+                    android:textSize="14.6sp" />
+
+                <ImageView
+                    android:id="@+id/btnShareCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toStartOf="@+id/btnSettings"
+                    android:src="@drawable/ic_share_code" />
+
+                <ImageView
+                    android:id="@+id/btnSettings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_settings" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutFriend"
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/headerMap">
+
+                <TextView
+                    android:id="@+id/txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/roboto"
+                    android:paddingVertical="15dp"
+                    android:paddingStart="10dp"
+                    android:text="@string/add_friend"
+                    android:textColor="@color/gray_939393"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/btnViewAddFriend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/txt"
+                    android:layout_alignBottom="@id/txt"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:paddingEnd="10dp"
+                    android:text="@string/view_more"
+                    android:textColor="@color/blue_408CFF"
+                    android:textSize="12sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt"
+                    android:background="@drawable/bg_recycler">
+
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="horizontal">-->
+<!--                        <androidx.recyclerview.widget.RecyclerView-->
+<!--                            android:id="@+id/rcvAdd"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:paddingVertical="12dp"/>-->
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerFriend"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingVertical="12dp" />
+<!--                    </LinearLayout>-->
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:visibility="invisible"
+                        android:id="@+id/rcvSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="12dp"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvNull"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="56dp"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/no_results"
+                        android:textColor="#667085"
+                        android:textSize="13sp"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutPlace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutFriend"
+                android:layout_marginBottom="60dp">
+
+                <TextView
+                    android:id="@+id/txt2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/roboto"
+                    android:paddingVertical="15dp"
+                    android:paddingStart="10dp"
+                    android:text="@string/near_by_place"
+                    android:textColor="@color/gray_939393"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/btnViewPlace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/txt2"
+                    android:layout_alignBottom="@id/txt2"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:paddingEnd="10dp"
+                    android:text="@string/view_more"
+                    android:textColor="@color/blue_408CFF"
+                    android:textSize="12sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_300sdp"
+                    android:layout_below="@id/txt2"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/bg_recycler">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerPlace"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:paddingVertical="12dp"
+                        tools:listitem="@layout/item_place" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
