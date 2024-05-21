@@ -3,6 +3,7 @@ package com.kan.dev.familyhealth.utils
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
+import com.google.android.gms.maps.model.LatLng
 import java.time.LocalDate
 
 
@@ -21,13 +22,17 @@ const val MY_CODE = "CODE"
 const val KEY_QR_BITMAP = "qr_bitmap_link"
 const val QR_REQUEST_CODE = 123
 const val PHONE_PATTERN = "^[+]?[0-9]{10,13}$"
-
+const val KEY_MAP = "KEY_MAP"
 const val OTHER = "OTHER"
+const val DISABLE = "disable"
+const val ENABLE = "enable"
 const val toastDuration = 2000
  var isClick = true
  val handler by lazy {
     Handler(Looper.getMainLooper())
 }
+
+val DEFAULT_LATLNG = LatLng(-1.0, -1.0)
 var daily : Boolean = true
 var weekly: Boolean = false
 var monthly: Boolean = false

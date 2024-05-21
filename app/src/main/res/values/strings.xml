@@ -254,6 +254,8 @@
     <string name="choose_a_map">Choose A Map</string>
     <string name="terrain">Terrain</string>
     <string name="satellite">Satellite</string>
+    <string name="traffic">Traffic</string>
+    <string name="transit">Transit</string>
 
     <string name="connected_yourself">You have already connected yourself to this person</string>
     <string name="qr_code">QR Code</string>
@@ -265,4 +267,7 @@
     <string name="dialog_location">To continue, enable device location using Google location services</string>
     <string name="no_results">No Results</string>
     <string name="turn_off_all_notification"><u>Turn off all notifications</u></string>
+    <string name="Message_perLocation">If you enable background location access, your location will always be shared with friends while you run the program in the background. Your location will be terminated when the application is closed or not utilized.Please allow this permission from settings to proceed further.</string>
+
+    <string name="toast_sos">You must enable tracking mode before sending the sos signal</string>
 </resources>

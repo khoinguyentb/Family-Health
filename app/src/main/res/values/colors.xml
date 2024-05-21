@@ -8,6 +8,10 @@
     <color name="YellowFF">#FFDA66</color>
     <color name="item">#202036</color>
 
+    <color name="headerColorRed">#BB1313</color>
+    <color name="red_E02E07">#E02E07</color>
+
+
     <color name="light_blue_D2DFFF">#40D2DFFF</color>
     <color name="blue_049DEF">#049DEF</color>
     <color name="lightblue_60A7EB">#60A7EB</color>

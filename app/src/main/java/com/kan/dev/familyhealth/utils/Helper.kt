@@ -17,8 +17,10 @@ import com.google.zxing.EncodeHintType
 import com.google.zxing.WriterException
 import com.google.zxing.qrcode.QRCodeWriter
 import com.kan.dev.familyhealth.R
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.Date
 import java.util.EnumMap
 
 
@@ -124,4 +126,11 @@ fun getCurrentMonth(context: Context): String {
         else -> ""
     }
     return monthName
+}
+
+@SuppressLint("SimpleDateFormat")
+fun formatDateFromLong(timeInMillis: Long): String? {
+    val date = Date(timeInMillis)
+    val sdf = SimpleDateFormat("HH:mm dd:MM:yy")
+    return sdf.format(date)
 }

@@ -67,7 +67,7 @@ object RealtimeDAO {
 
     fun updateRealtimeData(
         childPath: String,
-        newChild: Map<String?, Any?>,
+        newChild: Map<String, Any>,
         listener: onSuccessListener
     ) {
         databaseReference!!.child(childPath).updateChildren(newChild)
