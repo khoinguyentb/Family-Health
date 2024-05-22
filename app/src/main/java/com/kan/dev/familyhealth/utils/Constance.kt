@@ -26,6 +26,13 @@ const val KEY_MAP = "KEY_MAP"
 const val OTHER = "OTHER"
 const val DISABLE = "disable"
 const val ENABLE = "enable"
+const val BUS = "bus"
+const val PETROL = "gas_station"
+const val CAFE = "cafe"
+const val CINEMA = "movie_theater"
+const val BANK = "bank"
+
+
 const val toastDuration = 2000
  var isClick = true
  val handler by lazy {

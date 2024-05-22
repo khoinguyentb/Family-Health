@@ -13,10 +13,14 @@ import android.graphics.Color
 import android.media.MediaPlayer
 import android.net.Uri
 import android.provider.Settings
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -35,14 +39,20 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.kan.dev.familyhealth.R
+import com.kan.dev.familyhealth.adapter.DetailListener
+import com.kan.dev.familyhealth.adapter.FriendAdapter
 import com.kan.dev.familyhealth.adapter.OnclickStopListener
+import com.kan.dev.familyhealth.adapter.PlaceAdapter
+import com.kan.dev.familyhealth.adapter.PlaceListener
 import com.kan.dev.familyhealth.adapter.SosAdapter
 import com.kan.dev.familyhealth.base.BaseActivity
+import com.kan.dev.familyhealth.data.Data.Companion.placeList
 import com.kan.dev.familyhealth.data.RealtimeDAO
 import com.kan.dev.familyhealth.data.RealtimeDAO.getOnetimeData
 import com.kan.dev.familyhealth.data.RealtimeDAO.updateRealtimeData
 import com.kan.dev.familyhealth.data.model.FriendModel
 import com.kan.dev.familyhealth.databinding.ActivityGpsactivityBinding
+import com.kan.dev.familyhealth.ui.activity.DetailInformationActivity
 import com.kan.dev.familyhealth.utils.CODE_LENGTH
 import com.kan.dev.familyhealth.utils.ClickDialogListener
 import com.kan.dev.familyhealth.utils.DEFAULT_LATLNG
@@ -76,11 +86,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
+import java.util.Locale
 
 @Suppress("NAME_SHADOWING")
 @AndroidEntryPoint
 class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallback,
-    OnclickStopListener {
+    OnclickStopListener, DetailListener,PlaceListener {
     override fun setViewBinding(): ActivityGpsactivityBinding {
         return ActivityGpsactivityBinding.inflate(layoutInflater)
     }
@@ -106,12 +117,13 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
     private var isSos = false
     private var checkPut = 0
     private var perDialog: Dialog? = null
-
     private val sosAdapter :SosAdapter by lazy {
         SosAdapter(this,this)
     }
+    private lateinit var placeAdapter: PlaceAdapter
+    private lateinit var friendAdapter: FriendAdapter
 
-    private var mapTypeDialog:android.app.Dialog? = null
+    private var mapTypeDialog: Dialog? = null
     override fun initData() {
         RealtimeDAO.initRealtimeData()
     }
@@ -120,6 +132,11 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
         Admob.getInstance().loadInterAll(this, getString(R.string.inter_all))
         Admob.getInstance().loadCollapsibleBanner(this, getString(R.string.banner_collap), "bottom")
         initDialog()
+        getFriend()
+        getPlace()
+        initDialog()
+        actionSearchFriend()
+        initAdapter()
     }
 
     override fun initListener() {
@@ -237,50 +254,210 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
         })
     }
 
-//    private fun initAdapter() {
-//        val listFri: MutableList<SharedUserModel> = java.util.ArrayList<SharedUserModel>()
-//        listFri.add(DEFAULT_USER)
-//        listFri.add(DEFAULT_USER)
-//        listFri.addAll(friendList)
-//        binding.mapBottomSheet.recyclerOnlineFriend.layoutManager = LinearLayoutManager(
-//            this,
-//            LinearLayoutManager.HORIZONTAL, false
-//        )
-//        binding.mapBottomSheet.recyclerOnlineFriend.setHasFixedSize(true)
-//        val adapter = FriendAdapter(this, "online", listFri) { code ->
-//            getOnetimeData(code) { snapshot ->
-//                val latLng =
-//                    snapshot!!.child("latLng").getValue(String::class.java)
-//                map!!.clear()
-//                actionShowFriendAll(false)
-//                moveCamera(FRIEND_ONE, convertToLatLng(latLng!!))
-//            }
-//        }
-//        binding.mapBottomSheet.recyclerOnlineFriend.adapter = adapter
-//        binding.mapBottomSheet.recyclerOnlineFriend.itemAnimator = null
-//        binding.mapBottomSheet.recyclerFriend.layoutManager =
-//            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-//        binding.mapBottomSheet.recyclerFriend.setHasFixedSize(true)
-//        val adapter1 = FriendAdapter(this, "main", listFri) { code ->
-//            val intent = Intent(applicationContext, DetailInformationActivity::class.java)
-//            intent.putExtra("receiveCode", code)
-//            Log.e("Kan", code)
-//            startActivity(intent)
-//        }
-//        binding.mapBottomSheet.recyclerFriend.adapter = adapter1
-//        binding.mapBottomSheet.recyclerFriend.itemAnimator = null
-//        placeList = initPlaceList()
-//        binding.mapBottomSheet.recyclerPlace.layoutManager =
-//            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//        binding.mapBottomSheet.recyclerPlace.setHasFixedSize(true)
-//        val adapter2 = PlaceAdapter(this, placeList.subList(0, 4)) { type: String? ->
-//            actionShowNearbyPlace(
-//                type!!
-//            )
-//        }
-//        binding.mapBottomSheet.recyclerPlace.adapter = adapter2
-//        binding.mapBottomSheet.recyclerPlace.itemAnimator = null
-//    }
+    private fun initAdapter() {
+
+        viewModel.getAll.observe(this){
+            binding.mapBottomSheet.recyclerOnlineFriend.layoutManager = LinearLayoutManager(
+                this,
+                LinearLayoutManager.HORIZONTAL, false
+            )
+            binding.mapBottomSheet.recyclerOnlineFriend.setHasFixedSize(true)
+
+            friendAdapter = FriendAdapter(this,"online",this)
+            friendAdapter.setItems(it)
+            binding.mapBottomSheet.recyclerOnlineFriend.adapter = friendAdapter
+            binding.mapBottomSheet.recyclerOnlineFriend.itemAnimator = null
+            binding.mapBottomSheet.recyclerFriend.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            binding.mapBottomSheet.recyclerFriend.setHasFixedSize(true)
+
+            friendAdapter = FriendAdapter(this,"main",this)
+            friendAdapter.setItems(it)
+            binding.mapBottomSheet.recyclerFriend.adapter = friendAdapter
+            binding.mapBottomSheet.recyclerFriend.itemAnimator = null
+        }
+
+        binding.mapBottomSheet.recyclerPlace.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.mapBottomSheet.recyclerPlace.setHasFixedSize(true)
+        placeAdapter = PlaceAdapter(this,this)
+        placeAdapter.setItems(placeList)
+        binding.mapBottomSheet.recyclerPlace.adapter = placeAdapter
+        binding.mapBottomSheet.recyclerPlace.itemAnimator = null
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun actionSearchFriend() {
+        binding.mapBottomSheet.edtSearch.setOnClickListener { v ->
+            if (mapBottomBehavior!!.state == BottomSheetBehavior.STATE_COLLAPSED || mapBottomBehavior!!.state == BottomSheetBehavior.STATE_HALF_EXPANDED) {
+                mapBottomBehavior!!.addBottomSheetCallback(object : BottomSheetCallback() {
+                    override fun onStateChanged(bottomSheet: View, newState: Int) {
+                        if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                            binding.mapBottomSheet.online.visibility = View.INVISIBLE
+                            binding.mapBottomSheet.layoutPlace.visibility = View.VISIBLE
+                            binding.mapBottomSheet.layoutFriend.visibility = View.VISIBLE
+                        } else if (newState == BottomSheetBehavior.STATE_HALF_EXPANDED) {
+                            binding.mapBottomSheet.online.visibility = View.INVISIBLE
+                            binding.mapBottomSheet.layoutPlace.visibility = View.INVISIBLE
+                            binding.mapBottomSheet.layoutFriend.visibility = View.VISIBLE
+                        } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                            binding.mapBottomSheet.online.visibility = View.VISIBLE
+                            binding.mapBottomSheet.layoutFriend.visibility = View.INVISIBLE
+                            binding.mapBottomSheet.layoutPlace.visibility = View.INVISIBLE
+                            val imm =
+                                getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                            imm.hideSoftInputFromWindow(
+                                binding.mapBottomSheet.edtSearch.windowToken,
+                                0
+                            )
+                        }
+                    }
+
+                    override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                        if (slideOffset > 0.5) {
+                            mapBottomBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED)
+                            //                            mapBottomBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        } else {
+                            mapBottomBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
+                            mapBottomBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED)
+                        }
+                    }
+                })
+                mapBottomBehavior!!.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+        }
+        binding.mapBottomSheet.edtSearch.onFocusChangeListener =
+            OnFocusChangeListener { v, hasFocus ->
+                Log.e("EdtSearch", hasFocus.toString())
+                if (hasFocus) {
+                    if (mapBottomBehavior!!.state == BottomSheetBehavior.STATE_COLLAPSED || mapBottomBehavior!!.state == BottomSheetBehavior.STATE_HALF_EXPANDED) {
+                        mapBottomBehavior!!.addBottomSheetCallback(object : BottomSheetCallback() {
+                            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                                    binding.mapBottomSheet.online.visibility = View.INVISIBLE
+                                    binding.mapBottomSheet.layoutPlace.visibility = View.VISIBLE
+                                    binding.mapBottomSheet.layoutFriend.visibility = View.VISIBLE
+                                } else if (newState == BottomSheetBehavior.STATE_HALF_EXPANDED) {
+                                    binding.mapBottomSheet.online.visibility = View.INVISIBLE
+                                    binding.mapBottomSheet.layoutPlace.visibility = View.INVISIBLE
+                                    binding.mapBottomSheet.layoutFriend.visibility = View.VISIBLE
+                                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                                    binding.mapBottomSheet.online.visibility = View.VISIBLE
+                                    binding.mapBottomSheet.layoutFriend.visibility = View.INVISIBLE
+                                    binding.mapBottomSheet.layoutPlace.visibility = View.INVISIBLE
+                                    val imm =
+                                        getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                                    imm.hideSoftInputFromWindow(
+                                        binding.mapBottomSheet.edtSearch.windowToken,
+                                        0
+                                    )
+                                }
+                            }
+
+                            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                                if (slideOffset > 0.5) {
+                                    mapBottomBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED)
+                                    //                            mapBottomBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                                } else {
+                                    mapBottomBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
+                                    mapBottomBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED)
+                                }
+                            }
+                        })
+                        mapBottomBehavior!!.state = BottomSheetBehavior.STATE_EXPANDED
+                    }
+                }
+            }
+        binding.mapBottomSheet.edtSearch.setOnEditorActionListener { textView, i, keyEvent ->
+            if (i === EditorInfo.IME_ACTION_DONE) {
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                val imm =
+                    getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(textView.windowToken, 0)
+                getPlace()
+                binding.mapBottomSheet.edtSearch.clearFocus()
+                return@setOnEditorActionListener true
+            }
+            false
+        }
+        binding.mapBottomSheet.edtSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+                val text = charSequence.toString().trim { it <= ' ' }
+                if (text != "") {
+                    viewModel.getAll.observe(this@GPSActivity){
+                        val tempList: MutableList<FriendModel> = ArrayList<FriendModel>()
+                        for (u in it) {
+                            getOnetimeData(myCode + "/friends/" + u.code) { snapshot ->
+                                val name =
+                                    snapshot!!.child("name").getValue(String::class.java)
+                                val nickname =
+                                    snapshot.child("nickname").getValue(String::class.java)
+                                val phoneNumber =
+                                    snapshot.child("phoneNumber").getValue(String::class.java)
+                                if (nickname!!.trim { it <= ' ' } == "") {
+                                    if (phoneNumber!!.contains(text) || name!!.lowercase(Locale.getDefault())
+                                            .contains(text.lowercase(Locale.getDefault()))
+                                    ) {
+                                        tempList.add(u)
+                                    }
+                                } else {
+                                    if (phoneNumber!!.contains(text) || name!!.lowercase(Locale.getDefault())
+                                            .contains(text.lowercase(Locale.getDefault())) || nickname.lowercase(
+                                            Locale.getDefault()
+                                        ).contains(text.lowercase(Locale.getDefault()))
+                                    ) {
+                                        tempList.add(u)
+                                    }
+                                }
+                                if (tempList.size == 0) {
+                                    binding.mapBottomSheet.tvNull.visibility = View.VISIBLE
+                                } else {
+                                    binding.mapBottomSheet.tvNull.visibility = View.GONE
+                                }
+                            }
+                        }
+                        binding.mapBottomSheet.rcvSearch.layoutManager = LinearLayoutManager(
+                            this@GPSActivity,
+                            LinearLayoutManager.VERTICAL, false
+                        )
+                        binding.mapBottomSheet.rcvSearch.setHasFixedSize(true)
+                        if (tempList.size == 0) {
+                            binding.mapBottomSheet.tvNull.visibility = View.VISIBLE
+                        } else {
+                            binding.mapBottomSheet.tvNull.visibility = View.GONE
+                        }
+                    }
+
+
+//                    val adapter =
+//                        FriendDetailAdapter(this@GPSActivity, tempList, object : DetailListener() {
+//                            fun onDelete(check: Boolean) {
+//                                if (check) {
+//                                    binding.mapBottomSheet.tvNull.visibility = View.VISIBLE
+//                                } else {
+//                                    binding.mapBottomSheet.tvNull.visibility = View.GONE
+//                                }
+//                            }
+//                        })
+//                    binding.mapBottomSheet.rcvSearch.adapter = adapter
+                    binding.mapBottomSheet.rcvSearch.itemAnimator = null
+                    binding.mapBottomSheet.rcvSearch.visibility = View.VISIBLE
+                    binding.mapBottomSheet.recyclerFriend.visibility = View.INVISIBLE
+                } else {
+                    binding.mapBottomSheet.tvNull.visibility = View.GONE
+                    binding.mapBottomSheet.rcvSearch.visibility = View.INVISIBLE
+                    binding.mapBottomSheet.recyclerFriend.visibility = View.VISIBLE
+                    initAdapter()
+                }
+            }
+
+            override fun afterTextChanged(editable: Editable) {}
+        })
+    }
+
+
     private fun actionShowFriendAll(show: Boolean) {
         map!!.clear()
         latLngList.clear()
@@ -380,7 +557,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                                         updateRealtimeData(
                                             myCode + "/friends/" + friend.code,
                                             userSos
-                                        ) { unused -> }
+                                        ) { _ -> }
                                         markerMap = map!!.addMarker(
                                             MarkerOptions().position(latLng)
                                                 .icon(iconMarker(this@GPSActivity, friendAvt))
@@ -394,7 +571,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                                 updateRealtimeData(
                                     myCode + "/friends/" + friend.code,
                                     userSos
-                                ) { unused -> }
+                                ) { _ -> }
                             }
                             if (temp == 0) {
                                 sosList.clear()
@@ -834,7 +1011,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             }
         })
     }
-
     override fun onStop(friendModel: FriendModel) {
         try {
             userSos.put("statusSos", false)
@@ -850,7 +1026,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             e.printStackTrace()
         }
     }
-
     private fun getFriend() {
 
         viewModel.getAll.observe(this){
@@ -921,11 +1096,33 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                                 }
                             }
                         }
-                    } catch (e: java.lang.Exception) {
+                    } catch (_: java.lang.Exception) {
                     }
                 }
             }
         }
     }
+    override fun onDetail(code: String, type: String) {
+        when(type){
+            "online"-> {
+                getOnetimeData(code) { snapshot ->
+                    val latLng =
+                        snapshot!!.child("latLng").getValue(String::class.java)
+                    map!!.clear()
+                    actionShowFriendAll(false)
+                    moveCamera(FRIEND_ONE, convertToLatLng(latLng!!))
+                }
+            }
+            "main"->{
+                val intent = Intent(this, DetailInformationActivity::class.java)
+            intent.putExtra("receiveCode", code)
+            Log.e("Kan", code)
+            startActivity(intent)
+            }
+        }
 
+    }
+    override fun onFind(type: String) {
+        actionShowNearbyPlace(type)
+    }
 }

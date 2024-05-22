@@ -270,4 +270,6 @@
     <string name="Message_perLocation">If you enable background location access, your location will always be shared with friends while you run the program in the background. Your location will be terminated when the application is closed or not utilized.Please allow this permission from settings to proceed further.</string>
 
     <string name="toast_sos">You must enable tracking mode before sending the sos signal</string>
+    <string name="tv_ADD">ADD</string>
+    <string name="tv_me">Me</string>
 </resources>

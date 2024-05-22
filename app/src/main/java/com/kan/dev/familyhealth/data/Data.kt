@@ -1,13 +1,18 @@
 package com.kan.dev.familyhealth.data
 
-import android.annotation.SuppressLint
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.data.model.AboutModel
 import com.kan.dev.familyhealth.data.model.FilterModel
 import com.kan.dev.familyhealth.data.model.IntroModel
 import com.kan.dev.familyhealth.data.model.LanguageModel
+import com.kan.dev.familyhealth.data.model.PlaceModel
 import com.kan.dev.familyhealth.data.model.SettingModel
 import com.kan.dev.familyhealth.data.model.YearModel
+import com.kan.dev.familyhealth.utils.BANK
+import com.kan.dev.familyhealth.utils.BUS
+import com.kan.dev.familyhealth.utils.CAFE
+import com.kan.dev.familyhealth.utils.CINEMA
+import com.kan.dev.familyhealth.utils.PETROL
 import java.time.LocalDate
 
 class Data {
@@ -108,5 +113,12 @@ class Data {
             YearModel(LocalDate.now().year + 10, false),
         )
 
+        val placeList = mutableListOf(
+            PlaceModel(BUS, R.string.bus_stop, R.drawable.ic_place_1),
+            PlaceModel(PETROL, R.string.petrol_station, R.drawable.ic_place_2),
+            PlaceModel(CAFE, R.string.cafe, R.drawable.ic_place_3),
+            PlaceModel(CINEMA, R.string.cinema, R.drawable.ic_place_4),
+            PlaceModel(BANK, R.string.bank, R.drawable.ic_place_5),
+        )
     }
 }

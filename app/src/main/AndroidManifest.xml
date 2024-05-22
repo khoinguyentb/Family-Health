@@ -32,6 +32,12 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.DetailInformationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.FriendActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.gps.GPSActivity"
             android:exported="false" />
         <activity
