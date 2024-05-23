@@ -4,6 +4,7 @@ package com.kan.dev.familyhealth.ui.activity.gps
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -12,9 +13,12 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.media.MediaPlayer
 import android.net.Uri
+import android.os.Handler
 import android.provider.Settings
 import android.text.Editable
+import android.text.SpannableString
 import android.text.TextWatcher
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.View
 import android.view.View.OnFocusChangeListener
@@ -26,6 +30,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.constraintlayout.helper.widget.MotionEffect
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arsy.maps_library.MapRipple
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -40,7 +45,9 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.adapter.DetailListener
+import com.kan.dev.familyhealth.adapter.DetailListeners
 import com.kan.dev.familyhealth.adapter.FriendAdapter
+import com.kan.dev.familyhealth.adapter.FriendDetailAdapter
 import com.kan.dev.familyhealth.adapter.OnclickStopListener
 import com.kan.dev.familyhealth.adapter.PlaceAdapter
 import com.kan.dev.familyhealth.adapter.PlaceListener
@@ -53,6 +60,9 @@ import com.kan.dev.familyhealth.data.RealtimeDAO.updateRealtimeData
 import com.kan.dev.familyhealth.data.model.FriendModel
 import com.kan.dev.familyhealth.databinding.ActivityGpsactivityBinding
 import com.kan.dev.familyhealth.ui.activity.DetailInformationActivity
+import com.kan.dev.familyhealth.ui.activity.FriendActivity
+import com.kan.dev.familyhealth.ui.activity.PermissionActivity.Companion.LOCATION
+import com.kan.dev.familyhealth.ui.activity.interaction.ShareInformationActivity
 import com.kan.dev.familyhealth.utils.CODE_LENGTH
 import com.kan.dev.familyhealth.utils.ClickDialogListener
 import com.kan.dev.familyhealth.utils.DEFAULT_LATLNG
@@ -71,11 +81,15 @@ import com.kan.dev.familyhealth.utils.LocationHelper.getCoordinate
 import com.kan.dev.familyhealth.utils.LocationHelper.getCurrentLocation
 import com.kan.dev.familyhealth.utils.LocationHelper.iconMarker
 import com.kan.dev.familyhealth.utils.LocationHelper.iconMarkerSos
+import com.kan.dev.familyhealth.utils.LocationHelper.isLocationEnabled
 import com.kan.dev.familyhealth.utils.MY_CODE
+import com.kan.dev.familyhealth.utils.checkPerList
 import com.kan.dev.familyhealth.utils.checkPermissionLocation
 import com.kan.dev.familyhealth.utils.formatDateFromLong
 import com.kan.dev.familyhealth.utils.handler
+import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.viewmodel.FriendViewModel
+import com.lvt.ads.callback.InterCallback
 import com.lvt.ads.util.Admob
 import com.lvt.ads.util.AppOpenManager
 import com.squareup.okhttp.Callback
@@ -88,10 +102,10 @@ import org.json.JSONObject
 import java.io.IOException
 import java.util.Locale
 
-@Suppress("NAME_SHADOWING")
+@Suppress("NAME_SHADOWING", "DEPRECATION")
 @AndroidEntryPoint
 class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallback,
-    OnclickStopListener, DetailListener,PlaceListener {
+    OnclickStopListener, DetailListener,PlaceListener,DetailListeners {
     override fun setViewBinding(): ActivityGpsactivityBinding {
         return ActivityGpsactivityBinding.inflate(layoutInflater)
     }
@@ -122,7 +136,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
     }
     private lateinit var placeAdapter: PlaceAdapter
     private lateinit var friendAdapter: FriendAdapter
-
+    private lateinit var friendDetailAdapter: FriendDetailAdapter
     private var mapTypeDialog: Dialog? = null
     override fun initData() {
         RealtimeDAO.initRealtimeData()
@@ -140,7 +154,148 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
     }
 
     override fun initListener() {
-        
+
+        binding.apply {
+            btnChooseMapType.setOnClickListener {
+                mapTypeDialog!!.show()
+                binding.includeBanner.visibility = View.INVISIBLE
+                DialogUtils.initView(this@GPSActivity)
+            }
+            btnSos.setOnClickListener { actionOpenSos() }
+            btnScanMap.setOnClickListener { actionShowFriendAll(true) }
+            viewSOS.btnActive.setOnClickListener {actionClickSos() }
+            viewSos.tvTurnOffNotification.setOnClickListener {
+                try {
+                    for (fri in sosList) {
+                        val user: MutableMap<String, Any> =
+                            java.util.HashMap()
+                        user["statusSos"] = false
+                        updateRealtimeData(
+                            myCode + "/friends/" + fri.code,
+                            user
+                        ) { _ ->
+                            val marker = map!!.addMarker(
+                                MarkerOptions().position(convertToLatLng(fri.latLng))
+                                    .icon(iconMarker(this@GPSActivity, fri.avt))
+                            )
+                            marker!!.tag = fri.code
+                        }
+                    }
+                    sosList.clear()
+                    stopSOS()
+                } catch (e: java.lang.Exception) {
+                    sosList.clear()
+                    e.printStackTrace()
+                }
+            }
+            mapBottomSheet.btnSettings.setOnClickListener {
+                if (isClick) {
+                    isClick = false
+                    startActivity(Intent(applicationContext, SettingGPSActivity::class.java))
+                    handler.postDelayed({ isClick = true }, 500)
+                }
+            }
+            mapBottomSheet.btnShareCode.setOnClickListener {
+                if (isClick) {
+                    isClick = false
+                    startActivity(
+                        Intent(
+                            applicationContext,
+                            ShareInformationActivity::class.java
+                        ).putExtra("settings", true)
+                    )
+                    Handler().postDelayed({ isClick = true }, 500)
+                }
+            }
+            mapBottomSheet.btnViewAddFriend.setOnClickListener {
+                if (isClick) {
+                    isClick = false
+                    Admob.getInstance().showInterAll(this@GPSActivity, object : InterCallback() {
+                        override fun onNextAction() {
+                            super.onNextAction()
+                            startActivity(
+                                Intent(
+                                    applicationContext,
+                                    FriendActivity::class.java
+                                )
+                            )
+                        }
+                    })
+                    Handler().postDelayed({ isClick = true }, 500)
+                }
+            }
+            mapBottomSheet.btnViewPlace.setOnClickListener {
+                if (isClick) {
+                    isClick = false
+                    Admob.getInstance().showInterAll(this@GPSActivity, object : InterCallback() {
+                        override fun onNextAction() {
+                            super.onNextAction()
+                            startActivity(Intent(applicationContext, PlaceActivity::class.java).putExtra("main", true))
+                        }
+                    })
+                    handler.postDelayed({ isClick = true }, 500)
+                }
+            }
+        }
+
+    }
+
+    private fun check() {
+        if (checkPerList(LOCATION)) {
+            initMap()
+            perDialog!!.dismiss()
+        } else {
+            perDialog!!.show()
+        }
+    }
+    override fun onResume() {
+        super.onResume()
+        check()
+        AppOpenManager.getInstance().enableAppResumeWithActivity(GPSActivity::class.java)
+        if (mediaPlayer != null) {
+            mediaPlayer!!.stop()
+        }
+        if (runnable != null) {
+            handler.removeCallbacks(runnable!!)
+            handler.postDelayed(runnable!!, 10000)
+        }
+        if (!isLocationEnabled(this@GPSActivity)) {
+            val builder = AlertDialog.Builder(this)
+            val buttonText = getString(R.string.Ok)
+            val spannableButtonString = SpannableString(buttonText)
+            spannableButtonString.setSpan(
+                ForegroundColorSpan(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.blue_049DEF
+                    )
+                ), 0, buttonText.length, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            builder.setMessage(getString(R.string.dialog_location))
+                .setCancelable(false)
+                .setPositiveButton(
+                    spannableButtonString
+                ) { dialog, _ ->
+                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(intent)
+                    dialog.dismiss()
+                }
+            val alert = builder.create()
+            alert.show()
+        }
+        getFriend()
+        initAdapter()
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
+        checkSos()
+    }
+    override fun onDestroy() {
+        val user: MutableMap<String, Any> = java.util.HashMap()
+        user["isSos"] = false
+        updateRealtimeData(myCode, user) { _ -> }
+        handler.removeCallbacks(runnable!!)
+        super.onDestroy()
     }
     private fun initMap() {
         val mapFragment =
@@ -212,7 +367,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             false
         }
     }
-
     private fun initDialog(){
         perDialog = DialogUtils.initPerDialog(this, object : DialogListener {
             override fun onGrant() {
@@ -253,7 +407,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             }
         })
     }
-
     private fun initAdapter() {
 
         viewModel.getAll.observe(this){
@@ -285,38 +438,41 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
         binding.mapBottomSheet.recyclerPlace.adapter = placeAdapter
         binding.mapBottomSheet.recyclerPlace.itemAnimator = null
     }
-
     @SuppressLint("ClickableViewAccessibility")
     private fun actionSearchFriend() {
-        binding.mapBottomSheet.edtSearch.setOnClickListener { v ->
+        binding.mapBottomSheet.edtSearch.setOnClickListener {
             if (mapBottomBehavior!!.state == BottomSheetBehavior.STATE_COLLAPSED || mapBottomBehavior!!.state == BottomSheetBehavior.STATE_HALF_EXPANDED) {
                 mapBottomBehavior!!.addBottomSheetCallback(object : BottomSheetCallback() {
+                    @SuppressLint("SwitchIntDef")
                     override fun onStateChanged(bottomSheet: View, newState: Int) {
-                        if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                            binding.mapBottomSheet.online.visibility = View.INVISIBLE
-                            binding.mapBottomSheet.layoutPlace.visibility = View.VISIBLE
-                            binding.mapBottomSheet.layoutFriend.visibility = View.VISIBLE
-                        } else if (newState == BottomSheetBehavior.STATE_HALF_EXPANDED) {
-                            binding.mapBottomSheet.online.visibility = View.INVISIBLE
-                            binding.mapBottomSheet.layoutPlace.visibility = View.INVISIBLE
-                            binding.mapBottomSheet.layoutFriend.visibility = View.VISIBLE
-                        } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                            binding.mapBottomSheet.online.visibility = View.VISIBLE
-                            binding.mapBottomSheet.layoutFriend.visibility = View.INVISIBLE
-                            binding.mapBottomSheet.layoutPlace.visibility = View.INVISIBLE
-                            val imm =
-                                getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                            imm.hideSoftInputFromWindow(
-                                binding.mapBottomSheet.edtSearch.windowToken,
-                                0
-                            )
+                        when (newState) {
+                            BottomSheetBehavior.STATE_EXPANDED -> {
+                                binding.mapBottomSheet.online.visibility = View.INVISIBLE
+                                binding.mapBottomSheet.layoutPlace.visibility = View.VISIBLE
+                                binding.mapBottomSheet.layoutFriend.visibility = View.VISIBLE
+                            }
+                            BottomSheetBehavior.STATE_HALF_EXPANDED -> {
+                                binding.mapBottomSheet.online.visibility = View.INVISIBLE
+                                binding.mapBottomSheet.layoutPlace.visibility = View.INVISIBLE
+                                binding.mapBottomSheet.layoutFriend.visibility = View.VISIBLE
+                            }
+                            BottomSheetBehavior.STATE_COLLAPSED -> {
+                                binding.mapBottomSheet.online.visibility = View.VISIBLE
+                                binding.mapBottomSheet.layoutFriend.visibility = View.INVISIBLE
+                                binding.mapBottomSheet.layoutPlace.visibility = View.INVISIBLE
+                                val imm =
+                                    getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                                imm.hideSoftInputFromWindow(
+                                    binding.mapBottomSheet.edtSearch.windowToken,
+                                    0
+                                )
+                            }
                         }
                     }
 
                     override fun onSlide(bottomSheet: View, slideOffset: Float) {
                         if (slideOffset > 0.5) {
                             mapBottomBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED)
-                            //                            mapBottomBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                         } else {
                             mapBottomBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
                             mapBottomBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED)
@@ -327,37 +483,41 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             }
         }
         binding.mapBottomSheet.edtSearch.onFocusChangeListener =
-            OnFocusChangeListener { v, hasFocus ->
+            OnFocusChangeListener { _, hasFocus ->
                 Log.e("EdtSearch", hasFocus.toString())
                 if (hasFocus) {
                     if (mapBottomBehavior!!.state == BottomSheetBehavior.STATE_COLLAPSED || mapBottomBehavior!!.state == BottomSheetBehavior.STATE_HALF_EXPANDED) {
                         mapBottomBehavior!!.addBottomSheetCallback(object : BottomSheetCallback() {
+                            @SuppressLint("SwitchIntDef")
                             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                                    binding.mapBottomSheet.online.visibility = View.INVISIBLE
-                                    binding.mapBottomSheet.layoutPlace.visibility = View.VISIBLE
-                                    binding.mapBottomSheet.layoutFriend.visibility = View.VISIBLE
-                                } else if (newState == BottomSheetBehavior.STATE_HALF_EXPANDED) {
-                                    binding.mapBottomSheet.online.visibility = View.INVISIBLE
-                                    binding.mapBottomSheet.layoutPlace.visibility = View.INVISIBLE
-                                    binding.mapBottomSheet.layoutFriend.visibility = View.VISIBLE
-                                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                                    binding.mapBottomSheet.online.visibility = View.VISIBLE
-                                    binding.mapBottomSheet.layoutFriend.visibility = View.INVISIBLE
-                                    binding.mapBottomSheet.layoutPlace.visibility = View.INVISIBLE
-                                    val imm =
-                                        getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                                    imm.hideSoftInputFromWindow(
-                                        binding.mapBottomSheet.edtSearch.windowToken,
-                                        0
-                                    )
+                                when (newState) {
+                                    BottomSheetBehavior.STATE_EXPANDED -> {
+                                        binding.mapBottomSheet.online.visibility = View.INVISIBLE
+                                        binding.mapBottomSheet.layoutPlace.visibility = View.VISIBLE
+                                        binding.mapBottomSheet.layoutFriend.visibility = View.VISIBLE
+                                    }
+                                    BottomSheetBehavior.STATE_HALF_EXPANDED -> {
+                                        binding.mapBottomSheet.online.visibility = View.INVISIBLE
+                                        binding.mapBottomSheet.layoutPlace.visibility = View.INVISIBLE
+                                        binding.mapBottomSheet.layoutFriend.visibility = View.VISIBLE
+                                    }
+                                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                                        binding.mapBottomSheet.online.visibility = View.VISIBLE
+                                        binding.mapBottomSheet.layoutFriend.visibility = View.INVISIBLE
+                                        binding.mapBottomSheet.layoutPlace.visibility = View.INVISIBLE
+                                        val imm =
+                                            getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                                        imm.hideSoftInputFromWindow(
+                                            binding.mapBottomSheet.edtSearch.windowToken,
+                                            0
+                                        )
+                                    }
                                 }
                             }
 
                             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                                 if (slideOffset > 0.5) {
                                     mapBottomBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED)
-                                    //                            mapBottomBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                                 } else {
                                     mapBottomBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
                                     mapBottomBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED)
@@ -368,7 +528,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                     }
                 }
             }
-        binding.mapBottomSheet.edtSearch.setOnEditorActionListener { textView, i, keyEvent ->
+        binding.mapBottomSheet.edtSearch.setOnEditorActionListener { textView, i, _ ->
             if (i === EditorInfo.IME_ACTION_DONE) {
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
                         View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -396,7 +556,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                                     snapshot.child("nickname").getValue(String::class.java)
                                 val phoneNumber =
                                     snapshot.child("phoneNumber").getValue(String::class.java)
-                                if (nickname!!.trim { it <= ' ' } == "") {
+                                if (nickname!!.trim { it -> it <= ' ' } == "") {
                                     if (phoneNumber!!.contains(text) || name!!.lowercase(Locale.getDefault())
                                             .contains(text.lowercase(Locale.getDefault()))
                                     ) {
@@ -428,23 +588,13 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                         } else {
                             binding.mapBottomSheet.tvNull.visibility = View.GONE
                         }
+                        friendDetailAdapter = FriendDetailAdapter(this@GPSActivity,this@GPSActivity)
+                        friendDetailAdapter.setItems(tempList)
+                        binding.mapBottomSheet.rcvSearch.itemAnimator = null
+                        binding.mapBottomSheet.rcvSearch.visibility = View.VISIBLE
+                        binding.mapBottomSheet.recyclerFriend.visibility = View.INVISIBLE
                     }
 
-
-//                    val adapter =
-//                        FriendDetailAdapter(this@GPSActivity, tempList, object : DetailListener() {
-//                            fun onDelete(check: Boolean) {
-//                                if (check) {
-//                                    binding.mapBottomSheet.tvNull.visibility = View.VISIBLE
-//                                } else {
-//                                    binding.mapBottomSheet.tvNull.visibility = View.GONE
-//                                }
-//                            }
-//                        })
-//                    binding.mapBottomSheet.rcvSearch.adapter = adapter
-                    binding.mapBottomSheet.rcvSearch.itemAnimator = null
-                    binding.mapBottomSheet.rcvSearch.visibility = View.VISIBLE
-                    binding.mapBottomSheet.recyclerFriend.visibility = View.INVISIBLE
                 } else {
                     binding.mapBottomSheet.tvNull.visibility = View.GONE
                     binding.mapBottomSheet.rcvSearch.visibility = View.INVISIBLE
@@ -452,12 +602,9 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                     initAdapter()
                 }
             }
-
             override fun afterTextChanged(editable: Editable) {}
         })
     }
-
-
     private fun actionShowFriendAll(show: Boolean) {
         map!!.clear()
         latLngList.clear()
@@ -589,7 +736,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             }
         }
     }
-
     private fun checkOnline() {
 
         viewModel.getAll.observe(this){
@@ -625,11 +771,9 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                 binding.detailBottom.textView2.visibility = View.GONE
                 detailBottomBehavior!!.state = BottomSheetBehavior.STATE_EXPANDED
                 val latLng = convertToLatLng(code)
-                binding.detailBottom.txtAddress.setText(
-                    getAddressFromLatLng(
-                        this.applicationContext,
-                        latLng
-                    )
+                binding.detailBottom.txtAddress.text = getAddressFromLatLng(
+                    this.applicationContext,
+                    latLng
                 )
                 binding.detailBottom.txtCoordinate.text = getCoordinate(latLng)
                 binding.detailBottom.btnClose.setOnClickListener {
@@ -656,11 +800,9 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                         val latLng = convertToLatLng(latLong!!)
                         val lastActive =
                             snapshot.child("lastActive").getValue(Long::class.java)
-                        binding.detailBottom.txtAddress.setText(
-                            getAddressFromLatLng(
-                                this.applicationContext,
-                                latLng
-                            )
+                        binding.detailBottom.txtAddress.text = getAddressFromLatLng(
+                            this.applicationContext,
+                            latLng
                         )
                         Log.e(MotionEffect.TAG, "actionShowDetail: 1")
                         binding.detailBottom.txtActiveTime.text = formatDateFromLong(lastActive!!)
@@ -678,21 +820,19 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                                 val latLng = convertToLatLng(latLong!!)
                                 val lastActive =
                                     snapshot.child("lastActive").getValue(Long::class.java)
-                                binding.detailBottom.txtAddress.setText(
-                                    getAddressFromLatLng(
-                                        this.applicationContext,
-                                        latLng
-                                    )
+                                binding.detailBottom.txtAddress.text = getAddressFromLatLng(
+                                    this.applicationContext,
+                                    latLng
                                 )
-                                binding.detailBottom.txtActiveTime.setText(formatDateFromLong(lastActive!!))
-                                binding.detailBottom.txtCoordinate.setText(getCoordinate(latLng))
+                                binding.detailBottom.txtActiveTime.text = formatDateFromLong(lastActive!!)
+                                binding.detailBottom.txtCoordinate.text = getCoordinate(latLng)
                             }
                             return@observe
                         }
                     }
                 }
 
-                binding.detailBottom.btnClose.setOnClickListener { view ->
+                binding.detailBottom.btnClose.setOnClickListener {
                     Log.e(MotionEffect.TAG, "actionShowDetail: 2")
                     detailBottomBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
                 }
@@ -701,7 +841,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             }
         }
     }
-
     private fun moveCamera(type: String, latLng: LatLng?) {
 
         handler.removeCallbacks(runnable!!)
@@ -718,7 +857,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             }
         }
     }
-
     private fun actionShowNearbyPlace(type: String) {
         Log.e("actionShowNearbyPlace", type)
         map!!.clear()
@@ -820,7 +958,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                                 e.printStackTrace()
                             }
                         } else {
-                            val errorMessage = response!!.message()
+                            val errorMessage = response.message()
                             Log.e(MotionEffect.TAG, errorMessage)
                         }
                     }
@@ -831,13 +969,12 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             }
         }
     }
-
     private fun moveCameraPlace(list: List<LatLng>) {
         handler.removeCallbacks(runnable!!)
 
         val user: MutableMap<String, Any> = java.util.HashMap()
         user["isSos"] = false
-        updateRealtimeData(myCode, user) { unused ->
+        updateRealtimeData(myCode, user) { _ ->
             sosStatus = ENABLE
             actionClickSos()
             if (binding.viewSOS.root.visibility === View.VISIBLE) {
@@ -865,7 +1002,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             }
         }
     }
-
     private fun actionOpenSos() {
         if (binding.viewSOS.root.visibility === View.GONE) {
             binding.viewSOS.root.visibility = View.VISIBLE
@@ -877,7 +1013,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             binding.viewSOS.root.visibility = View.GONE
         }
     }
-
     private fun checkSos() {
         getOnetimeData(myCode) { snapshot ->
             isTracking = snapshot!!.child("isTracking").getValue(Boolean::class.java)!!
@@ -907,7 +1042,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
         }
         mediaPlayer = MediaPlayer.create(this, R.raw.sound_alert)
         Log.w("Sos", sosList.size.toString())
-        if (sosList.size == 0 || sosList == null) {
+        if (sosList.size == 0) {
             mediaPlayer!!.stop()
             binding.viewSos.root.visibility = View.GONE
             mapRipple!!.stopRippleMapAnimation()
@@ -938,7 +1073,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                         val user: MutableMap<String, Any> =
                             java.util.HashMap()
                         user["isSos"] = true
-                        updateRealtimeData(myCode, user) { unused -> }
+                        updateRealtimeData(myCode, user) { _ -> }
                     }
                 }
             }
@@ -951,11 +1086,10 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                     ColorStateList.valueOf(getColor(R.color.red_E02E07))
                 val user: MutableMap<String, Any> = java.util.HashMap()
                 user["isSos"] = false
-                updateRealtimeData(myCode, user) { unused -> }
+                updateRealtimeData(myCode, user) { _ -> }
             }
         }
     }
-
     private fun getPlace() {
         mapBottomBehavior = BottomSheetBehavior.from(binding.mapBottomSheet.root)
         detailBottomBehavior = BottomSheetBehavior.from(binding.detailBottom.root)
@@ -974,6 +1108,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
         })
         mapBottomBehavior!!.addBottomSheetCallback(object : BottomSheetCallback() {
+            @SuppressLint("SwitchIntDef")
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
                     BottomSheetBehavior.STATE_EXPANDED -> {
@@ -1013,7 +1148,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
     }
     override fun onStop(friendModel: FriendModel) {
         try {
-            userSos.put("statusSos", false)
+            userSos["statusSos"] = false
             updateRealtimeData(
                 myCode + "/friends/" + friendModel.code,
                 userSos
@@ -1030,7 +1165,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
 
         viewModel.getAll.observe(this){
             for (i in it) {
-                val finalI: Int = 0
                 getOnetimeData(
                     myCode + "/friends/" + i.code
                 ) { snapshot1 ->
@@ -1124,5 +1258,8 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
     }
     override fun onFind(type: String) {
         actionShowNearbyPlace(type)
+    }
+    override fun onDelete(item: FriendModel) {
+        viewModel.delete(item)
     }
 }

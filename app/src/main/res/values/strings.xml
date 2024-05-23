@@ -272,4 +272,12 @@
     <string name="toast_sos">You must enable tracking mode before sending the sos signal</string>
     <string name="tv_ADD">ADD</string>
     <string name="tv_me">Me</string>
+    <string name="phone_number">Phone number:</string>
+    <string name="turn_on_tracking">Turn On Tracking:</string>
+    <string name="re_name">Rename</string>
+    <string name="des_dialog_rename">Create your own nickname for your friends</string>
+    <string name="des_dialog_delete">Are you sure to delete this friend of yours?</string>
+
+    <string name="whoops">Whoops!</string>
+    <string name="no_internet">No Internet connection found. Check your connection or try again.</string>
 </resources>

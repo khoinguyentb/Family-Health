@@ -12,6 +12,7 @@ import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.databinding.ActivitySignInBinding
 import com.kan.dev.familyhealth.ui.activity.main.MainActivity
 import com.kan.dev.familyhealth.ui.activity.interaction.InformationActivity
+import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
 
@@ -68,6 +69,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
                         user = FirebaseAuth.getInstance().currentUser!!
                         Log.d("KanMobile",user.displayName.toString())
                         intent = if (user.displayName != null){
+                            sharePre.putString(MY_CODE,user.displayName)
                             Intent(this@SignInActivity, MainActivity::class.java)
                         }else{
                             Intent(this@SignInActivity, InformationActivity::class.java)

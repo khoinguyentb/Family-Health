@@ -20,11 +20,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
     }
 
     private lateinit var auth: FirebaseAuth
-    private var phoneNumber : String = ""
     private var email : String = ""
     private var pass : String = ""
     private var conFirmPass : String = ""
-    private var userName : String = ""
 
     override fun initData() {
         auth = FirebaseAuth.getInstance()
@@ -36,11 +34,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
     override fun initListener() {
         binding.apply {
             btnSignUp.setOnClickListener {
-                phoneNumber = edtPhone.text.toString()
                 email = edtEmail.text.toString()
                 pass = edtPass.text.toString()
                 conFirmPass = edtConFirmPass.text.toString()
-                userName = edtUserName.text.toString()
                 if (isValueDate()){
                     setUser(email,pass)
                 }
@@ -73,7 +69,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
     private fun isValueDate() :Boolean {
         binding.apply {
-            return if (userName == "" || phoneNumber == "" || email == "" || pass == "" || conFirmPass == ""){
+            return if (email == "" || pass == "" || conFirmPass == ""){
                 Toast.makeText(this@SignUpActivity,getString(R.string.NoEmpty),Toast.LENGTH_SHORT).show()
                 false
             }else{

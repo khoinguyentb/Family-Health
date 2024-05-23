@@ -56,25 +56,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/PhoneNumber"
-                android:textColor="#99FFFFFF"
-                android:layout_marginTop="@dimen/_5sdp"
-                style="@style/poppins_14"/>
-
-            <EditText
-                android:id="@+id/edtPhone"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_38sdp"
-                android:textColor="@color/white"
-                android:hint="@string/hintEnterPhone"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:textColorHint="#66FFFFFF"
-                android:paddingHorizontal="@dimen/_10sdp"
-                android:background="@drawable/bg_language_selector"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/Email"
                 android:textColor="#99FFFFFF"
                 android:layout_marginTop="@dimen/_5sdp"
@@ -91,24 +72,6 @@
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:background="@drawable/bg_language_selector"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/UserName"
-                android:textColor="#99FFFFFF"
-                android:layout_marginTop="@dimen/_5sdp"
-                style="@style/poppins_14"/>
-
-            <EditText
-                android:id="@+id/edtUserName"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_38sdp"
-                android:textColor="@color/white"
-                android:hint="@string/hintUserName1"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:textColorHint="#66FFFFFF"
-                android:paddingHorizontal="@dimen/_10sdp"
-                android:background="@drawable/bg_language_selector"/>
 
             <TextView
                 android:layout_width="wrap_content"

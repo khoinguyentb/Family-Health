@@ -117,7 +117,7 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
         checkKg = false
         checkLb = false
         checkSt = true
-        binding.rulerHeight.initViewParam(50f, 30f, 300f, 0.1f)
+        binding.rulerHeight.initViewParam(50f, 30f, 300f, 0.5f)
         binding.rulerWeight.initViewParam(20f, 0f, 48f, 0.1f)
         binding.rulerHeight.setUnit(getString(R.string.cm))
         binding.rulerWeight.setUnit(getString(R.string.st))
@@ -125,27 +125,27 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
 
     override fun initListener() {
         binding.apply {
-            btnSave.setOnClickListener { view ->
+            btnSave.setOnClickListener { 
                 if (isClick) {
                     isClick = false
                     actionSave()
                 }
             }
-            layoutMale.setOnClickListener { view ->
+            layoutMale.setOnClickListener { 
                 actionChooseGender(
                     MALE,
                     rbMale,
                     txtMale
                 )
             }
-            layoutFemale.setOnClickListener { view ->
+            layoutFemale.setOnClickListener { 
                 actionChooseGender(
                     FEMALE,
                     rbFemale,
                     txtFemale
                 )
             }
-            layoutOther.setOnClickListener { view ->
+            layoutOther.setOnClickListener { 
                 actionChooseGender(
                     OTHER,
                     rbOther,
@@ -159,7 +159,7 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
                     checkCm = true
                     CM.setBackgroundResource(R.drawable.bg_unit)
                     FT.setBackgroundResource(R.color.transfer)
-                    rulerHeight.initViewParam(50f, 30f, 300f, 0.1f)
+                    rulerHeight.initViewParam(50f, 30f, 300f, 0.5f)
                     rulerHeight.setUnit(getString(R.string.cm))
                     handler.postDelayed({ isClick = true }, 500)
                 }

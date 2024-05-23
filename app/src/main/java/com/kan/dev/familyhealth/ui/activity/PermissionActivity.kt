@@ -30,13 +30,14 @@ class PermissionActivity : BaseActivity<ActivityPermissionBinding>() {
         const val REQUEST_CODE_CAMERA = 1000
         const val REQUEST_CODE_NOTIFICATION = 1001
         const val REQUEST_CODE_LOCATION = 1002
-    }
-
-    private var LOCATION = arrayOf(
+        val LOCATION = arrayOf(
         Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.ACCESS_COARSE_LOCATION,
         Manifest.permission.ACCESS_NETWORK_STATE
-    )
+        )
+    }
+
+
     override fun initData() {
         sharePre.putBoolean(CHECK_PER,true)
     }

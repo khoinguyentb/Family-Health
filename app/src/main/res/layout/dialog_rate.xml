@@ -30,7 +30,7 @@
             android:id="@+id/tv_Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:gravity="center"
             android:layout_marginTop="@dimen/_15sdp"
             style="@style/poppinsBold_20"

@@ -25,14 +25,14 @@ class ShareInformationActivity : BaseActivity<ActivityShareInformationBinding>()
     }
     private var lastTime: Long = 0
     var settings = false
-    private val clipboard: ClipboardManager? = null
+    private var clipboard: ClipboardManager? = null
     private var file: File? = null
     override fun initData() {
         settings = intent.getBooleanExtra("settings", false)
         binding.apply {
             btnContinue.isSelected = true
             btnSecurity.isSelected = true
-
+            clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
             if (settings) {
                 txt1.gravity = Gravity.START
                 txt1.text = getString(R.string.my_security)
