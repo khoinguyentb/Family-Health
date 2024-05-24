@@ -16,7 +16,7 @@ class PlaceAdapter(private val context: Context,private val listener: PlaceListe
         binding.apply {
             imgPlace.setImageResource(item.placeRes)
             txtPlace.setText(item.placeName)
-            btnFind.setOnClickListener {     listener.onFind(item.placeId) }
+            btnFind.setOnClickListener { listener.onFind(item.placeId) }
         }
     }
 }

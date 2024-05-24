@@ -41,10 +41,10 @@
             android:name=".ui.activity.gps.SettingGPSActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.DetailInformationActivity"
+            android:name=".ui.activity.main.DetailInformationActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.FriendActivity"
+            android:name=".ui.activity.main.FriendActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.gps.GPSActivity"

@@ -31,6 +31,15 @@ fun Activity.checkPerList(listPermission: Array<String>): Boolean {
     return true
 }
 
+fun checkPer(permission: String?, context: Context?): Boolean {
+    return if (context != null) {
+        ActivityCompat.checkSelfPermission(
+            context,
+            permission!!
+        ) == PackageManager.PERMISSION_GRANTED
+    } else false
+}
+
 fun Activity.requestAppPermissionCamera(requestCode: Int) {
     ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), requestCode)
 }

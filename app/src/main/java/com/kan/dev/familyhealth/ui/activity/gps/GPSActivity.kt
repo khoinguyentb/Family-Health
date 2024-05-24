@@ -59,8 +59,8 @@ import com.kan.dev.familyhealth.data.RealtimeDAO.getOnetimeData
 import com.kan.dev.familyhealth.data.RealtimeDAO.updateRealtimeData
 import com.kan.dev.familyhealth.data.model.FriendModel
 import com.kan.dev.familyhealth.databinding.ActivityGpsactivityBinding
-import com.kan.dev.familyhealth.ui.activity.DetailInformationActivity
-import com.kan.dev.familyhealth.ui.activity.FriendActivity
+import com.kan.dev.familyhealth.ui.activity.main.DetailInformationActivity
+import com.kan.dev.familyhealth.ui.activity.main.FriendActivity
 import com.kan.dev.familyhealth.ui.activity.PermissionActivity.Companion.LOCATION
 import com.kan.dev.familyhealth.ui.activity.interaction.ShareInformationActivity
 import com.kan.dev.familyhealth.utils.CODE_LENGTH
@@ -138,6 +138,21 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
     private lateinit var friendAdapter: FriendAdapter
     private lateinit var friendDetailAdapter: FriendDetailAdapter
     private var mapTypeDialog: Dialog? = null
+    private val friendDefault : FriendModel by lazy {
+        FriendModel("00000000",0,0,"name",0f,0f,"","","","",
+            checkCm = true,
+            checkSt = true,
+            checkKg = true,
+            checkLb = true,
+            latLng = "",
+            visible = true,
+            isSos = true,
+            statusSos = true,
+            isTracking = true,
+            lastActive = 0L,
+            online = true
+        )
+    }
     override fun initData() {
         RealtimeDAO.initRealtimeData()
     }
@@ -388,7 +403,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                         .enableAppResumeWithActivity(GPSActivity::class.java)
                 }
             }
-
             override fun onDismiss() {}
         })
 
@@ -408,7 +422,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
         })
     }
     private fun initAdapter() {
-
         viewModel.getAll.observe(this){
             binding.mapBottomSheet.recyclerOnlineFriend.layoutManager = LinearLayoutManager(
                 this,
@@ -418,6 +431,8 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
 
             friendAdapter = FriendAdapter(this,"online",this)
             friendAdapter.setItems(it)
+            friendAdapter.addItem(friendDefault,0)
+            friendAdapter.addItem(friendDefault,0)
             binding.mapBottomSheet.recyclerOnlineFriend.adapter = friendAdapter
             binding.mapBottomSheet.recyclerOnlineFriend.itemAnimator = null
             binding.mapBottomSheet.recyclerFriend.layoutManager =
@@ -426,6 +441,8 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
 
             friendAdapter = FriendAdapter(this,"main",this)
             friendAdapter.setItems(it)
+            friendAdapter.addItem(friendDefault,0)
+            friendAdapter.addItem(friendDefault,0)
             binding.mapBottomSheet.recyclerFriend.adapter = friendAdapter
             binding.mapBottomSheet.recyclerFriend.itemAnimator = null
         }
@@ -1180,7 +1197,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                                 val name =
                                     snapshot.child("name").getValue(String::class.java)
                                 val gender =
-                                    snapshot.child("sex").getValue(String::class.java)
+                                    snapshot.child("gender").getValue(String::class.java)
                                 val phoneNumber =
                                     snapshot.child("phoneNumber").getValue(String::class.java)
                                 val latLng =
@@ -1209,7 +1226,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                                     friend["name"] = name
                                     friend["avt"] = avtId
                                     friend["phoneNumber"] = phoneNumber
-                                    friend["sex"] = gender
+                                    friend["gender"] = gender
                                     friend["isTracking"] = isTracking
                                     friend["isSos"] = isSos
                                     friend["lastActive"] = lastActive

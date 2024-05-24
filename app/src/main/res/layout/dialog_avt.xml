@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_dialog"
+    android:padding="@dimen/_14sdp">
+
+    <ImageView
+        android:id="@+id/icClose"
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:src="@drawable/img_delete"
+        android:tint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseAppTint" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_AVT"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icClose"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="4"
+        tools:listitem="@layout/item_avatar" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/SELECT_AVATAR"
+        android:textColor="@color/main"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rcv_AVT" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:maxLines="3"
+        android:text="@string/des_Dialog_avt"
+        android:textColor="#E6FFFFFF"
+        android:textSize="@dimen/_11sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_33sdp"
+        android:background="@drawable/bg_gotosetting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/Save_avatar"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_11sdp"
+        android:textAllCaps="false"
+        android:paddingHorizontal="@dimen/_10sdp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

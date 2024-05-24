@@ -57,7 +57,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 startActivity(Intent(this@MainActivity, BMIActivity::class.java))
             }
             btnMap.setOnClickListener {
-                startActivity(Intent(this@MainActivity, GPSActivity::class.java))
+                startActivity(Intent(this@MainActivity, GPSActivity ::class.java))
             }
             profileImage.setOnClickListener {
                 if (isClick){

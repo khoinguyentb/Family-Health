@@ -19,7 +19,7 @@ import com.kan.dev.familyhealth.dialog.DialogDeleteFriend
 import com.kan.dev.familyhealth.dialog.DialogRename
 import com.kan.dev.familyhealth.dialog.OnclickDeleteListener
 import com.kan.dev.familyhealth.dialog.OnclickListener
-import com.kan.dev.familyhealth.ui.activity.DetailInformationActivity
+import com.kan.dev.familyhealth.ui.activity.main.DetailInformationActivity
 import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.SharePreferencesUtils
 

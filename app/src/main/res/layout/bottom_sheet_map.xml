@@ -33,14 +33,17 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerOnlineFriend"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_friend"/>
         </RelativeLayout>
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_stroke_light_blue_gray"
+            android:background="@color/background"
             android:paddingHorizontal="12dp">
 
             <ImageView
@@ -113,7 +116,7 @@
                     android:paddingVertical="15dp"
                     android:paddingStart="10dp"
                     android:text="@string/add_friend"
-                    android:textColor="@color/gray_939393"
+                    android:textColor="@color/white"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -138,22 +141,14 @@
                     android:background="@drawable/bg_recycler">
 
 
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:orientation="horizontal">-->
-<!--                        <androidx.recyclerview.widget.RecyclerView-->
-<!--                            android:id="@+id/rcvAdd"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:paddingVertical="12dp"/>-->
-
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerFriend"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            android:orientation="horizontal"
+                            tools:listitem="@layout/item_friend"
                             android:paddingVertical="12dp" />
-<!--                    </LinearLayout>-->
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:visibility="invisible"

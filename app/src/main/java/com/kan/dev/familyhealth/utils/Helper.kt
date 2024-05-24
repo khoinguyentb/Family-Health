@@ -33,6 +33,17 @@ fun openWebPage(context: Context, url: String) {
     }
 }
 
+@SuppressLint("DiscouragedApi")
+fun initAvatarList(context: Context): List<Int> {
+    val list: MutableList<Int> = ArrayList()
+    for (i in 1..18) {
+        val resourceId =
+            context.resources.getIdentifier("ic_avt_$i", "drawable", context.packageName)
+        list.add(resourceId)
+    }
+    return list
+}
+
 fun shareApp(context: Context) {
     val pInfo: PackageInfo =
         context.getPackageManager().getPackageInfo(context.getPackageName(), 0)

@@ -1,9 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.QRScanActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.budiyev.android.codescanner.CodeScannerView
+        android:id="@+id/scanner_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginEnd="1dp"
+        app:autoFocusButtonVisible="false"
+        app:flashButtonVisible="false"
+        app:frameColor="@color/blue_408CFF"
+        app:frameCornersCapRounded="true"
+        app:frameCornersRadius="2dp"
+        app:frameCornersSize="15dp"
+        app:frameThickness="3dp"
+        app:frameVisible="true"
+        app:maskColor="#45686565"
+        app:maskVisible="true" />
+
+    <ImageView
+        android:id="@+id/imgAddImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:src="@color/black"
+        android:visibility="gone"/>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="87dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/toolbar_qr" />
+
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/view2"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            android:src="@drawable/arrow_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/roboto"
+            android:text="@string/qr_code"
+            android:textColor="@color/gray_FFEAEA"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view2"
+        android:gravity="center"
+        android:padding="30dp"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto"
+        android:textStyle="bold"
+        android:text="@string/qr_struct" />
+
+
+    <LinearLayout
+        android:id="@+id/layout_qr_instruc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/layoutButton"
+        android:layout_marginBottom="30dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bg_qr_text_instruc"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="22dp"
+        android:paddingVertical="6dp"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="@string/qr_instruct_1"
+            android:textColor="@color/lightblue_60A7EB"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="@string/qr_instruct_2"
+            android:textColor="@color/gray_C8C5C5"
+            android:textSize="14sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:id="@+id/layoutButton"
+        android:layout_above="@id/includeBanner"
+        android:layout_marginBottom="18dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btnAddCode"
+            android:text="@string/add_code"
+            android:singleLine="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:ellipsize="marquee"
+            android:background="@drawable/tv_add_code"
+            android:layout_marginHorizontal="20dp"
+            android:paddingVertical="13dp"
+            android:paddingHorizontal="27dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:fontFamily="@font/roboto"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btnAddImage"
+            android:text="@string/add_image"
+            android:singleLine="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:ellipsize="marquee"
+            android:scrollHorizontally="true"
+            android:background="@drawable/tv_add_image"
+            android:layout_marginHorizontal="20dp"
+            android:paddingVertical="13dp"
+            android:paddingHorizontal="27dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:fontFamily="@font/roboto"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <include
+        android:id="@+id/includeBanner"
+        layout="@layout/layout_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</RelativeLayout>

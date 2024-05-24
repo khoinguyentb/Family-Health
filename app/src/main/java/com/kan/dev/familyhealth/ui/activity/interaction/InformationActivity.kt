@@ -27,6 +27,8 @@ import com.kan.dev.familyhealth.data.RealtimeDAO.generateMyCode
 import com.kan.dev.familyhealth.data.RealtimeDAO.initRealtimeData
 import com.kan.dev.familyhealth.data.RealtimeDAO.pushRealtimeData
 import com.kan.dev.familyhealth.databinding.ActivityInformationBinding
+import com.kan.dev.familyhealth.dialog.DialogAvt
+import com.kan.dev.familyhealth.dialog.OnSaveListener
 import com.kan.dev.familyhealth.utils.FEMALE
 import com.kan.dev.familyhealth.utils.KEY_QR_BITMAP
 import com.kan.dev.familyhealth.utils.MALE
@@ -35,6 +37,7 @@ import com.kan.dev.familyhealth.utils.OTHER
 import com.kan.dev.familyhealth.utils.PHONE_PATTERN
 import com.kan.dev.familyhealth.utils.generateQRCode
 import com.kan.dev.familyhealth.utils.handler
+import com.kan.dev.familyhealth.utils.initAvatarList
 import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.utils.toastDuration
 import com.lvt.ads.callback.InterCallback
@@ -89,6 +92,7 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
             initRealtimeData()
             actionOnTextChange()
             sex = MALE
+            avt = R.drawable.ic_avt_1
             code = generateMyCode()
             checkExistUser(code,RealtimeDAO.valueEventListener{snapshot->
                 if (snapshot!!.exists()) code = generateMyCode()
@@ -220,6 +224,24 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
         }
     }
 
+    private fun initAvatar() {
+        sharePre.putInt("selectedItem", 0)
+        binding.imgAvt.setImageResource(avt)
+        binding.imgAvt.setOnClickListener {
+            val dialogAvt = DialogAvt(this , object : OnSaveListener{
+                override fun onClickSave(avt: Int) {
+                    for (i in 0 until initAvatarList(this@InformationActivity).size) {
+                        if (avt == initAvatarList(this@InformationActivity)[i])
+                            sharePre.putInt("selectedItem", i)
+                    }
+                    binding.imgAvt.setImageResource(avt)
+                    this@InformationActivity.avt = avt
+                }
+            })
+            dialogAvt.show()
+        }
+    }
+
     private fun actionChooseGender(s: String, rb: AppCompatRadioButton, tv: TextView) {
         sex = s
         binding.apply {
@@ -264,8 +286,8 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
 
             override fun afterTextChanged(editable: Editable) {}
         })
-        binding.edtPhoneNumber.setOnEditorActionListener { textView, i, keyEvent ->
-            if (i === EditorInfo.IME_ACTION_DONE) {
+        binding.edtPhoneNumber.setOnEditorActionListener { textView, i, _ ->
+            if (i == EditorInfo.IME_ACTION_DONE) {
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
                         View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
                 val imm =

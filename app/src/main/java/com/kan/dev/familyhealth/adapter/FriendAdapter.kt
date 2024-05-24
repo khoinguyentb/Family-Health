@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +16,7 @@ import com.kan.dev.familyhealth.base.BaseAdapter
 import com.kan.dev.familyhealth.data.RealtimeDAO.getRealtimeData
 import com.kan.dev.familyhealth.data.model.FriendModel
 import com.kan.dev.familyhealth.databinding.ItemFriendBinding
-import com.kan.dev.familyhealth.ui.activity.FriendActivity
+import com.kan.dev.familyhealth.ui.activity.main.FriendActivity
 import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.SharePreferencesUtils
 import com.kan.dev.familyhealth.utils.handler

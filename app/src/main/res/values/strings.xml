@@ -280,4 +280,8 @@
 
     <string name="whoops">Whoops!</string>
     <string name="no_internet">No Internet connection found. Check your connection or try again.</string>
+    <string name="No_QR">No QR code found in the image</string>
+    <string name="Error_QR">Error decoding QR code from image</string>
+    <string name="find_users_by_phone_number">Find users by phone number</string>
+    <string name="scan_the_QR_code_to_add_friends">Scan the QR code to add friends</string>
 </resources>
