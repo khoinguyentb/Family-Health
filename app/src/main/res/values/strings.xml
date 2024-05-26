@@ -23,8 +23,8 @@
     <string name="Female">Female</string>
     <string name="Male">Male</string>
     <string name="Age">Age</string>
-    <string name="Height">Height</string>
-    <string name="Weight">Weight</string>
+    <string name="Height">Height :</string>
+    <string name="Weight">Weight :</string>
     <string name="bmi_error">Please enter the actual value</string>
     <string name="desIntro1">By using your weight and height information, you can easily calculate your body mass index and view your status</string>
     <string name="desIntro2">Allows statistics of calculated data. And all your information is kept confidential</string>
@@ -139,7 +139,7 @@
     <string name="PhoneNumber">Phone Number</string>
     <string name="hintEnterPhone">Enter your phone number</string>
 
-    <string name="Email">Email</string>
+    <string name="Email">Email: </string>
     <string name="hintEnterEmail">Enter your Email</string>
 
     <string name="UserName">User name</string>
@@ -284,4 +284,13 @@
     <string name="Error_QR">Error decoding QR code from image</string>
     <string name="find_users_by_phone_number">Find users by phone number</string>
     <string name="scan_the_QR_code_to_add_friends">Scan the QR code to add friends</string>
+    <string name="detailed_information">Detailed Information</string>
+
+    <string name="HealthInformation">Health information</string>
+    <string name="BMIInformation">BMI information</string>
+    <string name="GPSSettings">GPS Settings</string>
+    <string name="phone_tracking">Phone tracking: </string>
+    <string name="qr_for_friends_to_connect">QR for friends to connect</string>
+    <string name="edit_information">Edit Information</string>
+
 </resources>

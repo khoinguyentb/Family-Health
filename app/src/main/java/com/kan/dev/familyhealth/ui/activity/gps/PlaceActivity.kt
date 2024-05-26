@@ -30,7 +30,7 @@ class PlaceActivity : BaseActivity<ActivityPlaceBinding>() {
     }
 
     override fun initListener() {
-        binding.imgBack.setOnClickListener { v ->
+        binding.imgBack.setOnClickListener {
             if (check) {
                 startActivity(Intent(this, GPSActivity::class.java))
             }

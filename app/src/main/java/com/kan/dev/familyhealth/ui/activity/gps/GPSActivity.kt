@@ -114,19 +114,18 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
     private var latLngList: ArrayList<LatLng> = ArrayList()
     private var mapBottomBehavior: BottomSheetBehavior<*>? = null
     private var detailBottomBehavior:BottomSheetBehavior<*>? = null
-    private lateinit var friendModel: FriendModel
     private var mapRipple: MapRipple? = null
     private val myCode : String by lazy {
         sharePre.getString(MY_CODE,"")!!
     }
-    private val sosList: ArrayList<FriendModel> = ArrayList<FriendModel>()
+    private val sosList: ArrayList<FriendModel> = ArrayList()
     private var temp = 0
     private var sosStatus: String = DISABLE
     private var runnable: Runnable? = null
     private var userSos = mutableMapOf<String, Any>()
-    var markerMap: Marker? = null
-    var mediaPlayer: MediaPlayer? = null
-    var animation: Animation? = null
+    private var markerMap: Marker? = null
+    private var mediaPlayer: MediaPlayer? = null
+    private var animation: Animation? = null
     private var isTracking = false
     private var isSos = false
     private var checkPut = 0
@@ -563,8 +562,8 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
                 val text = charSequence.toString().trim { it <= ' ' }
                 if (text != "") {
-                    viewModel.getAll.observe(this@GPSActivity){
-                        val tempList: MutableList<FriendModel> = ArrayList<FriendModel>()
+                    viewModel.getAll.observe(this@GPSActivity){it ->
+                        val tempList: MutableList<FriendModel> = ArrayList()
                         for (u in it) {
                             getOnetimeData(myCode + "/friends/" + u.code) { snapshot ->
                                 val name =
@@ -573,7 +572,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                                     snapshot.child("nickname").getValue(String::class.java)
                                 val phoneNumber =
                                     snapshot.child("phoneNumber").getValue(String::class.java)
-                                if (nickname!!.trim { it -> it <= ' ' } == "") {
+                                if (nickname!!.trim { it <= ' ' } == "") {
                                     if (phoneNumber!!.contains(text) || name!!.lowercase(Locale.getDefault())
                                             .contains(text.lowercase(Locale.getDefault()))
                                     ) {
@@ -877,7 +876,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
     private fun actionShowNearbyPlace(type: String) {
         Log.e("actionShowNearbyPlace", type)
         map!!.clear()
-        mapBottomBehavior!!.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        mapBottomBehavior!!.addBottomSheetCallback(object : BottomSheetCallback() {
             @SuppressLint("SwitchIntDef")
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
@@ -1271,7 +1270,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             startActivity(intent)
             }
         }
-
     }
     override fun onFind(type: String) {
         actionShowNearbyPlace(type)
