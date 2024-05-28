@@ -4,6 +4,7 @@ import android.content.Context
 import com.kan.dev.familyhealth.data.DatabaseApp
 import com.kan.dev.familyhealth.data.dao.BMIDao
 import com.kan.dev.familyhealth.data.dao.FriendDAO
+import com.kan.dev.familyhealth.data.dao.HealthyDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,5 +30,10 @@ class DatabaseModule {
     @Provides
     fun provideFriendDao(databaseApp: DatabaseApp): FriendDAO {
         return databaseApp.FriendDAO()
+    }
+    @Singleton
+    @Provides
+    fun provideHealthyDao(databaseApp: DatabaseApp): HealthyDao {
+        return databaseApp.HealthyDao()
     }
 }

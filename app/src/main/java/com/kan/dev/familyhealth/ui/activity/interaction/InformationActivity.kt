@@ -28,7 +28,10 @@ import com.kan.dev.familyhealth.data.RealtimeDAO.initRealtimeData
 import com.kan.dev.familyhealth.data.RealtimeDAO.pushRealtimeData
 import com.kan.dev.familyhealth.databinding.ActivityInformationBinding
 import com.kan.dev.familyhealth.dialog.DialogAvt
+import com.kan.dev.familyhealth.dialog.DialogDate
 import com.kan.dev.familyhealth.dialog.OnSaveListener
+import com.kan.dev.familyhealth.interfacces.IDateClickListener
+import com.kan.dev.familyhealth.utils.DATE_CHANGE
 import com.kan.dev.familyhealth.utils.FEMALE
 import com.kan.dev.familyhealth.utils.KEY_QR_BITMAP
 import com.kan.dev.familyhealth.utils.MALE
@@ -48,7 +51,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 
 
-class InformationActivity : BaseActivity<ActivityInformationBinding>() {
+class InformationActivity : BaseActivity<ActivityInformationBinding>(), IDateClickListener {
     override fun setViewBinding(): ActivityInformationBinding {
         return ActivityInformationBinding.inflate(layoutInflater)
     }
@@ -65,9 +68,11 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
     private var checkSt: Boolean = false
     private var checkKg: Boolean = false
     private var checkLb: Boolean = false
+    private lateinit var dialogDate: DialogDate
     private var myUser = FirebaseAuth.getInstance().currentUser
     private lateinit var profileUpdates : UserProfileChangeRequest
     override fun initData() {
+        dialogDate = DialogDate(this, this)
         binding.apply {
             Admob.getInstance()
                 .loadNativeAd(this@InformationActivity, getString(R.string.native_all), object : NativeCallback() {
@@ -125,6 +130,7 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
         binding.rulerWeight.initViewParam(20f, 0f, 48f, 0.1f)
         binding.rulerHeight.setUnit(getString(R.string.cm))
         binding.rulerWeight.setUnit(getString(R.string.st))
+        initAvatar()
     }
 
     override fun initListener() {
@@ -221,6 +227,13 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
                     handler.postDelayed({ isClick = true }, 500)
                 }
             }
+            icCalender.setOnClickListener {
+                if (isClick){
+                    isClick = false
+                    dialogDate.show()
+                    handler.postDelayed({ isClick = true},500)
+                }
+            }
         }
     }
 
@@ -253,9 +266,7 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
             txtOther.setTypeface(null, Typeface.NORMAL)
             rb.isChecked = true
         }
-
     }
-
     private fun actionOnTextChange() {
         binding.edtName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
@@ -377,6 +388,11 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>() {
                 }
             })
         }
+    }
+
+    override fun clickDateListener(date: String?) {
+        binding.edtDatebirth.text = date
+        sharePre.putBoolean(DATE_CHANGE, true)
     }
 
 }

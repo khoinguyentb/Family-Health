@@ -45,7 +45,6 @@ class ExerciseActivity : BaseActivity<ActivityExerciseBinding>(), SensorEventLis
     override fun initView() {
 
     }
-
     override fun initListener() {
 
     }
@@ -66,7 +65,7 @@ class ExerciseActivity : BaseActivity<ActivityExerciseBinding>(), SensorEventLis
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        // Xử lý khi độ chính xác của sensor thay đổi (nếu cần thiết)
+
     }
 
     override fun onResume() {

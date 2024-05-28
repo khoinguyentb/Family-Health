@@ -76,13 +76,13 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
         binding.tvTime.text = date
     }
 
-    private val maleClickListener = View.OnClickListener { v ->
+    private val maleClickListener = View.OnClickListener { 
         genders = MALE
         binding.Male.setBackground(ContextCompat.getDrawable(requireActivity(), R.drawable.selector_sex))
         binding.Female.setBackground(ContextCompat.getDrawable(requireActivity(), R.drawable.unselector_sex))
     }
 
-    private val timeClickListener = View.OnClickListener { v ->
+    private val timeClickListener = View.OnClickListener { 
         if (isClick) {
             isClick = true
             dialogDate.show()
@@ -90,13 +90,13 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
         }
     }
 
-    private val femaleClickListener = View.OnClickListener { v ->
+    private val femaleClickListener = View.OnClickListener { 
         genders = FEMALE
         binding.Female.setBackground(ContextCompat.getDrawable(requireActivity(), R.drawable.selector_sex))
         binding.Male.setBackground(ContextCompat.getDrawable(requireActivity(), R.drawable.unselector_sex))
     }
 
-    private val recentClickListener = View.OnClickListener { v ->
+    private val recentClickListener = View.OnClickListener { 
         if (isClick) {
             isClick = false
             intent = Intent(requireContext(), RecentActivity::class.java)
@@ -105,7 +105,7 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
         }
     }
 
-    private val reloadClickListener = View.OnClickListener { v ->
+    private val reloadClickListener = View.OnClickListener { 
         if (isClick) {
             isClick = false
             date = getCurrentDateFormatted()
@@ -128,7 +128,7 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
         }
     }
 
-    private val calculatorClickListener = View.OnClickListener { v ->
+    private val calculatorClickListener = View.OnClickListener { 
         if (isClick) {
             isClick = false
             age = binding.numberPicker.value
@@ -175,7 +175,7 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
         }
     }
 
-    private val cmClickListener = View.OnClickListener { v ->
+    private val cmClickListener = View.OnClickListener { 
         if (isClick) {
             isClick = true
             checkCm = true
@@ -187,7 +187,7 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
         }
     }
 
-    private val ftClickListener = View.OnClickListener { v ->
+    private val ftClickListener = View.OnClickListener { 
         if (isClick) {
             isClick = true
             checkCm = false
@@ -199,7 +199,7 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
         }
     }
 
-    private val stClickListener = View.OnClickListener { v ->
+    private val stClickListener = View.OnClickListener { 
         if (isClick) {
             isClick = true
             checkSt = true
@@ -214,7 +214,7 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
         }
     }
 
-    private val kgClickListener = View.OnClickListener { v ->
+    private val kgClickListener = View.OnClickListener { 
         if (isClick) {
             isClick = true
             checkSt = false
@@ -229,7 +229,7 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
         }
     }
 
-    private val lbClickListener = View.OnClickListener { v ->
+    private val lbClickListener = View.OnClickListener { 
         if (isClick) {
             isClick = true
             checkSt = false
@@ -284,7 +284,8 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
     }
 
     override fun clickDateListener(date: String?) {
-
+        binding.tvTime.text = date
+        sharePre.putBoolean(DATE_CHANGE, true)
     }
 
     override fun hideNavigation() {
