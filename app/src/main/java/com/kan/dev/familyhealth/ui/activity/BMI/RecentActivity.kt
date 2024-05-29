@@ -2,16 +2,19 @@ package com.kan.dev.familyhealth.ui.activity.BMI
 
 import android.content.Intent
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.adapter.RecentAdapter
 import com.kan.dev.familyhealth.base.BaseActivity
+import com.kan.dev.familyhealth.data.RealtimeDAO
 import com.kan.dev.familyhealth.data.model.BMI
 import com.kan.dev.familyhealth.databinding.ActivityRecentBinding
 import com.kan.dev.familyhealth.interfacces.IRecentListener
 import com.kan.dev.familyhealth.utils.BMIS
+import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.viewmodel.BMIViewModel
@@ -27,6 +30,9 @@ class RecentActivity : BaseActivity<ActivityRecentBinding>(),IRecentListener {
     private val viewModel :BMIViewModel by viewModels()
     private val adapter : RecentAdapter by lazy {
         RecentAdapter(this,this)
+    }
+    private val myCode by lazy {
+        sharePre.getString(MY_CODE,"")
     }
     override fun initData() {
         viewModel.getAll.observe(this){
@@ -51,7 +57,10 @@ class RecentActivity : BaseActivity<ActivityRecentBinding>(),IRecentListener {
     }
 
     override fun deleteRecent(bmi: BMI) {
-        viewModel.delete(bmi)
+        RealtimeDAO.removeRealtimeData(myCode + "/BMI/" + bmi.id){
+            Toast.makeText(this,getString(R.string.DeletedSuccessfully), Toast.LENGTH_SHORT).show()
+            viewModel.delete(bmi)
+        }
     }
 
     override fun clickRecent(item: BMI) {

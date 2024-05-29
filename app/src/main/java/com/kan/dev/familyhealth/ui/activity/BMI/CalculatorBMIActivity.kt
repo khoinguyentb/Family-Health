@@ -8,12 +8,14 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.base.BaseActivity
+import com.kan.dev.familyhealth.data.RealtimeDAO
 import com.kan.dev.familyhealth.data.model.BMI
 import com.kan.dev.familyhealth.databinding.ActivityCalculatorBmiactivityBinding
 import com.kan.dev.familyhealth.dialog.DialogDelete
 import com.kan.dev.familyhealth.interfacces.IDeleteClickListener
 import com.kan.dev.familyhealth.utils.BMIS
 import com.kan.dev.familyhealth.utils.FEMALE
+import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.viewmodel.BMIViewModel
 import com.lvt.ads.callback.InterCallback
@@ -34,6 +36,9 @@ class CalculatorBMIActivity : BaseActivity<ActivityCalculatorBmiactivityBinding>
     private val viewModel : BMIViewModel by viewModels()
     private var height = 0f
     private var weight = 0f
+    private val myCode by lazy {
+        sharePre.getString(MY_CODE,"")
+    }
     override fun setViewBinding(): ActivityCalculatorBmiactivityBinding {
         return ActivityCalculatorBmiactivityBinding.inflate(layoutInflater)
     }
@@ -201,27 +206,46 @@ class CalculatorBMIActivity : BaseActivity<ActivityCalculatorBmiactivityBinding>
                         .postDelayed({ isClick = true }, 500)
                 }
             }
-            binding.btnSave.setOnClickListener { v ->
-                viewModel.insert(bmi)
-                Admob.getInstance().setOpenActivityAfterShowInterAds(false)
-                Admob.getInstance().showInterAll(this@CalculatorBMIActivity, object : InterCallback() {
-                    override fun onNextAction() {
-                        super.onNextAction()
-                        Toast.makeText(
-                            applicationContext,
-                            getString(R.string.SavedSuccessfully),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        finish()
-                        Admob.getInstance().setOpenActivityAfterShowInterAds(true)
-                    }
-                })
+            binding.btnSave.setOnClickListener {
+                val bMI = hashMapOf<String, Any>(
+                    "id" to bmi.id,
+                    "time" to bmi.time,
+                    "gender" to bmi.gender,
+                    "age" to bmi.age,
+                    "weight" to bmi.weight,
+                    "checkCm" to bmi.checkCm,
+                    "checkSt" to bmi.checkSt,
+                    "checkKg" to bmi.checkKg,
+                    "checkLb" to bmi.checkLb,
+                    "height" to bmi.height,
+                    "bmi" to bmi.bmi,
+                    "isRecent" to bmi.isRecent
+                )
+                RealtimeDAO.pushRealtimeData(myCode + "/BMI/" + bmi.id,bMI){
+                    Admob.getInstance().setOpenActivityAfterShowInterAds(false)
+                    Admob.getInstance().showInterAll(this@CalculatorBMIActivity, object : InterCallback() {
+                        override fun onNextAction() {
+                            super.onNextAction()
+                            viewModel.insert(bmi)
+                            Toast.makeText(
+                                applicationContext,
+                                getString(R.string.SavedSuccessfully),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            finish()
+                            Admob.getInstance().setOpenActivityAfterShowInterAds(true)
+                        }
+                    })
+                }
             }
         }
     }
 
     override fun clickDelete() {
-        viewModel.delete(bmi)
+        RealtimeDAO.removeRealtimeData(myCode + "/BMI/" + bmi.id){
+            Toast.makeText(this,getString(R.string.DeletedSuccessfully),Toast.LENGTH_SHORT).show()
+            viewModel.delete(bmi)
+        }
     }
 
 }
