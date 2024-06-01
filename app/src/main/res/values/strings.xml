@@ -292,4 +292,6 @@
     <string name="phone_tracking">Phone tracking: </string>
     <string name="qr_for_friends_to_connect">QR for friends to connect</string>
     <string name="edit_information">Edit Information</string>
+    <string name="KM">KM</string>
+    <string name="KCAL">KCAL</string>
 </resources>

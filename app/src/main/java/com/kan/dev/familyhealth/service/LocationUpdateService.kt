@@ -8,6 +8,10 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Handler
@@ -15,6 +19,8 @@ import android.os.IBinder
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStore
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.data.RealtimeDAO.initRealtimeData
 import com.kan.dev.familyhealth.data.RealtimeDAO.updateRealtimeData
@@ -22,24 +28,56 @@ import com.kan.dev.familyhealth.utils.LocationHelper.getCurrentLocation
 import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.SharePreferencesUtils
 import com.kan.dev.familyhealth.utils.handler
+import com.kan.dev.familyhealth.viewmodel.HealthyViewModel
+import com.kan.dev.familyhealth.viewmodel.HealthyViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import javax.inject.Inject
 
 
+@AndroidEntryPoint
 @SuppressLint("ObsoleteSdkInt")
-class LocationUpdateService : Service() {
+class LocationUpdateService : Service(), SensorEventListener {
     private var runnable: Runnable? = null
 
+    @Inject
+    lateinit var viewModelFactory: HealthyViewModelFactory
+    private lateinit var viewModel : HealthyViewModel
     private var battery = 0
     private var lastActive = 0L
     private var latlngObj = mutableMapOf<String, Any>()
     private lateinit var sharePre : SharePreferencesUtils
     private lateinit var myCode : String
+
+    private val sensorManager: SensorManager by lazy {
+        getSystemService(Context.SENSOR_SERVICE) as SensorManager
+    }
+    private val sensor: Sensor? by lazy {
+        sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
+    }
+    private var currentDate: String = ""
+    private lateinit var dateFormat : SimpleDateFormat
+    private var stepCount = 0
+    private var distanceInMeters = 0f
+    private var distanceInKm = 0f
+    private var caloriesBurned = 0f
     override fun onCreate() {
         super.onCreate()
         initRealtimeData()
+        val viewModelStore = ViewModelStore()
+        viewModel = ViewModelProvider(viewModelStore,viewModelFactory)[HealthyViewModel::class.java]
+
+        if (sensor != null) {
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+        }
         sharePre = SharePreferencesUtils(applicationContext)
         myCode = sharePre.getString(MY_CODE,"")!!
         runnable = object : Runnable {
             override fun run() {
+                dateFormat = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault())
+                currentDate = dateFormat.format(Date())
                 getCurrentLocation(applicationContext) { latLng ->
                     Log.e("Kano", myCode)
                     battery = batteryLevel
@@ -64,14 +102,14 @@ class LocationUpdateService : Service() {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-        handler!!.postDelayed(runnable!!, 10000)
+        handler.postDelayed(runnable!!, 10000)
         startForeground(NOTIFICATION_ID, createNotification())
         return START_STICKY
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        handler!!.removeCallbacks(runnable!!)
+        handler.removeCallbacks(runnable!!)
     }
 
     @SuppressLint("ObsoleteSdkInt")
@@ -108,6 +146,25 @@ class LocationUpdateService : Service() {
             }
             return false
         }
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event?.sensor?.type == Sensor.TYPE_STEP_COUNTER) {
+            stepCount = event.values[0].toInt()
+            distanceInMeters = (stepCount * 0.762).toFloat()
+            distanceInKm = distanceInMeters / 1000
+            caloriesBurned = (stepCount * 0.05).toFloat()
+
+            distanceInKm = Math.round(distanceInKm*100)/100.toFloat()
+            caloriesBurned = Math.round(caloriesBurned*100)/100.toFloat()
+            viewModel.createOrUpdateRecordForCurrentDate(stepCount,distanceInKm,caloriesBurned)
+
+
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+
     }
 }
 

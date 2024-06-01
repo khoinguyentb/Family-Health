@@ -15,7 +15,7 @@ class BMIRepository @Inject constructor (private val dao: BMIDao) {
     }
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun getItem(id: Int) :  BMI {
+    suspend fun getItem(id: Int) : Flow<BMI> {
         return withContext(Dispatchers.IO) {
             dao.getItem(id)
         }

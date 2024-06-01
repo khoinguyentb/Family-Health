@@ -7,10 +7,10 @@ import java.io.Serializable
 
 @Entity(tableName = "healthy")
 data class HealthyModel (
-    var step : Int,
+    var stepCount : Int,
     var distance : Float,
-    var moving : Float,
-    val time : String
+    var calories : Float,
+    val date : String
 ):Serializable{
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

@@ -15,7 +15,13 @@ interface HealthyDao {
     val all: Flow<List<HealthyModel>>
 
     @Query("select * from healthy where id = :id")
-    fun getItem(id: Int): HealthyModel
+    fun getItem(id: Int): Flow<HealthyModel>
+
+    @Query("SELECT * FROM healthy WHERE date = :date")
+    fun getItemByDate(date: String): Flow<HealthyModel>
+
+    @Query("SELECT * FROM healthy WHERE date = :date")
+    fun getRecordByDate(date: String): HealthyModel?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(healthyModel: HealthyModel)

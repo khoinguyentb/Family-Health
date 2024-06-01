@@ -20,7 +20,7 @@ interface BMIDao {
     fun getList(month: Int): LiveData<List<BMI>>
 
     @Query("select * from bmi where id = :id")
-    fun getItem(id: Int): BMI
+    fun getItem(id: Int): Flow<BMI>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(bmi: BMI)

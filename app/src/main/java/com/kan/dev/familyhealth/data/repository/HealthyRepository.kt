@@ -17,9 +17,25 @@ class HealthyRepository @Inject constructor(
     }
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun getItem(id: Int) : HealthyModel {
+    suspend fun getItem(id: Int) : Flow<HealthyModel> {
         return withContext(Dispatchers.IO) {
             dao.getItem(id)
+        }
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun getItemByDate(date: String) : Flow<HealthyModel> {
+        return withContext(Dispatchers.IO) {
+            dao.getItemByDate(date)
+        }
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun getRecordByDate(date : String) : HealthyModel? {
+        return withContext(Dispatchers.IO) {
+            dao.getRecordByDate(date)
         }
     }
     @Suppress("RedundantSuspendModifier")

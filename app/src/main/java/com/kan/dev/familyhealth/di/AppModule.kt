@@ -1,8 +1,10 @@
 package com.kan.dev.familyhealth.di
 
 import android.content.Context
+import com.kan.dev.familyhealth.data.repository.HealthyRepository
 import com.kan.dev.familyhealth.utils.SharePreferencesUtils
 import com.kan.dev.familyhealth.utils.SystemUtils
+import com.kan.dev.familyhealth.viewmodel.HealthyViewModelFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,5 +25,11 @@ class AppModule {
     @Singleton
     fun provideSystemUtils(@ApplicationContext context: Context) : SystemUtils {
         return SystemUtils(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideViewModelFactory(repository: HealthyRepository): HealthyViewModelFactory {
+        return HealthyViewModelFactory(repository)
     }
 }

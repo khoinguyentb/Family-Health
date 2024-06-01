@@ -34,19 +34,3 @@ class InternetBroadcastReceiver : BroadcastReceiver() {
     }
 }
 
-// Example usage
-fun registerReceiver(context: Context) {
-    if (!InternetBroadcastReceiver.isRegistered){
-        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        val receiver = InternetBroadcastReceiver()
-        context.registerReceiver(receiver, filter)
-        InternetBroadcastReceiver.isRegistered = true
-    }
-}
-
-fun unregisterReceiver(context: Context, receiver: InternetBroadcastReceiver) {
-    if (InternetBroadcastReceiver.isRegistered) {
-        context.unregisterReceiver(receiver)
-        InternetBroadcastReceiver.isRegistered = false
-    }
-}
