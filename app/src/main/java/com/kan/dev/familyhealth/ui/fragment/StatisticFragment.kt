@@ -321,7 +321,7 @@ class StatisticFragment : BaseFragment<FragmentStatisticBinding>(),IRecentListen
                     Log.d("Kan", "Month :$months")
                     if (months == currentMonth) {
                         x = time.substring(time.lastIndexOf('.') + 1).toFloat()
-                        y = it.bmi.toFloat()
+                        y = it.bmi
                         values.add(Entry(x!!, y!!))
 
                         groupedByX.clear()

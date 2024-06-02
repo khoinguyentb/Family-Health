@@ -294,4 +294,5 @@
     <string name="edit_information">Edit Information</string>
     <string name="KM">KM</string>
     <string name="KCAL">KCAL</string>
+    <string name="Chart">Chart</string>
 </resources>

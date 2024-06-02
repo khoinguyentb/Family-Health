@@ -278,7 +278,7 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
         }
     }
     private fun getCurrentDateFormatted(): String {
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault())
         val date = Date()
         return dateFormat.format(date)
     }
