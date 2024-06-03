@@ -295,4 +295,8 @@
     <string name="KM">KM</string>
     <string name="KCAL">KCAL</string>
     <string name="Chart">Chart</string>
+    <string name="ToastSignIn">Email or password cannot be blank</string>
+    <string name="IncorrectSign">Incorrect email or password</string>
+    <string name="LoggedSuccessfully">Logged in successfully</string>
+    <string name="EmailAlready">Email already exists</string>
 </resources>

@@ -48,7 +48,8 @@ class LocationUpdateService : Service(), SensorEventListener {
     private var battery = 0
     private var lastActive = 0L
     private var latlngObj = mutableMapOf<String, Any>()
-    private lateinit var sharePre : SharePreferencesUtils
+    @Inject
+    lateinit var sharePre : SharePreferencesUtils
     private lateinit var myCode : String
 
     private val sensorManager: SensorManager by lazy {
@@ -72,7 +73,6 @@ class LocationUpdateService : Service(), SensorEventListener {
         if (sensor != null) {
             sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
         }
-        sharePre = SharePreferencesUtils(applicationContext)
         myCode = sharePre.getString(MY_CODE,"")!!
         runnable = object : Runnable {
             override fun run() {

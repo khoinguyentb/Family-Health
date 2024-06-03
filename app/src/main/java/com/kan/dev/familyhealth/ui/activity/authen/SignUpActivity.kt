@@ -62,7 +62,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
                         Toast.makeText(this,getString(R.string.SignUpSuccess),Toast.LENGTH_SHORT).show()
                         finish()
                     } else {
-                        Toast.makeText(this,getString(R.string.SignUpFailed),Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this,getString(R.string.EmailAlready),Toast.LENGTH_SHORT).show()
                     }
                 })
     }

@@ -8,10 +8,12 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.databinding.ActivitySignInBinding
 import com.kan.dev.familyhealth.ui.activity.main.MainActivity
 import com.kan.dev.familyhealth.ui.activity.interaction.InformationActivity
+import com.kan.dev.familyhealth.utils.Code
 import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
@@ -59,29 +61,41 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
     }
 
     private fun signIn(email:String,pass : String){
-        dialog.show()
-        auth.signInWithEmailAndPassword(email, pass)
-            .addOnCompleteListener(
-                this,
-                OnCompleteListener<AuthResult?> { task ->
-                    dialog.dismiss()
-                    if (task.isSuccessful) {
-                        user = FirebaseAuth.getInstance().currentUser!!
-                        Log.d("KanMobile",user.displayName.toString())
-                        intent = if (user.displayName != null){
-                            sharePre.putString(MY_CODE,user.displayName)
-                            Intent(this@SignInActivity, MainActivity::class.java)
-                        }else{
-                            Intent(this@SignInActivity, InformationActivity::class.java)
+        if (email.trim() == "" || pass.trim() == ""){
+            Toast.makeText(
+                this@SignInActivity, getString(R.string.ToastSignIn),
+                Toast.LENGTH_SHORT
+            ).show()
+        }else{
+            dialog.show()
+            auth.signInWithEmailAndPassword(email, pass)
+                .addOnCompleteListener(
+                    this,
+                    OnCompleteListener<AuthResult?> { task ->
+                        dialog.dismiss()
+                        if (task.isSuccessful) {
+                            user = FirebaseAuth.getInstance().currentUser!!
+                            Log.d("KanMobile",user.displayName.toString())
+                            intent = if (user.displayName != null){
+                                sharePre.putString(MY_CODE,user.displayName)
+                                Code = user.displayName!!
+                                Intent(this@SignInActivity, MainActivity::class.java)
+                            }else{
+                                Intent(this@SignInActivity, InformationActivity::class.java)
+                            }
+                            Toast.makeText(
+                                this@SignInActivity, getString(R.string.LoggedSuccessfully),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            Toast.makeText(
+                                this@SignInActivity, getString(R.string.IncorrectSign),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        Toast.makeText(
-                            this@SignInActivity, "Authentication failed.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                })
+                    })
+        }
     }
 }

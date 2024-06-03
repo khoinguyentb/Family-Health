@@ -29,7 +29,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideViewModelFactory(repository: HealthyRepository): HealthyViewModelFactory {
-        return HealthyViewModelFactory(repository)
+    fun provideViewModelFactory(repository: HealthyRepository,sharePreferencesUtils: SharePreferencesUtils): HealthyViewModelFactory {
+        return HealthyViewModelFactory(repository,sharePreferencesUtils)
     }
 }

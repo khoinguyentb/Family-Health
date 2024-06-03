@@ -22,10 +22,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HealthyViewModel @Inject constructor(
-    private val repository: HealthyRepository
+    private val repository: HealthyRepository,
+    private val sharePre : SharePreferencesUtils?=null
 ) : ViewModel() {
-    @Inject
-    lateinit var sharePre : SharePreferencesUtils
+
+
     private lateinit var myCode :String
     private val _getAll = MutableStateFlow(UiState.Loading as UiState)
     val getAll: StateFlow<UiState> = _getAll
@@ -41,7 +42,7 @@ class HealthyViewModel @Inject constructor(
     private lateinit var dateFormat : SimpleDateFormat
     init {
         getAll()
-        myCode = sharePre.getString(MY_CODE,"")!!
+        myCode = sharePre!!.getString(MY_CODE,"")!!
     }
 
     private fun getAll() {
@@ -85,7 +86,7 @@ class HealthyViewModel @Inject constructor(
 
     fun createOrUpdateRecordForCurrentDate(stepCount : Int,distance : Float, calories : Float) {
         viewModelScope.launch {
-            dateFormat = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault())
+            dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             currentDate = dateFormat.format(Date())
             healthyModel = repository.getRecordByDate(currentDate)
             if (healthyModel == null) {
@@ -136,11 +137,12 @@ class HealthyViewModel @Inject constructor(
 }
 
 class HealthyViewModelFactory @Inject constructor(
-    private val repository: HealthyRepository
+    private val repository: HealthyRepository,
+    private val sharePre: SharePreferencesUtils?
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(HealthyViewModel::class.java)) {
-            return HealthyViewModel(repository) as T
+            return HealthyViewModel(repository,sharePre) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

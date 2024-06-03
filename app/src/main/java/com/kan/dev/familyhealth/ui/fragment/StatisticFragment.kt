@@ -49,9 +49,10 @@ import com.kan.dev.familyhealth.utils.years
 import com.kan.dev.familyhealth.viewmodel.BMIViewModel
 import com.lvt.ads.callback.InterCallback
 import com.lvt.ads.util.Admob
+import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 
-
+@AndroidEntryPoint
 class StatisticFragment : BaseFragment<FragmentStatisticBinding>(),IRecentListener,IMonthClickListener {
     override fun getBinding(
         inflater: LayoutInflater,

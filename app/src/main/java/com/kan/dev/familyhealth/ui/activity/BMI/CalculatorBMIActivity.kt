@@ -187,11 +187,12 @@ class CalculatorBMIActivity : BaseActivity<ActivityCalculatorBmiactivityBinding>
     override fun initListener() {
         binding.apply {
             binding.icBack.setOnClickListener {
-                if (bmi.isRecent) {
-                    finish()
-                } else {
-                    dialogDelete!!.show()
-                }
+//                if (bmi.isRecent) {
+//                    finish()
+//                } else {
+//                    dialogDelete!!.show()
+//                }
+                finish()
             }
             binding.icRecent.setOnClickListener {
                 if (isClick) {

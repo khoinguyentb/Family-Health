@@ -65,7 +65,7 @@ class ExerciseActivity : BaseActivity<ActivityExerciseBinding>() {
 
     @SuppressLint("SetTextI18n")
     override fun initView() {
-        val dateFormat = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val currentDate = dateFormat.format(Date())
         viewmodel.getItemByDate(currentDate)
         lifecycleScope.launch {
@@ -118,12 +118,12 @@ class ExerciseActivity : BaseActivity<ActivityExerciseBinding>() {
         if (list.isNotEmpty()) {
             for (it in list) {
                 val time = it.date
-                val firstDotIndex = time.indexOf(".")
-                val secondDotIndex = time.indexOf(".", firstDotIndex + 1)
+                val firstDotIndex = time.indexOf("/")
+                val secondDotIndex = time.indexOf("/", firstDotIndex + 1)
                 val months = time.substring(firstDotIndex + 1, secondDotIndex).toInt()
                 Log.d("Kan", "Month :$months")
                 if (months == currentMonth) {
-                    x = time.substring(time.lastIndexOf('.') + 1).toFloat()
+                    x = time.substring(time.lastIndexOf('/') + 1).toFloat()
                     y = it.stepCount.toFloat()
                     values.add(Entry(x!!, y!!))
 
@@ -188,17 +188,17 @@ class ExerciseActivity : BaseActivity<ActivityExerciseBinding>() {
                 moveViewToX(0f)
                 xAxis.apply {
                     setDrawGridLines(false)
-                    textColor = androidx.core.content.ContextCompat.getColor(this@ExerciseActivity, com.kan.dev.familyhealth.R.color.white)
-                    axisLineColor = androidx.core.content.ContextCompat.getColor(this@ExerciseActivity, com.kan.dev.familyhealth.R.color.transfer)
+                    textColor = androidx.core.content.ContextCompat.getColor(this@ExerciseActivity, R.color.white)
+                    axisLineColor = androidx.core.content.ContextCompat.getColor(this@ExerciseActivity, R.color.transfer)
                     axisMinimum = minX
                     axisMaximum = maxX
                     granularity = 1f
                 }
                 yAxis.apply {
-                    textColor = androidx.core.content.ContextCompat.getColor(this@ExerciseActivity, com.kan.dev.familyhealth.R.color.white)
+                    textColor = androidx.core.content.ContextCompat.getColor(this@ExerciseActivity, R.color.white)
                     axisMinimum = 0f
                     axisMaximum = 10000f
-                    axisLineColor = androidx.core.content.ContextCompat.getColor(this@ExerciseActivity, com.kan.dev.familyhealth.R.color.transfer)
+                    axisLineColor = androidx.core.content.ContextCompat.getColor(this@ExerciseActivity, R.color.transfer)
                 }
                 setVisibleXRangeMinimum(500f)
                 setVisibleXRangeMaximum(700f)
