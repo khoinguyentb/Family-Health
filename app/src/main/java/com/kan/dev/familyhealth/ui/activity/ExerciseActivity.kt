@@ -118,12 +118,12 @@ class ExerciseActivity : BaseActivity<ActivityExerciseBinding>() {
         if (list.isNotEmpty()) {
             for (it in list) {
                 val time = it.date
-                val firstDotIndex = time.indexOf("/")
-                val secondDotIndex = time.indexOf("/", firstDotIndex + 1)
+                val firstDotIndex = time.indexOf("-")
+                val secondDotIndex = time.indexOf("-", firstDotIndex + 1)
                 val months = time.substring(firstDotIndex + 1, secondDotIndex).toInt()
                 Log.d("Kan", "Month :$months")
                 if (months == currentMonth) {
-                    x = time.substring(time.lastIndexOf('/') + 1).toFloat()
+                    x = time.substring(time.lastIndexOf('-') + 1).toFloat()
                     y = it.stepCount.toFloat()
                     values.add(Entry(x!!, y!!))
 
@@ -155,7 +155,6 @@ class ExerciseActivity : BaseActivity<ActivityExerciseBinding>() {
                 maxX = values.last().x
                 if (maxX < 28) maxX += 2
             }
-
             val dataSet = LineDataSet(values, "Label").apply {
                 setDrawValues(true)
                 mode = LineDataSet.Mode.CUBIC_BEZIER
@@ -183,26 +182,26 @@ class ExerciseActivity : BaseActivity<ActivityExerciseBinding>() {
                 xAxis.apply {
                     isEnabled = true
                     setDrawLabels(true)
-                    position = com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM
+                    position = XAxis.XAxisPosition.BOTTOM
                 }
                 moveViewToX(0f)
                 xAxis.apply {
                     setDrawGridLines(false)
-                    textColor = androidx.core.content.ContextCompat.getColor(this@ExerciseActivity, R.color.white)
-                    axisLineColor = androidx.core.content.ContextCompat.getColor(this@ExerciseActivity, R.color.transfer)
+                    textColor = ContextCompat.getColor(this@ExerciseActivity, R.color.white)
+                    axisLineColor = ContextCompat.getColor(this@ExerciseActivity, R.color.transfer)
                     axisMinimum = minX
                     axisMaximum = maxX
                     granularity = 1f
                 }
                 yAxis.apply {
-                    textColor = androidx.core.content.ContextCompat.getColor(this@ExerciseActivity, R.color.white)
+                    textColor = ContextCompat.getColor(this@ExerciseActivity, R.color.white)
                     axisMinimum = 0f
                     axisMaximum = 10000f
-                    axisLineColor = androidx.core.content.ContextCompat.getColor(this@ExerciseActivity, R.color.transfer)
+                    axisLineColor = ContextCompat.getColor(this@ExerciseActivity, R.color.transfer)
                 }
-                setVisibleXRangeMinimum(500f)
-                setVisibleXRangeMaximum(700f)
-                setVisibleYRangeMaximum(7000f, com.github.mikephil.charting.components.YAxis.AxisDependency.LEFT)
+                setVisibleXRangeMinimum(5f)
+                setVisibleXRangeMaximum(7f)
+                setVisibleYRangeMaximum(7000f, YAxis.AxisDependency.LEFT)
                 invalidate()
             }
 
