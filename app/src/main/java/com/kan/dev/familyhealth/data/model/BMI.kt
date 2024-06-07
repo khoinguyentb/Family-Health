@@ -3,8 +3,9 @@ package com.kan.dev.familyhealth.data.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.firebase.database.IgnoreExtraProperties
 import java.io.Serializable
-
+@IgnoreExtraProperties
 @Entity(tableName = "bmi")
 data class BMI(
     var time: String,
@@ -32,5 +33,5 @@ data class BMI(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Int = 0
-
+    constructor() : this("", "", 0,0f,true,true,true,true,0f,0f)
 }

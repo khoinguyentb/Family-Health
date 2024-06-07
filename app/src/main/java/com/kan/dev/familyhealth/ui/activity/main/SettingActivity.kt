@@ -69,6 +69,9 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(),ISettingClickList
                     startActivity(Intent(this, SignInActivity::class.java))
                     finishAffinity()
                 }
+                R.drawable.ic_add_friend -> {
+                    startActivity(Intent(this, FriendActivity::class.java))
+                }
             }
             handler.postDelayed(Runnable { isClick = true }, 500)
         }

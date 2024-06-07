@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.crashlytics.internal.model.CrashlyticsReport.Session.Event.Log
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.adapter.DetailListeners
 import com.kan.dev.familyhealth.adapter.FriendDetailAdapter
@@ -52,15 +53,15 @@ class FriendActivity : BaseActivity<ActivityFriendBinding>() {
     }
 
     override fun initListener() {
-        binding.btnBack.setOnClickListener { view -> onBackPressed() }
-        binding.btnAddCode.setOnClickListener { view ->
+        binding.btnBack.setOnClickListener {  onBackPressed() }
+        binding.btnAddCode.setOnClickListener {
             if (isClick) {
                 isClick = false
                 startActivity(Intent(applicationContext, JoinWithFamilyActivity::class.java))
                 Handler().postDelayed({ isClick = true }, 500)
             }
         }
-        binding.btnQR.setOnClickListener { view ->
+        binding.btnQR.setOnClickListener {
             if (isClick) {
                 isClick = false
                 startActivity(
@@ -92,12 +93,17 @@ class FriendActivity : BaseActivity<ActivityFriendBinding>() {
     }
 
     private fun getFriend() {
-
         viewModel.getAll.observe(this) {
+            android.util.Log.d("KanMobile",it.size.toString())
+
             binding.recyclerFriend.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
             binding.recyclerFriend.setHasFixedSize(true)
             if (it.isEmpty()) {
+                binding.imvNull.visibility = View.VISIBLE
+                binding.tvNull.visibility = View.VISIBLE
+            } else {
+
                 adapter = FriendDetailAdapter(this, object : DetailListeners {
                     override fun onDelete(item: FriendModel) {
                     }
@@ -106,13 +112,9 @@ class FriendActivity : BaseActivity<ActivityFriendBinding>() {
                 binding.recyclerFriend.adapter = adapter
                 binding.recyclerFriend.itemAnimator = null
 
-                binding.imvNull.visibility = View.VISIBLE
-                binding.tvNull.visibility = View.VISIBLE
-            } else {
                 binding.imvNull.visibility = View.GONE
                 binding.tvNull.visibility = View.GONE
             }
-
         }
     }
 

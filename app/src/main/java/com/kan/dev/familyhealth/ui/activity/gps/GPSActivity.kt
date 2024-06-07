@@ -332,7 +332,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                 actionShowFriendAll(false)
                 checkPut++
                 checkOnline()
-                getFriend()
                 if (ActivityCompat.checkSelfPermission(
                         this@GPSActivity,
                         Manifest.permission.ACCESS_FINE_LOCATION
@@ -1178,7 +1177,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
         }
     }
     private fun getFriend() {
-
         viewModel.getAll.observe(this){
             for (i in it) {
                 getOnetimeData(
@@ -1207,6 +1205,8 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                                     snapshot.child("isTracking").getValue(Boolean::class.java)!!
                                 val isSos =
                                     snapshot.child("isSos").getValue(Boolean::class.java)!!
+
+
                                 if (isTracking) {
                                     i.avt = avtId
                                     i.battery = battery

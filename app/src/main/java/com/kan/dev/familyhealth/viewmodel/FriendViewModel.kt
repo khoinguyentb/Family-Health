@@ -22,7 +22,6 @@ class FriendViewModel @Inject constructor(
     init {
         getAll()
     }
-
     private fun getAll() {
         viewModelScope.launch {
             repository.getAll().collect {

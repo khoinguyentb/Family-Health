@@ -26,7 +26,6 @@ import kotlin.math.pow
 @AndroidEntryPoint
 class CalculatorBMIActivity : BaseActivity<ActivityCalculatorBmiactivityBinding>(),IDeleteClickListener {
 
-
     private lateinit var bmi: BMI
     private var weightMin = 47.3
     private var weightMax = 63.9
@@ -46,6 +45,13 @@ class CalculatorBMIActivity : BaseActivity<ActivityCalculatorBmiactivityBinding>
     override fun initData() {
         if (intent.hasExtra(BMIS)) {
             bmi = intent.getSerializableExtra(BMIS) as BMI
+        }
+        if (intent.hasExtra("BMIInformation")){
+            bmi = intent.getSerializableExtra("BMIInformation") as BMI
+            binding.apply {
+                btnSave.visibility = View.GONE
+                icRecent.visibility = View.GONE
+            }
         }
         dialogDelete = DialogDelete(this, this)
         height = 0f
@@ -186,7 +192,7 @@ class CalculatorBMIActivity : BaseActivity<ActivityCalculatorBmiactivityBinding>
 
     override fun initListener() {
         binding.apply {
-            binding.icBack.setOnClickListener {
+            icBack.setOnClickListener {
 //                if (bmi.isRecent) {
 //                    finish()
 //                } else {
@@ -194,7 +200,7 @@ class CalculatorBMIActivity : BaseActivity<ActivityCalculatorBmiactivityBinding>
 //                }
                 finish()
             }
-            binding.icRecent.setOnClickListener {
+            icRecent.setOnClickListener {
                 if (isClick) {
                     isClick = false
                     if (bmi.isRecent) {
@@ -207,7 +213,7 @@ class CalculatorBMIActivity : BaseActivity<ActivityCalculatorBmiactivityBinding>
                         .postDelayed({ isClick = true }, 500)
                 }
             }
-            binding.btnSave.setOnClickListener {
+            btnSave.setOnClickListener {
                 val bMI = hashMapOf<String, Any>(
                     "id" to bmi.id,
                     "time" to bmi.time,

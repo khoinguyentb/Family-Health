@@ -13,7 +13,7 @@ import com.kan.dev.familyhealth.data.model.FriendModel
 import com.kan.dev.familyhealth.data.model.HealthyModel
 import java.util.concurrent.Executors
 
-@Database(entities = [BMI::class,FriendModel::class,HealthyModel::class], version = 1, exportSchema = false)
+@Database(entities = [BMI::class,FriendModel::class,HealthyModel::class], version = 2, exportSchema = false)
 abstract class DatabaseApp : RoomDatabase() {
     abstract fun bmiDAO() : BMIDao
     abstract fun FriendDAO() : FriendDAO
@@ -25,7 +25,7 @@ abstract class DatabaseApp : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     DatabaseApp::class.java,
-                    "fake_video_call_db"
+                    "database_db"
                 ).addCallback(object : Callback(){
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)

@@ -1,19 +1,9 @@
 package com.kan.dev.familyhealth.ui.activity
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.pm.PackageManager
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
-import android.os.Build
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.github.mikephil.charting.components.XAxis
@@ -27,11 +17,9 @@ import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.data.model.HealthyModel
 import com.kan.dev.familyhealth.databinding.ActivityExerciseBinding
 import com.kan.dev.familyhealth.utils.currentMonth
-import com.kan.dev.familyhealth.utils.showPermissionSettingsDialog
 import com.kan.dev.familyhealth.viewmodel.HealthyViewModel
 import com.kan.dev.familyhealth.viewmodel.state.UiState
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date

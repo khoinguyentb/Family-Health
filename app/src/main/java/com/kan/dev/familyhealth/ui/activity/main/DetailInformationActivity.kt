@@ -8,6 +8,7 @@ import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.data.RealtimeDAO
 import com.kan.dev.familyhealth.databinding.ActivityDetailInformationBinding
+import com.kan.dev.familyhealth.ui.activity.BMI.BMIInformationActivity
 import com.kan.dev.familyhealth.ui.activity.BMI.RecentActivity
 import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.handler
@@ -47,13 +48,13 @@ class DetailInformationActivity : BaseActivity<ActivityDetailInformationBinding>
             val name: String = snapshot.child("name").getValue(String::class.java)!!
             val phone: String =
                 snapshot.child("phoneNumber").getValue(String::class.java)!!
-            val sex: String = snapshot.child("sex").getValue(String::class.java)!!
+            val gender: String = snapshot.child("gender").getValue(String::class.java)!!
             val checkCm = snapshot.child("checkCm").getValue(Boolean::class.java)!!
             val checkKg = snapshot.child("checkKg").getValue(Boolean::class.java)!!
             val checkLb = snapshot.child("checkLb").getValue(Boolean::class.java)!!
             val checkSt = snapshot.child("checkSt").getValue(Boolean::class.java)!!
-            val weight = snapshot.child("weight").getValue(Int::class.java)!!
-            val height = snapshot.child("height").getValue(Int::class.java)!!
+            val weight = snapshot.child("weight").getValue(Float::class.java)!!
+            val height = snapshot.child("height").getValue(Float::class.java)!!
 
             if (checkCm){
                 heightText = "$height Cm"
@@ -75,7 +76,7 @@ class DetailInformationActivity : BaseActivity<ActivityDetailInformationBinding>
                 binding.txtBattery.text = "$battery%"
                 binding.txtName.text = name
                 binding.txtPhoneNum.text = phone
-                binding.txtSex.text = sex
+                binding.txtSex.text = gender
                 when (battery) {
                     in 1..20 -> {
                         binding.icPin.setImageDrawable(
@@ -132,7 +133,7 @@ class DetailInformationActivity : BaseActivity<ActivityDetailInformationBinding>
                 binding.txtBattery.text = "$battery%"
                 binding.txtName.text = name
                 binding.txtPhoneNum.text = phone
-                binding.txtSex.text = sex
+                binding.txtSex.text = gender
                 when (battery) {
                     in 1..20 -> {
                         binding.icPin.setImageDrawable(
@@ -187,7 +188,7 @@ class DetailInformationActivity : BaseActivity<ActivityDetailInformationBinding>
             btnHealthInformation.setOnClickListener {
                 if (isClick){
                     isClick = false
-                    intentInformation = Intent(this@DetailInformationActivity,RecentActivity::class.java)
+                    intentInformation = Intent(this@DetailInformationActivity,BMIInformationActivity::class.java)
                     intentInformation.putExtra("CODE",code)
                     startActivity(intentInformation)
                     handler.postDelayed({ isClick = true},500)
@@ -196,7 +197,7 @@ class DetailInformationActivity : BaseActivity<ActivityDetailInformationBinding>
             btnBMIInformation.setOnClickListener {
                 if (isClick){
                     isClick = false
-                    intentInformation = Intent(this@DetailInformationActivity,RecentActivity::class.java)
+                    intentInformation = Intent(this@DetailInformationActivity,BMIInformationActivity::class.java)
                     intentInformation.putExtra("CODE",code)
                     startActivity(intentInformation)
                     handler.postDelayed({ isClick = true},500)

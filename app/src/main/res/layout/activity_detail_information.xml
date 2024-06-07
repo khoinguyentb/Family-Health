@@ -64,7 +64,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
 
                     <ImageView
                         android:id="@+id/imgOnline"
@@ -73,7 +74,8 @@
                         android:layout_margin="@dimen/_5sdp"
                         android:src="@drawable/ic_online"
                         app:layout_constraintEnd_toEndOf="@id/imgUser"
-                        app:layout_constraintTop_toTopOf="@id/imgUser" />
+                        app:layout_constraintTop_toTopOf="@id/imgUser"
+                        tools:ignore="ContentDescription" />
 
                     <LinearLayout
                         android:id="@+id/battery"
@@ -92,7 +94,8 @@
                             android:id="@+id/ic_pin"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/_2sdp" />
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            tools:ignore="ContentDescription" />
 
                         <TextView
                             android:id="@+id/txtBattery"

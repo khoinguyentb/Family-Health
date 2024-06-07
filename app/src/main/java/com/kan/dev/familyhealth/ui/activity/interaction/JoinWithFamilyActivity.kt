@@ -219,6 +219,8 @@ class JoinWithFamilyActivity : BaseActivity<ActivityJoinWithFamilyBinding>() {
                                 "checkSt" to checkSt,
                                 "checkLb" to checkLb,
                                 "checkKg" to checkKg,
+                                "weight" to weight,
+                                "height" to height,
                             )
                             if (snapshot.key != sharePre.getString(MY_CODE,"")) {
                                 pushRealtimeData("${sharePre.getString(MY_CODE,"")}/friends/${users["code"]}", users) {

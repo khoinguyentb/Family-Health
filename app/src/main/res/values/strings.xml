@@ -202,6 +202,7 @@
     <string name="Distance">Distance</string>
 
     <string name="Recent">Recent</string>
+
     <string name="Gender">Gender</string>
     <string name="noData">No recent records</string>
     <string name="NoChartData">No Chart Data</string>
@@ -248,6 +249,7 @@
 
     <string name="search_for_friends_on_the_map">Search for friends on the map</string>
     <string name="add_friend">Add Friend</string>
+    <string name="Friend">Friend</string>
     <string name="view_more">View More</string>
     <string name="near_by_place">Near By Place</string>
     <string name="header_warning_permission">Warning permission</string>
