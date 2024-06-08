@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 
 
 @Dao
-interface FriendDAO  {
+interface FriendDAO {
     @get:Query("SELECT * FROM friend")
     val all: Flow<List<FriendModel>>
 
@@ -30,4 +30,7 @@ interface FriendDAO  {
 
     @Query("DELETE FROM friend WHERE code = :code")
     fun deleteUserByCode(code: String)
+
+    @Query("DELETE FROM friend")
+    fun deleteAll()
 }

@@ -43,5 +43,13 @@ class BMIRepository @Inject constructor (private val dao: BMIDao) {
             dao.delete(bmi)
         }
     }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteAll() {
+        withContext(Dispatchers.IO) {
+            dao.deleteAll()
+        }
+    }
 }
 

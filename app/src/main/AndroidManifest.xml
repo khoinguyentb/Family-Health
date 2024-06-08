@@ -32,6 +32,9 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.authen.ForgetPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.BMI.BMIInformationActivity"
             android:exported="false" />
         <activity

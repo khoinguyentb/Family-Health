@@ -124,10 +124,13 @@
 
     <string name="SignInNow">Sign in now</string>
     <string name="PleaseSignIn">Please sign in to continue our app</string>
-    <string name="hintUserName">Enter your username or phone number</string>
+    <string name="ResetPass">Reset Password</string>
+    <string name="Forget">Retrieve your password if you have forgotten it</string>
+    <string name="hintUserName">Enter your email…</string>
     <string name="hintPass">Enter your password</string>
-    <string name="ForgetPassword">Forget Password?</string>
+    <string name="ForgetPassword"><u>Forget Password?</u></string>
     <string name="SignIn">Sign In</string>
+    <string name="Reset">Reset</string>
     <string name="DontHave">Don’t have an account?</string>
     <string name="SignUp"> <u><i>Sign up </i></u></string>
     <string name="AlreadyHave">Already have an account</string>
@@ -135,7 +138,8 @@
     <string name="SignUp1">Sign up</string>
     <string name="SignUpNow">Sign up now</string>
     <string name="PleaseSignUp">Please fill the details and create account</string>
-
+    <string name="CheckMail">Check your email to change your password.</string>
+    <string name="EmailValid">Your email is not valid</string>
     <string name="PhoneNumber">Phone Number</string>
     <string name="hintEnterPhone">Enter your phone number</string>
 

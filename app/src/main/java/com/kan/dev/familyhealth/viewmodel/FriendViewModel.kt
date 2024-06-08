@@ -54,6 +54,12 @@ class FriendViewModel @Inject constructor(
         }
     }
 
+    fun deleteAll() {
+        viewModelScope.launch {
+            repository.deleteAll()
+        }
+    }
+
     fun deleteById(code:String) {
         viewModelScope.launch {
             repository.deleteFriendById(code)

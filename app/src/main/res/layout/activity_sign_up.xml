@@ -27,7 +27,7 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgBack" />
+        app:layout_constraintTop_toBottomOf="@id/imgBack"/>
     
     <TextView
         android:id="@+id/des"
@@ -81,17 +81,35 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 style="@style/poppins_14"/>
 
-            <EditText
-                android:id="@+id/edtPass"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_38sdp"
-                android:hint="@string/hintPassWord"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:textColor="@color/white"
-                android:inputType="textPassword"
-                android:textColorHint="#66FFFFFF"
-                android:paddingHorizontal="@dimen/_10sdp"
-                android:background="@drawable/bg_language_selector"/>
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edtPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_38sdp"
+                    android:hint="@string/hintPassWord"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textColor="@color/white"
+                    android:inputType="textPassword"
+                    android:textColorHint="#66FFFFFF"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:background="@drawable/bg_language_selector"
+                    tools:ignore="Autofill" />
+
+                <ImageView
+                    android:id="@+id/icShowPass"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:src="@drawable/hide_pass"
+                    tools:ignore="ContentDescription" />
+            </RelativeLayout>
+
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -101,17 +119,33 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 style="@style/poppins_14"/>
 
-            <EditText
-                android:id="@+id/edtConFirmPass"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_38sdp"
-                android:hint="@string/hintConfirmPass"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:textColor="@color/white"
-                android:inputType="textPassword"
-                android:textColorHint="#66FFFFFF"
-                android:paddingHorizontal="@dimen/_10sdp"
-                android:background="@drawable/bg_language_selector"/>
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edtConFirmPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_38sdp"
+                    android:hint="@string/hintConfirmPass"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textColor="@color/white"
+                    android:inputType="textPassword"
+                    android:textColorHint="#66FFFFFF"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:background="@drawable/bg_language_selector"
+                    tools:ignore="Autofill" />
+
+                <ImageView
+                    android:id="@+id/icShowPassConfirm"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:src="@drawable/hide_pass"
+                    tools:ignore="ContentDescription" />
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/btnSignUp"
@@ -124,8 +158,7 @@
                 android:textColor="@color/white"
                 style="@style/poppinsBold_16"
                 android:paddingHorizontal="@dimen/_30sdp"
-                android:paddingVertical="@dimen/_10sdp" />
-
+                android:paddingVertical="@dimen/_10sdp"/>
 
             <LinearLayout
                 android:layout_marginTop="@dimen/_10sdp"
@@ -151,7 +184,5 @@
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

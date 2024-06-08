@@ -91,8 +91,16 @@ dependencies {
     implementation 'androidx.activity:activity-ktx:1.8.2'
 
     def room_version = "2.5.0"
-    implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
+    // Room components
+    implementation "androidx.room:room-runtime:2.5.0"
+    annotationProcessor "androidx.room:room-compiler:2.5.0"
+
+    // Room RxJava3 support
+    implementation "androidx.room:room-rxjava3:2.5.0"
+
+    // RxJava3 dependencies
+    implementation "io.reactivex.rxjava3:rxjava:3.0.0"
+    implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
     implementation "androidx.room:room-ktx:$room_version"
 // To use Kotlin annotation processing tool (kapt)
     kapt "androidx.room:room-compiler:$room_version"

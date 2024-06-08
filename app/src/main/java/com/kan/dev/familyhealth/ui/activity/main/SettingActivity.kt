@@ -44,7 +44,11 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(),ISettingClickList
     }
 
     override fun initListener() {
-        
+        binding.apply {
+            icBack.setOnClickListener {
+                finish()
+            }
+        }
     }
 
     override fun clickItemSetting(image: Int) {

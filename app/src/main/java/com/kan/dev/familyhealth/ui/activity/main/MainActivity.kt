@@ -5,9 +5,13 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Build
+import android.util.Log
 import androidx.activity.viewModels
 import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.data.RealtimeDAO
+import com.kan.dev.familyhealth.data.model.BMI
+import com.kan.dev.familyhealth.data.model.FriendModel
+import com.kan.dev.familyhealth.data.model.HealthyModel
 import com.kan.dev.familyhealth.databinding.ActivityMainBinding
 import com.kan.dev.familyhealth.service.InternetBroadcastReceiver
 import com.kan.dev.familyhealth.service.LocationUpdateService
@@ -15,10 +19,12 @@ import com.kan.dev.familyhealth.service.LocationUpdateService.Companion.isServic
 import com.kan.dev.familyhealth.ui.activity.BMI.BMIActivity
 import com.kan.dev.familyhealth.ui.activity.ExerciseActivity
 import com.kan.dev.familyhealth.ui.activity.gps.GPSActivity
+import com.kan.dev.familyhealth.utils.Code
 import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.viewmodel.FriendViewModel
+import com.kan.dev.familyhealth.viewmodel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
 import java.util.HashMap
@@ -32,7 +38,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private val viewModel : FriendViewModel by viewModels()
     private lateinit var myCode : String
     private var runnable: Runnable? = null
-
+    private val viewModelSign : SignInViewModel by viewModels()
     private var avtId = 0
     private var battery = 0
     private var name = ""
@@ -48,6 +54,54 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun initData() {
         receiver = InternetBroadcastReceiver()
         myCode = sharePre.getString(MY_CODE,"")!!
+        RealtimeDAO.initRealtimeData()
+
+        try {
+            RealtimeDAO.getRealtimeData("$myCode/healthys") { snapshot ->
+                viewModelSign.deleteAllHealthy()
+                for (dataSnapshot in snapshot!!.children) {
+                    val model = dataSnapshot.getValue(HealthyModel::class.java)
+                    model?.let {
+                        viewModelSign.insertHealthy(model)
+                        Log.d("KanMobile","Kan")
+                    }
+                }
+            }
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
+
+        try {
+            RealtimeDAO.getRealtimeData("$myCode/BMI") { snapshot ->
+                viewModelSign.deleteAllBMI()
+                for (dataSnapshot in snapshot!!.children) {
+                    val model = dataSnapshot.getValue(BMI::class.java)
+                    model?.let {
+                        viewModelSign.insertBMI(model)
+                        Log.d("KanMobile","KanBMI")
+                    }
+                }
+            }
+
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
+
+        try {
+            RealtimeDAO.getRealtimeData("$myCode/friends") { snapshot ->
+                viewModelSign.deleteAllFriend()
+                for (dataSnapshot in snapshot!!.children) {
+                    val model = dataSnapshot.getValue(FriendModel::class.java)
+                    model?.let {
+                        viewModelSign.insertFriend(model)
+                        Log.d("KanMobile","KanFriend")
+                    }
+                }
+            }
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
+
         runnable = object : Runnable {
             override fun run() {
                 getFriend()

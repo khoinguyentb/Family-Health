@@ -61,5 +61,13 @@ class HealthyRepository @Inject constructor(
             dao.delete(healthyModel)
         }
     }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteAll() {
+        withContext(Dispatchers.IO) {
+            dao.deleteAll()
+        }
+    }
     
 }

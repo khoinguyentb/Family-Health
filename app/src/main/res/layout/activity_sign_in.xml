@@ -48,21 +48,38 @@
         android:textColorHint="#CCFFFFFF"
         android:background="@drawable/bg_language_selector"/>
 
-    <EditText
-        android:id="@+id/edtPass"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_38sdp"
-        android:hint="@string/hintPass"
-        android:inputType="textPassword"
-        android:textColor="@color/white"
-        android:maxLines="1"
-        android:paddingHorizontal="@dimen/_10sdp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:textColorHint="#CCFFFFFF"
-        android:background="@drawable/bg_language_selector"/>
+        android:layout_marginTop="@dimen/_10sdp">
+        <EditText
+            android:id="@+id/edtPass"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_38sdp"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:hint="@string/hintPass"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:textColorHint="#CCFFFFFF"
+            android:background="@drawable/bg_language_selector"/>
+
+        <ImageView
+            android:id="@+id/icShowPass"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:src="@drawable/hide_pass" />
+
+    </RelativeLayout>
+
+
 
     <TextView
+        android:id="@+id/btnForgetPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ForgetPassword"

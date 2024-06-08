@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.Flow
 interface BMIDao {
     @get:Query("SELECT * FROM bmi")
     val all: Flow<List<BMI>>
-
     @Query("select * from bmi where id = :month")
     fun getList(month: Int): LiveData<List<BMI>>
 
@@ -30,5 +29,7 @@ interface BMIDao {
 
     @Delete
     fun delete(bmi: BMI)
+    @Query("DELETE FROM bmi")
+    fun deleteAll()
 }
 

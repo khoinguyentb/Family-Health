@@ -6,6 +6,8 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
@@ -14,6 +16,8 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.base.BaseActivity
+import com.kan.dev.familyhealth.data.RealtimeDAO
+import com.kan.dev.familyhealth.data.model.BMI
 import com.kan.dev.familyhealth.data.model.HealthyModel
 import com.kan.dev.familyhealth.databinding.ActivityExerciseBinding
 import com.kan.dev.familyhealth.utils.currentMonth
@@ -47,41 +51,73 @@ class ExerciseActivity : BaseActivity<ActivityExerciseBinding>() {
         return ActivityExerciseBinding.inflate(layoutInflater)
     }
 
+    private var isInformation = false
+    private var code = ""
+    private var listHea : ArrayList<HealthyModel> = ArrayList()
+    @SuppressLint("SetTextI18n")
     override fun initData() {
+        if (intent.hasExtra("CODE")){
+            code = intent.getStringExtra("CODE")!!
+            isInformation = true
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val currentDate = dateFormat.format(Date())
 
+            RealtimeDAO.getRealtimeData("$code/healthys") { snapshot ->
+                for (dataSnapshot in snapshot!!.children) {
+                    val model = dataSnapshot.getValue(HealthyModel::class.java)
+                    model?.let {
+                        listHea.add(it)
+                    }
+                }
+                if (listHea.isNotEmpty()) {
+                    listHea.forEach {
+                        if (it.date == currentDate) {
+                            binding.apply {
+                                tvStep.text = it.steps.toString()
+                                tvDistance.text = it.distance.toString() + getString(R.string.KM)
+                                tvMoving.text = it.calories.toString() + getString(R.string.KCAL)
+                            }
+                        }
+                    }
+                    lineChart(listHea)
+                }
+            }
+        }
     }
 
     @SuppressLint("SetTextI18n")
     override fun initView() {
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val currentDate = dateFormat.format(Date())
-        viewmodel.getItemByDate(currentDate)
-        lifecycleScope.launch {
-            viewmodel.uiStateDate.collect{state ->
-                when (state) {
-                    is UiState.Loading ->{}
-                    is UiState.Success<*> ->{
-                        healthyModel = state.data as HealthyModel
-                        binding.apply {
-                            tvStep.text = healthyModel.stepCount.toString()
-                            tvDistance.text = healthyModel.distance.toString() + getString(R.string.KM)
-                            tvMoving.text = healthyModel.calories.toString() + getString(R.string.KCAL)
+        if (!isInformation){
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val currentDate = dateFormat.format(Date())
+            viewmodel.getItemByDate(currentDate)
+            lifecycleScope.launch {
+                viewmodel.uiStateDate.collect{state ->
+                    when (state) {
+                        is UiState.Loading ->{}
+                        is UiState.Success<*> ->{
+                            healthyModel = state.data as HealthyModel
+                            binding.apply {
+                                tvStep.text = healthyModel.steps.toString()
+                                tvDistance.text = healthyModel.distance.toString() + getString(R.string.KM)
+                                tvMoving.text = healthyModel.calories.toString() + getString(R.string.KCAL)
+                            }
                         }
+                        is UiState.Error -> {}
                     }
-                    is UiState.Error -> {}
                 }
             }
-        }
 
-        lifecycleScope.launch {
-            viewmodel.getAll.collect{state ->
-                when (state) {
-                    is UiState.Loading ->{}
-                    is UiState.Success<*> ->{
-                        listHealthy = state.data as MutableList<HealthyModel>
-                        lineChart(listHealthy)
+            lifecycleScope.launch {
+                viewmodel.getAll.collect{state ->
+                    when (state) {
+                        is UiState.Loading ->{}
+                        is UiState.Success<*> ->{
+                            listHealthy = state.data as MutableList<HealthyModel>
+                            lineChart(listHealthy)
+                        }
+                        is UiState.Error -> {}
                     }
-                    is UiState.Error -> {}
                 }
             }
         }
@@ -112,7 +148,7 @@ class ExerciseActivity : BaseActivity<ActivityExerciseBinding>() {
                 Log.d("Kan", "Month :$months")
                 if (months == currentMonth) {
                     x = time.substring(time.lastIndexOf('-') + 1).toFloat()
-                    y = it.stepCount.toFloat()
+                    y = it.steps.toFloat()
                     values.add(Entry(x!!, y!!))
 
                     groupedByX.clear()
@@ -122,7 +158,6 @@ class ExerciseActivity : BaseActivity<ActivityExerciseBinding>() {
                             groupedByX[entry.x] = entriesWithSameX as ArrayList<Entry>
                         }
                     }
-
                     result.clear()
                     for ((key, entriesWithSameX) in groupedByX) {
                         val averageY = entriesWithSameX.map { it.y.toDouble() }.average().let {

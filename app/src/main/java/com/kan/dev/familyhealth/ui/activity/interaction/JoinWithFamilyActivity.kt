@@ -214,6 +214,7 @@ class JoinWithFamilyActivity : BaseActivity<ActivityJoinWithFamilyBinding>() {
                                 "statusSos" to true,
                                 "isTracking" to isTracking,
                                 "lastActive" to lastActive,
+                                "dateOfBirth" to dateOfBirth,
                                 "online" to true,
                                 "checkCm" to checkCm,
                                 "checkSt" to checkSt,

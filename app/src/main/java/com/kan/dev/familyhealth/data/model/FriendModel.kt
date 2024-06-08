@@ -8,7 +8,7 @@ import java.io.Serializable
 
 @Entity (tableName = "friend")
 data class FriendModel(
-    val code: String,
+    var code: String,
     var avt: Int,
     var battery: Int,
     var name: String,
@@ -33,4 +33,6 @@ data class FriendModel(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Int = 0
+    constructor() : this("",0,0,"",0f,0f,"","","","",true,true,true,true,
+        "",true,true,true,true,0L,true)
 }

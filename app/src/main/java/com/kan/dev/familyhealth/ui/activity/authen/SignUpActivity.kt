@@ -1,6 +1,7 @@
 package com.kan.dev.familyhealth.ui.activity.authen
 
 import android.app.ProgressDialog
+import android.text.InputType
 import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
@@ -23,7 +24,8 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
     private var email : String = ""
     private var pass : String = ""
     private var conFirmPass : String = ""
-
+    private var isPasswordVisible: Boolean = false
+    private var isPasswordConfirmVisible: Boolean = false
     override fun initData() {
         auth = FirebaseAuth.getInstance()
     }
@@ -46,6 +48,30 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
             }
             btnSignIn.setOnClickListener {
                 finish()
+            }
+
+            icShowPass.setOnClickListener {
+                if (isPasswordVisible) {
+                    edtPass.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                    icShowPass.setImageResource(R.drawable.hide_pass)
+                } else {
+                    edtPass.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                    icShowPass.setImageResource(R.drawable.show_pass)
+                }
+                edtPass.setSelection(edtPass.text.length)
+                isPasswordVisible = !isPasswordVisible
+            }
+
+            icShowPassConfirm.setOnClickListener {
+                if (isPasswordConfirmVisible) {
+                    edtConFirmPass.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                    icShowPassConfirm.setImageResource(R.drawable.hide_pass)
+                } else {
+                    edtConFirmPass.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                    icShowPassConfirm.setImageResource(R.drawable.show_pass)
+                }
+                edtConFirmPass.setSelection(edtConFirmPass.text.length)
+                isPasswordConfirmVisible = !isPasswordConfirmVisible
             }
         }
     }

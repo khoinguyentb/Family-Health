@@ -59,6 +59,11 @@ class BMIInformationActivity : BaseActivity<ActivityBmiinformationBinding>(), IB
     }
 
     override fun initListener() {
+        binding.apply {
+            icBack.setOnClickListener {
+                finish()
+            }
+        }
         
     }
 

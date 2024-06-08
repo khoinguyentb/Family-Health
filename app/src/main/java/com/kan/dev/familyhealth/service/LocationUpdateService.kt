@@ -51,7 +51,7 @@ class LocationUpdateService : Service(), SensorEventListener {
     @Inject
     lateinit var sharePre : SharePreferencesUtils
     private lateinit var myCode : String
-
+    private var initialStepCount: Int = 0
     private val sensorManager: SensorManager by lazy {
         getSystemService(Context.SENSOR_SERVICE) as SensorManager
     }
@@ -64,6 +64,7 @@ class LocationUpdateService : Service(), SensorEventListener {
     private var distanceInMeters = 0f
     private var distanceInKm = 0f
     private var caloriesBurned = 0f
+    private var savedDate = ""
     override fun onCreate() {
         super.onCreate()
         initRealtimeData()
@@ -76,8 +77,6 @@ class LocationUpdateService : Service(), SensorEventListener {
         myCode = sharePre.getString(MY_CODE,"")!!
         runnable = object : Runnable {
             override fun run() {
-                dateFormat = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault())
-                currentDate = dateFormat.format(Date())
                 getCurrentLocation(applicationContext) { latLng ->
                     Log.e("Kano", myCode)
                     battery = batteryLevel
@@ -92,7 +91,6 @@ class LocationUpdateService : Service(), SensorEventListener {
             }
         }
     }
-
     @get:RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private val batteryLevel: Int
         get() {
@@ -127,11 +125,9 @@ class LocationUpdateService : Service(), SensorEventListener {
             .setSmallIcon(R.drawable.logo)
         return builder.build()
     }
-
     override fun onBind(intent: Intent): IBinder? {
         return null
     }
-
     companion object {
         private const val NOTIFICATION_ID = 123
         fun isServiceRunning(context: Context?): Boolean {
@@ -150,17 +146,26 @@ class LocationUpdateService : Service(), SensorEventListener {
 
     override fun onSensorChanged(event: SensorEvent?) {
         if (event?.sensor?.type == Sensor.TYPE_STEP_COUNTER) {
-            stepCount = event.values[0].toInt()
+            dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            currentDate = dateFormat.format(Date())
+            if (savedDate != currentDate) {
+                initialStepCount = event.values[0].toInt()
+                saveCurrentState(initialStepCount, currentDate)
+            }
+            initialStepCount = sharePre.getInt("PREF_INITIAL_STEP_COUNT", 0)
+            stepCount = event.values[0].toInt() - initialStepCount
             distanceInMeters = (stepCount * 0.762).toFloat()
             distanceInKm = distanceInMeters / 1000
             caloriesBurned = (stepCount * 0.05).toFloat()
-
             distanceInKm = Math.round(distanceInKm*100)/100.toFloat()
             caloriesBurned = Math.round(caloriesBurned*100)/100.toFloat()
             viewModel.createOrUpdateRecordForCurrentDate(stepCount,distanceInKm,caloriesBurned)
-
-
         }
+    }
+
+    private fun saveCurrentState(initialStepCount: Int, currentDate: String) {
+        sharePre.putInt("PREF_INITIAL_STEP_COUNT", initialStepCount)
+        sharePre.putString("PREF_DATE", currentDate)
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {

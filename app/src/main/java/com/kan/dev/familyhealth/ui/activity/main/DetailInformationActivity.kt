@@ -10,6 +10,7 @@ import com.kan.dev.familyhealth.data.RealtimeDAO
 import com.kan.dev.familyhealth.databinding.ActivityDetailInformationBinding
 import com.kan.dev.familyhealth.ui.activity.BMI.BMIInformationActivity
 import com.kan.dev.familyhealth.ui.activity.BMI.RecentActivity
+import com.kan.dev.familyhealth.ui.activity.ExerciseActivity
 import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
@@ -188,7 +189,7 @@ class DetailInformationActivity : BaseActivity<ActivityDetailInformationBinding>
             btnHealthInformation.setOnClickListener {
                 if (isClick){
                     isClick = false
-                    intentInformation = Intent(this@DetailInformationActivity,BMIInformationActivity::class.java)
+                    intentInformation = Intent(this@DetailInformationActivity,ExerciseActivity::class.java)
                     intentInformation.putExtra("CODE",code)
                     startActivity(intentInformation)
                     handler.postDelayed({ isClick = true},500)

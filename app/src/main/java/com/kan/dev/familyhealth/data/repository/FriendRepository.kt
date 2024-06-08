@@ -52,4 +52,12 @@ class FriendRepository @Inject constructor(
             dao.deleteUserByCode(code)
         }
     }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteAll() {
+        withContext(Dispatchers.IO) {
+            dao.deleteAll()
+        }
+    }
 }

@@ -31,4 +31,6 @@ interface HealthyDao {
 
     @Delete
     fun delete(healthyModel: HealthyModel)
+    @Query("DELETE FROM healthy")
+    fun deleteAll()
 }
