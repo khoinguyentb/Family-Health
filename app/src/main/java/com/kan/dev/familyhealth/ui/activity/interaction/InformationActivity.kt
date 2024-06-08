@@ -103,21 +103,6 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>(), IDateCli
                 if (snapshot!!.exists()) code = generateMyCode()
             })
 
-            val qrCodeWidthAndHeight = 500
-            val tempFile = File(externalCacheDir, "qr_code.png")
-
-            try {
-                val bitmap: Bitmap = generateQRCode(applicationContext, code, qrCodeWidthAndHeight)
-                val outputStream = FileOutputStream(tempFile)
-                bitmap.compress(Bitmap.CompressFormat.PNG, 80, outputStream)
-                outputStream.flush()
-                outputStream.close()
-                sharePre.putString(KEY_QR_BITMAP, tempFile.path)
-            } catch (e: WriterException) {
-                throw RuntimeException(e)
-            } catch (e: IOException) {
-                throw RuntimeException(e)
-            }
         }
     }
 

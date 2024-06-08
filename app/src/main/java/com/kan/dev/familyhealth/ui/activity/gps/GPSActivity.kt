@@ -160,7 +160,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
         Admob.getInstance().loadInterAll(this, getString(R.string.inter_all))
         Admob.getInstance().loadCollapsibleBanner(this, getString(R.string.banner_collap), "bottom")
         initDialog()
-        getFriend()
+//        getFriend()
         getPlace()
         initDialog()
         actionSearchFriend()
@@ -297,7 +297,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             val alert = builder.create()
             alert.show()
         }
-        getFriend()
+//        getFriend()
         initAdapter()
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -1174,82 +1174,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             Log.w("Sos", sosList.size.toString())
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
-        }
-    }
-    private fun getFriend() {
-        viewModel.getAll.observe(this){
-            for (i in it) {
-                getOnetimeData(
-                    myCode + "/friends/" + i.code
-                ) { snapshot1 ->
-                    try {
-                        val visible =
-                            snapshot1!!.child("visible").getValue(Boolean::class.java)!!
-                        if (visible) {
-                            getOnetimeData(i.code) { snapshot ->
-                                val avtId =
-                                    snapshot!!.child("avt").getValue(Int::class.java)!!
-                                val battery =
-                                    snapshot.child("battery").getValue(Int::class.java)!!
-                                val name =
-                                    snapshot.child("name").getValue(String::class.java)
-                                val gender =
-                                    snapshot.child("gender").getValue(String::class.java)
-                                val phoneNumber =
-                                    snapshot.child("phoneNumber").getValue(String::class.java)
-                                val latLng =
-                                    snapshot.child("latLng").getValue(String::class.java)
-                                val lastActive =
-                                    snapshot.child("lastActive").getValue(Long::class.java)
-                                val isTracking =
-                                    snapshot.child("isTracking").getValue(Boolean::class.java)!!
-                                val isSos =
-                                    snapshot.child("isSos").getValue(Boolean::class.java)!!
-
-
-                                if (isTracking) {
-                                    i.avt = avtId
-                                    i.battery = battery
-                                    i.name = name!!
-                                    i.gender = gender!!
-                                    i.phoneNumber = phoneNumber!!
-                                    i.latLng = latLng!!
-                                    i.lastActive = lastActive!!
-                                    i.isSos = isSos
-
-                                    viewModel.update(i)
-
-                                    val friend: MutableMap<String, Any> =
-                                        java.util.HashMap()
-                                    friend["battery"] = battery
-                                    friend["name"] = name
-                                    friend["avt"] = avtId
-                                    friend["phoneNumber"] = phoneNumber
-                                    friend["gender"] = gender
-                                    friend["isTracking"] = isTracking
-                                    friend["isSos"] = isSos
-                                    friend["lastActive"] = lastActive
-                                    friend["latLng"] = latLng
-
-                                    updateRealtimeData(
-                                        myCode + "/friends/" + snapshot.key,
-                                        friend
-                                    ) { _ -> }
-                                } else {
-                                    val friend: MutableMap<String, Any> =
-                                        java.util.HashMap()
-                                    friend["isTracking"] = isTracking
-                                    updateRealtimeData(
-                                        myCode + "/friends/" + snapshot.key,
-                                        friend
-                                    ) { _ -> }
-                                }
-                            }
-                        }
-                    } catch (_: java.lang.Exception) {
-                    }
-                }
-            }
         }
     }
     override fun onDetail(code: String, type: String) {

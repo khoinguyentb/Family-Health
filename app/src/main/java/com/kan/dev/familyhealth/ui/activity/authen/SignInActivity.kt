@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.text.InputType
 import android.util.Log
+import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.android.gms.tasks.OnCompleteListener
@@ -98,35 +99,42 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
                 Toast.LENGTH_SHORT
             ).show()
         }else{
-            dialog.show()
-            auth.signInWithEmailAndPassword(email, pass)
-                .addOnCompleteListener(
-                    this,
-                    OnCompleteListener<AuthResult?> { task ->
-                        dialog.dismiss()
-                        if (task.isSuccessful) {
-                            user = FirebaseAuth.getInstance().currentUser!!
-                            Log.d("KanMobile",user.displayName.toString())
-                            intent = if (user.displayName != null){
-                                sharePre.putString(MY_CODE,user.displayName)
-                                Code = user.displayName!!
-                                Intent(this@SignInActivity, MainActivity::class.java)
-                            }else{
-                                Intent(this@SignInActivity, InformationActivity::class.java)
+            if (Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                dialog.show()
+                auth.signInWithEmailAndPassword(email, pass)
+                    .addOnCompleteListener(
+                        this,
+                        OnCompleteListener<AuthResult?> { task ->
+                            dialog.dismiss()
+                            if (task.isSuccessful) {
+                                user = FirebaseAuth.getInstance().currentUser!!
+                                Log.d("KanMobile",user.displayName.toString())
+                                intent = if (user.displayName != null){
+                                    sharePre.putString(MY_CODE,user.displayName)
+                                    Code = user.displayName!!
+                                    Intent(this@SignInActivity, MainActivity::class.java)
+                                }else{
+                                    Intent(this@SignInActivity, InformationActivity::class.java)
+                                }
+                                Toast.makeText(
+                                    this@SignInActivity, getString(R.string.LoggedSuccessfully),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                Toast.makeText(
+                                    this@SignInActivity, getString(R.string.IncorrectSign),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
-                            Toast.makeText(
-                                this@SignInActivity, getString(R.string.LoggedSuccessfully),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            startActivity(intent)
-                            finish()
-                        } else {
-                            Toast.makeText(
-                                this@SignInActivity, getString(R.string.IncorrectSign),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    })
+                        })
+                true
+            }else{
+                Toast.makeText(this,getString(R.string.EmailValid),Toast.LENGTH_SHORT).show()
+                false
+            }
+
         }
     }
 }

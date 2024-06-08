@@ -4,20 +4,25 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Handler
 import android.view.Gravity
 import android.widget.Toast
 import androidx.core.content.FileProvider
+import com.google.zxing.WriterException
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.databinding.ActivityShareInformationBinding
 import com.kan.dev.familyhealth.utils.KEY_QR_BITMAP
 import com.kan.dev.familyhealth.utils.MY_CODE
+import com.kan.dev.familyhealth.utils.generateQRCode
 import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.utils.toastDuration
 import com.lvt.ads.util.AppOpenManager
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 class ShareInformationActivity : BaseActivity<ActivityShareInformationBinding>() {
     override fun setViewBinding(): ActivityShareInformationBinding {
@@ -44,9 +49,17 @@ class ShareInformationActivity : BaseActivity<ActivityShareInformationBinding>()
             }
 
             binding.txtCode.text = sharePre.getString(MY_CODE,"")
-            //        int qrCodeWidthAndHeight = dpToPx(getApplicationContext(),200);
-            file = File(sharePre.getString(KEY_QR_BITMAP, ""))
-            if (file!!.exists()) binding.imgMyQRCode.setImageURI(Uri.fromFile(file))
+            val qrCodeWidthAndHeight = 500
+            val tempFile = File(externalCacheDir, "qr_code.png")
+
+            try {
+                val bitmap: Bitmap = generateQRCode(applicationContext, sharePre.getString(MY_CODE,""), qrCodeWidthAndHeight)
+                imgMyQRCode.setImageBitmap(bitmap)
+            } catch (e: WriterException) {
+                throw RuntimeException(e)
+            } catch (e: IOException) {
+                throw RuntimeException(e)
+            }
         }
     }
 

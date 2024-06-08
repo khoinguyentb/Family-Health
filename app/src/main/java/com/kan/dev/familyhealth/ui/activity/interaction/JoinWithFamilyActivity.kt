@@ -201,6 +201,7 @@ class JoinWithFamilyActivity : BaseActivity<ActivityJoinWithFamilyBinding>() {
                                 checkKg = checkKg, checkLb = checkLb, checkSt = checkSt)
 
                             val users = hashMapOf<String, Any>(
+                                "id" to 0,
                                 "code" to code,
                                 "avt" to avtId,
                                 "battery" to battery,

@@ -55,7 +55,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         receiver = InternetBroadcastReceiver()
         myCode = sharePre.getString(MY_CODE,"")!!
         RealtimeDAO.initRealtimeData()
-
         try {
             RealtimeDAO.getRealtimeData("$myCode/healthys") { snapshot ->
                 viewModelSign.deleteAllHealthy()

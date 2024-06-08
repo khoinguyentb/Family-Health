@@ -3,6 +3,7 @@ package com.kan.dev.familyhealth.ui.activity.authen
 import android.app.ProgressDialog
 import android.text.InputType
 import android.util.Log
+import android.util.Patterns
 import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
@@ -103,6 +104,12 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
                     true
                 }else{
                     Toast.makeText(this@SignUpActivity,getString(R.string.Passwords_do_not_match),Toast.LENGTH_SHORT).show()
+                    false
+                }
+                if (Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    true
+                }else{
+                    Toast.makeText(this@SignUpActivity,getString(R.string.EmailValid),Toast.LENGTH_SHORT).show()
                     false
                 }
             }
