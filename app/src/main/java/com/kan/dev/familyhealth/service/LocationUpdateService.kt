@@ -58,6 +58,9 @@ class LocationUpdateService : Service(), SensorEventListener {
     private val sensor: Sensor? by lazy {
         sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
     }
+    private val accelerometerSensor: Sensor? by lazy {
+        sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+    }
     private var currentDate: String = ""
     private lateinit var dateFormat : SimpleDateFormat
     private var stepCount = 0
@@ -73,6 +76,8 @@ class LocationUpdateService : Service(), SensorEventListener {
 
         if (sensor != null) {
             sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+        }else if (accelerometerSensor != null) {
+            sensorManager.registerListener(this, accelerometerSensor, SensorManager.SENSOR_DELAY_NORMAL)
         }
         myCode = sharePre.getString(MY_CODE,"")!!
         runnable = object : Runnable {
@@ -146,23 +151,41 @@ class LocationUpdateService : Service(), SensorEventListener {
 
     override fun onSensorChanged(event: SensorEvent?) {
         if (event?.sensor?.type == Sensor.TYPE_STEP_COUNTER) {
-            dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            currentDate = dateFormat.format(Date())
-            if (savedDate != currentDate) {
-                initialStepCount = event.values[0].toInt()
-                saveCurrentState(initialStepCount, currentDate)
-            }
-            initialStepCount = sharePre.getInt("PREF_INITIAL_STEP_COUNT", 0)
-            stepCount = event.values[0].toInt() - initialStepCount
-            distanceInMeters = (stepCount * 0.762).toFloat()
-            distanceInKm = distanceInMeters / 1000
-            caloriesBurned = (stepCount * 0.05).toFloat()
-            distanceInKm = Math.round(distanceInKm*100)/100.toFloat()
-            caloriesBurned = Math.round(caloriesBurned*100)/100.toFloat()
-            viewModel.createOrUpdateRecordForCurrentDate(stepCount,distanceInKm,caloriesBurned)
+            handleStepCount(event.values[0].toInt())
+        } else if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
+            handleAcceleration(event.values)
         }
     }
 
+    private fun handleStepCount(stepCount: Int) {
+        dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        currentDate = dateFormat.format(Date())
+        if (savedDate != currentDate) {
+            initialStepCount = stepCount
+            saveCurrentState(initialStepCount, currentDate)
+        }
+        initialStepCount = sharePre.getInt("PREF_INITIAL_STEP_COUNT", 0)
+        this.stepCount = stepCount - initialStepCount
+        updateStepRelatedInfo()
+    }
+
+    private fun updateStepRelatedInfo() {
+        distanceInMeters = (stepCount * 0.762).toFloat()
+        distanceInKm = distanceInMeters / 1000
+        caloriesBurned = (stepCount * 0.05).toFloat()
+        distanceInKm = Math.round(distanceInKm * 100) / 100.toFloat()
+        caloriesBurned = Math.round(caloriesBurned * 100) / 100.toFloat()
+        viewModel.createOrUpdateRecordForCurrentDate(stepCount, distanceInKm, caloriesBurned)
+    }
+
+
+    private fun handleAcceleration(values: FloatArray) {
+        val acceleration = values.map { it * it }.sum().toDouble().let { Math.sqrt(it) }
+        val threshold = 10.0
+        if (acceleration > threshold) {
+            handleStepCount(stepCount + 1)
+        }
+    }
     private fun saveCurrentState(initialStepCount: Int, currentDate: String) {
         sharePre.putInt("PREF_INITIAL_STEP_COUNT", initialStepCount)
         sharePre.putString("PREF_DATE", currentDate)
