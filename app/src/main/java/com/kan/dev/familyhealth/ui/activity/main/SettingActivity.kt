@@ -63,6 +63,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(),ISettingClickList
                     shareApp(this)
                 }
                 R.drawable.rate -> {
+                    dialogRate = DialogRate(this,this)
                     dialogRate.show()
                 }
                 R.drawable.version -> {
@@ -73,7 +74,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(),ISettingClickList
                     startActivity(Intent(this, SignInActivity::class.java))
                     finishAffinity()
                 }
-                R.drawable.ic_add_friend -> {
+                R.drawable.friend -> {
                     startActivity(Intent(this, FriendActivity::class.java))
                 }
             }

@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Next">अगला</string>
+    <string name="desSplash">इस क्रिया में विज्ञापन हो सकते हैं</string>
+    <string name="splash">इस क्रिया में विज्ञापन हो सकते हैं</string>
+    <string name="Language">भाषा</string>
+    <string name="NormalWeight">सामान्य वजन</string>
+    <string name="Difference">अंतर</string>
+    <string name="BodyComposition">शारीरिक संरचना</string>
+    <string name="Calculator">कैलकुलेटर</string>
+    <string name="Permission">अनुमति</string>
+    <string name="titleIntro1" translatable="false">बीएमआई कैलकुलेटर</string>
+    <string name="titleIntro2">सांख्यिकी</string>
+    <string name="titleIntro3">डेटा सहेजें</string>
+    <string name="Female">महिला</string>
+    <string name="Male">पुरुष</string>
+    <string name="Age">आयु</string>
+    <string name="Height">ऊंचाई :</string>
+    <string name="Weight">वजन :</string>
+    <string name="bmi_error">कृपया वास्तविक मान दर्ज करें</string>
+    <string name="desIntro1">अपने वजन और ऊंचाई की जानकारी का उपयोग करके, आप आसानी से अपने बॉडी मास इंडेक्स की गणना कर सकते हैं और अपनी स्थिति देख सकते हैं</string>
+    <string name="desIntro2">गणना किए गए डेटा के सांख्यिकी की अनुमति देता है। और आपकी सभी जानकारी गोपनीय रखी जाती है</string>
+    <string name="desIntro3">अपनी जानकारी सहेजें और जब चाहें इसे एक्सेस करें</string>
+    <string name="Exercise">व्यायाम</string>
+    <string name="BMI">बीएमआई</string>
+    <string name="MAP">MAP</string>
+
+    <string name="Year">वर्ष</string>
+    <string name="Month">महीना</string>
+    <string name="Day">दिन</string>
+    <string name="Ok">ठीक है</string>
+    <string name="Statistics">सांख्यिकी</string>
+    <string name="Daily">दैनिक</string>
+    <string name="Weekly">साप्ताहिक</string>
+    <string name="Monthly">मासिक</string>
+    <string name="Update">अपडेट</string>
+
+
+    <string name="Adults">वयस्क</string>
+    <string name="Teenagers">किशोर</string>
+    <string name="Date">तारीख</string>
+
+    <string name="Notification">सूचना</string>
+    <string name="Camera">कैमरा</string>
+    <string name="Location">स्थान</string>
+    <string name="permission13">सूचना का उपयोग करने के लिए अनुमति की आवश्यकता है।</string>
+    <string name="permissionOther">संग्रहण का उपयोग करने के लिए अनुमति की आवश्यकता है।</string>
+    <string name="Continue">जारी रखें</string>
+    <string name="setting">सेटिंग</string>
+    <string name="Agree">सहमत</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="title_dialog_permission">सुविधा की अनुमति</string>
+    <string name="content_dialog_permission">आपने संग्रहण और अधिसूचना की अनुमति फिर से न माँगने का विकल्प चुना है। कृपया अनुमति देने के लिए ऐप सेटिंग पर जाएँ।</string>
+
+    //rate
+    <string name="title_rate_0">क्या आपको ऐप पसंद आया?</string>
+    <string name="des_rate_0">हमें अपना अनुभव बताएँ</string>
+
+    <string name="title_rate_1">ओह, नहीं!</string>
+    <string name="des_rate_1">कृपया हमें कुछ प्रतिक्रिया दें</string>
+
+    <string name="title_rate_2">ओह, नहीं!</string>
+    <string name="des_rate_2">कृपया हमें कुछ प्रतिक्रिया दें</string>
+
+    <string name="title_rate_3">ओह, नहीं!</string>
+    <string name="des_rate_3">कृपया हमें कुछ प्रतिक्रिया दें</string>
+
+    <string name="title_rate_4">हम भी आपसे प्यार करते हैं!</string>
+    <string name="des_rate_4">आपकी प्रतिक्रिया के लिए धन्यवाद</string>
+
+    <string name="title_rate_5">हम भी आपसे प्यार करते हैं!</string>
+    <string name="des_rate_5">आपकी प्रतिक्रिया के लिए धन्यवाद</string>
+    <string name="btn_rate">रेट करें</string>
+    <string name="btn_exit">बाहर निकलें</string>
+
+    <string name="very_Severely_underweight">बहुत गंभीर रूप से कम वजन</string>
+    <string name="tv_154">&lt; 15.4</string>
+    <string name="tv_154_255">15.4 – 25.5</string>
+    <string name="tv_226_263">22.6 – 26.3</string>
+    <string name="tv_264">&gt;= 26.4</string>
+
+
+    <string name="tv_16">&lt; 16</string>
+    <string name="severely_underweight">गंभीर रूप से कम वजन</string>
+    <string name="tv_16_169">16.0 – 16.9</string>
+    <string name="underweight">कम वजन</string>
+    <string name="tv_17_184">17.0 – 18.4</string>
+    <string name="normal">सामान्य</string>
+    <string name="tv_185_249">18.5 – 24.9</string>
+    <string name="overweight">अधिक वजन</string>
+    <string name="tv_25_299">25.0 – 29.9</string>
+    <string name="obese_Class_I">मोटापा वर्ग I</string>
+    <string name="tv_30_349">30.0 – 34.9</string>
+    <string name="obese_Class_II">मोटापा वर्ग II</string>
+    <string name="tv_35_399">35.0 – 39.9</string>
+    <string name="obese_class_III">मोटापा वर्ग III</string>
+    <string name="tv_40">&gt;= 40.0</string>
+
+    <string name="About">लगभग</string>
+    <string name="BMIForAdults">वयस्कों के लिए BMI</string>
+    <string name="BMIForAdults1">(>21 वर्ष की आयु)</string>
+    <string name="BMIForTeenagers">किशोरों के लिए BMI</string>
+    <string name="BMIForTeenagers1">(&lt;=20 वर्ष की आयु)</string>
+    <string name="Save">सहेजें</string>
+
+    <string name="Centimeter">सेंटीमीटर</string>
+    <string name="Feet">फीट</string>
+    <string name="Kilogram">किलोग्राम</string>
+    <string name="Stone">स्टोन</string>
+    <string name="Pound">पाउंड</string>
+
+    <string name="SavedSuccessfully">सफलतापूर्वक सहेजा गया</string>
+    <string name="DeleteConfirm">हटाएँ पुष्टि करें</string>
+    <string name="desDelete">क्या आप वाकई इस रिकॉर्ड को हटाना चाहते हैं?</string>
+    <string name="Delete">मिटाएँ</string>
+
+    <string name="SignInNow">अभी साइन इन करें</string>
+    <string name="PleaseSignIn">कृपया हमारे ऐप को जारी रखने के लिए साइन इन करें</string>
+    <string name="ResetPass">पासवर्ड रीसेट करें</string>
+    <string name="Forget">अगर आप अपना पासवर्ड भूल गए हैं तो उसे पुनः प्राप्त करें</string>
+    <string name="hintUserName">अपना ईमेल दर्ज करें…</string>
+    <string name="hintPass">अपना पासवर्ड दर्ज करें</string>
+    <string name="ForgetPassword"><u>पासवर्ड भूल गए?</u></string>
+    <string name="SignIn">साइन इन करें</string>
+    <string name="Reset">रीसेट करें</string>
+    <string name="DontHave">क्या आपके पास खाता नहीं है?</string>
+    <string name="SignUp"><u><i>साइन अप करें</i></u></string>
+    <string name="AlreadyHave">क्या आपके पास पहले से ही खाता है</string>
+    <string name="SignIn1"><u><i>साइन इन करें</i></u></string>
+    <string name="SignUp1">साइन अप करें</string>
+    <string name="SignUpNow">अभी साइन अप करें</string>
+    <string name="PleaseSignUp">कृपया विवरण भरें और खाता बनाएँ</string>
+    <string name="CheckMail">अपना पासवर्ड बदलने के लिए अपना ईमेल देखें।</string>
+    <string name="EmailValid">आपका ईमेल मान्य नहीं है</string>
+    <string name="PhoneNumber">फ़ोन नंबर</string>
+    <string name="hintEnterPhone">अपना फ़ोन नंबर दर्ज करें</string>
+
+    <string name="Email">ईमेल:</string>
+    <string name="hintEnterEmail">अपना ईमेल दर्ज करें</string>
+
+    <string name="UserName">उपयोगकर्ता नाम</string>
+    <string name="hintUserName1">अपना उपयोगकर्ता नाम दर्ज करें</string>
+    <string name="PassWord">पासवर्ड</string>
+    <string name="hintPassWord">अपना पासवर्ड दर्ज करें</string>
+    <string name="ConfirmPass">पासवर्ड की पुष्टि करें</string>
+    <string name="hintConfirmPass">अपना पासवर्ड पुष्टि करें</string>
+
+    <string name="SignUpSuccess">साइन अप सफल</string>
+    <string name="SignUpFailed">साइन अप विफल</string>
+    <string name="NoEmpty">आपको सभी जानकारी फ़ील्ड भरनी होंगी</string>
+    <string name="Passwords_do_not_match">पासवर्ड मेल नहीं खाते</string>
+    <string name="provide_information">जानकारी प्रदान करें</string>
+    <string name="avatar">अवतार:</string>
+    <string name="name">नाम:</string>
+    <string name="sex">लिंग:</string>
+    <string name="male">पुरुष</string>
+    <string name="female">महिला</string>
+    <string name="other">अन्य</string>
+    <string name="later">बाद में</string>
+    <string name="save">सहेजें</string>
+    <string name="enter_friend_nickname">अपने मित्र का उपनाम दर्ज करें</string>
+    <string name="write_your_name_here">अपना नाम यहाँ लिखें</string>
+    <string name="input_your_phone_number">अपना फ़ोन नंबर दर्ज करें</string>
+    <string name="over_25_char">अपनी छवि का नाम 25 वर्ण या उससे कम दर्ज करें</string>
+    <string name="invalid_phone_number">अमान्य फ़ोन नंबर!</string>
+    <string name="enter_name">अपना नाम दर्ज करें!</string>
+    <string name="enter_phone_number">अपना फ़ोन नंबर दर्ज करें!</string>
+
+    <string name="tv_Welcome">आपका स्वागत है!</string>
+    <string name="Settings">सेटिंग्स</string>
+    <string name="Share">साझा करें</string>
+    <string name="Rate">हमें रेटिंग दें</string>
+    <string name="Version">संस्करण</string>
+    <string name="LogOut">लॉग आउट करें</string>
+    <string name="DateOfBirth">जन्म तिथि</string>
+    <string name="security_detail">अपने पारिवारिक फ़ोन पर भेजे गए लिंक का अनुसरण करें, पिंगो ऐप इंस्टॉल करें, और कोड दर्ज करें</string>
+    <string name="share_information">जानकारी साझा करें</string>
+
+    <string name="qr_detail">यह कोड पिंगो ऐप को आपके पेरेंटिंग फाइंड योर फ्रेंड ऐप से कनेक्ट कर देगा और सब कुछ काम करना शुरू कर देगा!</string>
+    <string name="share_code">कोड साझा करें</string>
+    <string name="my_security">मेरा कोड</string>
+    <string name="share_qr">QR साझा करें</string>
+    <string name="share_with">इसके साथ साझा करें</string>
+    <string name="download_app">एप्लिकेशन डाउनलोड करें:</string>
+    <string name="start_join">जुड़ना शुरू करें</string>
+    <string name="copied">कॉपी किया गया!</string>
+
+    <string name="join_the_friend">परिवार के साथ जुड़ें</string>
+    <string name="join_friend_title">परिवार के साथ जुड़ने के लिए परिवार कोड दर्ज करें</string>
+    <string name="join_friend_detail">कोड परिवार के उस एप्लिकेशन से प्राप्त किया जा सकता है जिसने कनेक्शन बनाया है</string>
+    <string name="code">कोड</string>
+    <string name="InvalidCode">कोड अमान्य है</string>
+    <string name="join_with_friend">मित्र के साथ सफलतापूर्वक जुड़ें!</string>
+    <string name="invalid_friend_code">मित्र कोड अमान्य है!</string>
+    <string name="Summary"><u><i>सारांश</i></u></string>
+    <string name="Moving">चल रहा है</string>
+    <string name="Step">कदम</string>
+    <string name="Distance">दूरी</string>
+
+    <string name="Recent">हाल ही में</string>
+
+    <string name="Gender">लिंग</string>
+    <string name="noData">कोई हालिया रिकॉर्ड नहीं</string>
+    <string name="NoChartData">कोई चार्ट डेटा नहीं</string>
+    <string name="DeletedSuccessfully">सफलतापूर्वक हटाया गया</string>
+
+    <string name="January">जनवरी</string>
+    <string name="February">फरवरी</string>
+    <string name="March">मार्च</string>
+    <string name="April">अप्रैल</string>
+    <string name="May">मई</string>
+    <string name="June">जून</string>
+    <string name="July">जुलाई</string>
+    <string name="August">अगस्त</string>
+    <string name="September">सितंबर</string>
+    <string name="October">अक्टूबर</string>
+    <string name="November">नवंबर</string>
+    <string name="December">दिसंबर</string>
+    <string name="noStep">चरण काउंटर सेंसर उपलब्ध नहीं है!</string>
+
+    <string name="friend_location">मित्र स्थान</string>
+    <string name="start">शुरू करें</string>
+    <string name="turn_off">बंद करें</string>
+    <string name="enable_sos">क्या आप अन्य डिवाइस के लिए SOS अलर्ट सक्षम करना चाहते हैं?</string>
+    <string name="disable_sos">किसी अन्य डिवाइस पर SOS अलर्ट बंद करने के लिए बटन का चयन करें</string>
+    <string name="stop_sos">आपकी मदद की ज़रूरत है। आकर स्थिति देखें और उनकी मदद करें!</string>
+
+
+    <string name="bank">बैंक</string>
+    <string name="find">ढूंढें</string>
+    <string name="your_position">आपकी स्थिति</string>
+    <string name="detail2">विवरण</string>
+    <string name="address">पता</string>
+
+    <string name="detail"><u>विवरण</u></string>
+    <string name="bus_stop">बस स्टॉप</string>
+    <string name="petrol_station">पेट्रोल स्टेशन</string>
+    <string name="cafe">कैफ़े</string>
+    <string name="cinema">सिनेमा</string>
+    <string name="SELECT_AVATAR">अवतार चुनें</string>
+    <string name="des_Dialog_avt">अपना मनचाहा अवतार चुनें और आपके मित्र इस इंटरफ़ेस को रीयलटाइम ट्रैकर स्क्रीन पर देखेंगे</string>
+    <string name="Save_avatar">अवतार सहेजें</string>
+
+    <string name="coordinates">निर्देशांक</string>
+
+    <string name="search_for_friends_on_the_map">मानचित्र पर मित्रों की खोज करें</string>
+    <string name="add_friend">मित्र जोड़ें</string>
+    <string name="Friend">मित्र</string>
+    <string name="view_more">अधिक देखें</string>
+    <string name="near_by_place">निकटतम स्थान</string>
+    <string name="header_warning_permission">चेतावनी अनुमति</string>
+    <string name="choose_a_map">मानचित्र चुनें</string>
+    <string name="terrain">भूभाग</string>
+    <string name="satellite">उपग्रह</string>
+    <string name="traffic">यातायात</string>
+    <string name="transit">पारगमन</string>
+
+    <string name="connected_yourself">आप पहले ही इस व्यक्ति से जुड़ चुके हैं</string>
+    <string name="qr_code">QR कोड</string>
+    <string name="qr_instruct_2">स्कैनिंग अपने आप शुरू हो जाएगी</string>
+    <string name="qr_instruct_1">क्षेत्र के अंदर QR कोड रखें</string>
+    <string name="qr_struct">अपने प्रियजनों और मित्रों के स्थान को जोड़ने और ट्रैक करने के लिए QR कोड को स्कैन करें</string>
+    <string name="add_code">कोड जोड़ें</string>
+    <string name="add_image">छवि जोड़ें</string>
+    <string name="dialog_location">जारी रखने के लिए, Google स्थान सेवाओं का उपयोग करके डिवाइस स्थान सक्षम करें</string>
+    <string name="no_results">कोई परिणाम नहीं</string>
+    <string name="turn_off_all_notification"><u>सभी सूचनाएँ बंद करें</u></string>
+    <string name="Message_perLocation">यदि आप पृष्ठभूमि स्थान पहुँच सक्षम करते हैं, तो जब आप पृष्ठभूमि में प्रोग्राम चलाएँगे, तब आपका स्थान हमेशा मित्रों के साथ साझा किया जाएगा। जब एप्लिकेशन बंद हो जाएगा या उसका उपयोग नहीं किया जाएगा, तो आपका स्थान समाप्त हो जाएगा। कृपया आगे बढ़ने के लिए सेटिंग्स से इस अनुमति की अनुमति दें।</string>
+
+    <string name="toast_sos">एसओएस सिग्नल भेजने से पहले आपको ट्रैकिंग मोड सक्षम करना होगा</string>
+    <string name="tv_ADD">मुझे जोड़ें</string>
+    <string name="tv_me">फ़ोन नंबर:</string>
+    <string name="phone_number">ट्रैकिंग चालू करें:</string>
+    <string name="turn_on_tracking">नाम बदलें</string>
+    <string name="re_name">अपने दोस्तों के लिए अपना खुद का उपनाम बनाएँ</string>
+    <string name="des_dialog_rename">क्या आप अपने इस दोस्त को हटाना चाहते हैं?</string>
+    <string name="des_dialog_delete">ओह!</string>
+
+    <string name="whoops">कोई इंटरनेट कनेक्शन नहीं मिला। अपना कनेक्शन जांचें या फिर से प्रयास करें।</string>
+    <string name="no_internet">छवि में कोई क्यूआर कोड नहीं मिला</string>
+    <string name="No_QR">छवि से क्यूआर कोड डिकोड करने में त्रुटि</string>
+    <string name="Error_QR">फ़ोन नंबर से उपयोगकर्ता खोजें</string>
+    <string name="find_users_by_phone_number">मित्रों को जोड़ने के लिए क्यूआर कोड स्कैन करें</string>
+    <string name="scan_the_QR_code_to_add_friends">विस्तृत जानकारी</string>
+    <string name="detailed_information">स्वास्थ्य जानकारी</string>
+
+    <string name="HealthInformation">बीएमआई जानकारी</string>
+    <string name="BMIInformation">जीपीएस सेटिंग</string>
+    <string name="GPSSettings">फ़ोन ट्रैकिंग:</string>
+    <string name="phone_tracking">मित्रों से जुड़ने के लिए क्यूआर कोड</string>
+    <string name="qr_for_friends_to_connect">संपादित करेंजानकारी</string>
+    <string name="edit_information">KM</string>
+    <string name="KM">KCAL</string>
+    <string name="KCAL">चार्ट</string>
+    <string name="Chart">ईमेल या पासवर्ड खाली नहीं हो सकता</string>
+    <string name="ToastSignIn">गलत ईमेल या पासवर्ड</string>
+    <string name="IncorrectSign">सफलतापूर्वक लॉग इन किया गया</string>
+    <string name="LoggedSuccessfully">ईमेल पहले से मौजूद है</string>
+    <string name="EmailAlready">undefined</string>
+</resources>

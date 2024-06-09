@@ -33,13 +33,24 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
+        android:id="@+id/img_Back"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_13sdp"
+        android:src="@drawable/arrow_back"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_title_calculator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_title_calculator"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
         android:id="@+id/img_Recent"
         android:layout_width="@dimen/_20sdp"
         android:layout_height="@dimen/_20sdp"
         android:layout_marginStart="@dimen/_13sdp"
         android:src="@drawable/recent"
         app:layout_constraintBottom_toBottomOf="@+id/tv_title_calculator"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img_Back"
         app:layout_constraintTop_toTopOf="@+id/tv_title_calculator"
         tools:ignore="MissingConstraints" />
 

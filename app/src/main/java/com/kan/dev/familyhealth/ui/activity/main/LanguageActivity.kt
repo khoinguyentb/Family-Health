@@ -31,14 +31,15 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>(),LanguageAdapter
     }
     override fun initData() {
         codeLang = viewModel.getCodeLang()
+        Log.d("KanMobile",viewModel.getCodeLang())
         initListLanguage()
         initListener()
     }
 
     override fun initView() {
-        adapter.setCheck(codeLang)
         binding.apply {
             adapter.setItems(Data.languageList)
+            adapter.setCheck(codeLang)
             rcvLanguge.layoutManager = layoutManager
             rcvLanguge.adapter = adapter
         }

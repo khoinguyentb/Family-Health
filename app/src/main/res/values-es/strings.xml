@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Next">Siguiente</string>
+    <string name="desSplash">Esta acción puede contener anuncios</string>
+    <string name="splash">Esta acción puede contener anuncios</string>
+    <string name="Language">Idioma</string>
+    <string name="NormalWeight">Peso normal</string>
+    <string name="Difference">Diferencia</string>
+    <string name="BodyComposition">Composición corporal</string>
+    <string name="Calculator">Calculadora</string>
+    <string name="Permission">Permiso</string>
+    <string name="titleIntro1" translatable="false">Calculadora de IMC</string>
+    <string name="titleIntro2">Estadísticas</string>
+    <string name="titleIntro3">Guardar datos</string>
+    <string name="Female">Mujer</string>
+    <string name="Male">Hombre</string>
+    <string name="Age">Edad</string>
+    <string name="Height">Altura:</string>
+    <string name="Weight">Peso:</string>
+    <string name="bmi_error">Ingrese el valor real</string>
+    <string name="desIntro1">Al utilizar la información de su peso y altura, puede calcular fácilmente su índice de masa corporal y ver su estado</string>
+    <string name="desIntro2">Permite estadísticas de los datos calculados. Y toda su información se mantiene confidencial</string>
+    <string name="desIntro3">Guarde su información y acceda a ella cuando quiera</string>
+    <string name="Exercise">Ejercicio</string>
+    <string name="BMI">IMC</string>
+    <string name="MAP">MAPA</string>
+
+    <string name="Year">Año</string>
+    <string name="Month">Mes</string>
+    <string name="Day">Día</string>
+    <string name="Ok">Aceptar</string>
+    <string name="Statistics">Estadísticas</string>
+    <string name="Daily">Diariamente</string>
+    <string name="Weekly">Semanalmente</string>
+    <string name="Monthly">Mensualmente</string>
+    <string name="Update">Actualizar</string>
+
+
+    <string name="Adults">Adultos</string>
+    <string name="Teenagers">Adolescentes</string>
+    <string name="Date">Fecha</string>
+
+    <string name="Notification">Notificación</string>
+    <string name="Camera">Cámara</string>
+    <string name="Location">Ubicación</string>
+    <string name="permission13">requiere permiso para usar la Notificación.</string>
+    <string name="permissionOther">requiere permiso para usar el Almacenamiento.</string>
+    <string name="Continue">Continuar</string>
+    <string name="setting">Configuración</string>
+    <string name="Agree">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="title_dialog_permission">Permiso de función</string>
+    <string name="content_dialog_permission">Ha elegido no solicitar nuevamente el permiso de almacenamiento y notificación. Vaya a la configuración de la aplicación para otorgar el permiso.</string>
+
+    //rate
+    <string name="title_rate_0">¿Te gusta la aplicación?</string>
+    <string name="des_rate_0">Cuéntanos tu experiencia</string>
+
+    <string name="title_rate_1">¡Oh, no!</string>
+    <string name="des_rate_1">Por favor, danos tu opinión</string>
+
+    <string name="title_rate_2">¡Oh, no!</string>
+    <string name="des_rate_2">Por favor, danos tu opinión</string>
+
+    <string name="title_rate_3">¡Oh, no!</string>
+    <string name="des_rate_3">Por favor, danos tu opinión</string>
+
+    <string name="title_rate_4">¡Nosotros también te queremos!</string>
+    <string name="des_rate_4">Gracias por tus comentarios</string>
+
+    <string name="title_rate_5">¡Nosotros también te queremos!</string>
+    <string name="des_rate_5">Gracias por tus comentarios</string>
+    <string name="btn_rate">Calificar</string>
+    <string name="btn_exit">Salir</string>
+
+    <string name="very_Severely_underweight">Peso muy bajo</string>
+    <string name="tv_154">&lt; 15,4</string>
+    <string name="tv_154_255">15,4 – 25,5</string>
+    <string name="tv_226_263">22,6 – 26,3</string>
+    <string name="tv_264">&gt;= 26,4</string>
+
+
+    <string name="tv_16">&lt; 16</string>
+    <string name="severely_underweight">Peso muy bajo</string>
+    <string name="tv_16_169">16,0 – 16,9</string>
+    <string name="underweight">Peso bajo</string>
+    <string name="tv_17_184">17,0 – 18,4</string>
+    <string name="normal">Normal</string>
+    <string name="tv_185_249">18,5 – 24,9</string>
+    <string name="overweight">Sobrepeso</string>
+    <string name="tv_25_299">25,0 – 29,9</string>
+    <string name="obese_Class_I">Obesidad clase I</string>
+    <string name="tv_30_349">30,0 – 34,9</string>
+    <string name="obese_Class_II">Obesidad clase II</string>
+    <string name="tv_35_399">35,0 – 39,9</string>
+    <string name="obese_class_III">Obesidad clase III</string>
+    <string name="tv_40">&gt;= 40,0</string>
+
+    <string name="About">Acerca de</string>
+    <string name="BMIForAdults">IMC para adultos</string>
+    <string name="BMIForAdults1">(>21 años)</string>
+    <string name="BMIForTeenagers">IMC para adolescentes</string>
+    <string name="BMIForTeenagers1">(&lt;=20 años)</string>
+    <string name="Save">Guardar</string>
+
+    <string name="Centimeter">Centímetro</string>
+    <string name="Feet">Pies</string>
+    <string name="Kilogram">Kilogramo</string>
+    <string name="Stone">Stone</string>
+    <string name="Pound">Libra</string>
+
+    <string name="SavedSuccessfully">Guardado correctamente</string>
+    <string name="DeleteConfirm">Borrar confirmar</string>
+    <string name="desDelete">¿Está seguro de que desea eliminar este registro?</string>
+    <string name="Delete">Eliminar</string>
+
+    <string name="SignInNow">Iniciar sesión ahora</string>
+    <string name="PleaseSignIn">Inicia sesión para continuar con nuestra aplicación</string>
+    <string name="ResetPass">Restablecer contraseña</string>
+    <string name="Forget">Recupera tu contraseña si la has olvidado</string>
+    <string name="hintUserName">Ingresa tu correo electrónico…</string>
+    <string name="hintPass">Ingresa tu contraseña</string>
+    <string name="ForgetPassword"><u>¿Olvidaste tu contraseña?</u></string>
+    <string name="SignIn">Iniciar sesión</string>
+    <string name="Reset">Restablecer</string>
+    <string name="DontHave">¿No tienes una cuenta?</string>
+    <string name="SignUp"><u><i>Regístrate </i></u></string>
+    <string name="AlreadyHave">Ya tienes una cuenta</string>
+    <string name="SignIn1"><u><i>Iniciar sesión </i></u></string>
+    <string name="SignUp1">Regístrate</string>
+    <string name="SignUpNow">Regístrate ahora</string>
+    <string name="PleaseSignUp">Completa los datos y crea una cuenta</string>
+    <string name="CheckMail">Revisa tu correo electrónico para cambiar tu contraseña.</string>
+    <string name="EmailValid">Tu correo electrónico no es válido</string>
+    <string name="PhoneNumber">Número de teléfono</string>
+    <string name="hintEnterPhone">Ingresa tu número de teléfono</string>
+
+    <string name="Email">Correo electrónico:</string>
+    <string name="hintEnterEmail">Ingresa tu correo electrónico</string>
+
+    <string name="UserName">Nombre de usuario</string>
+    <string name="hintUserName1">Ingresa tu nombre de usuario</string>
+    <string name="PassWord">Contraseña</string>
+    <string name="hintPassWord">Ingresa tu contraseña</string>
+    <string name="ConfirmPass">Confirmar contraseña</string>
+    <string name="hintConfirmPass">Confirmar tu contraseña</string>
+
+    <string name="SignUpSuccess">Registro exitoso</string>
+    <string name="SignUpFailed">Registro fallido</string>
+    <string name="NoEmpty">Debes completar todos los campos de información</string>
+    <string name="Passwords_do_not_match">Las contraseñas no coinciden</string>
+    <string name="provide_information">Proporcionar información</string>
+    <string name="avatar">Avatar:</string>
+    <string name="name">Nombre:</string>
+    <string name="sex">Sexo:</string>
+    <string name="male">Masculino</string>
+    <string name="female">Femenino</string>
+    <string name="other">Otro</string>
+    <string name="later">Más tarde</string>
+    <string name="save">Guardar</string>
+    <string name="enter_friend_nickname">Ingresa el apodo de tu amigo</string>
+    <string name="write_your_name_here">Escribe tu nombre aquí</string>
+    <string name="input_your_phone_number">Ingresa tu número de teléfono</string>
+    <string name="over_25_char">Ingresa tu nombre de imagen de 25 caracteres o menos</string>
+    <string name="invalid_phone_number">¡Número de teléfono inválido!</string>
+    <string name="enter_name">¡Ingresa tu nombre!</string>
+    <string name="enter_phone_number">¡Ingresa tu número de teléfono!</string>
+
+    <string name="tv_Welcome">¡Bienvenido nuevamente!</string>
+    <string name="Settings">Configuración</string>
+    <string name="Share">Compartir</string>
+    <string name="Rate">Califícanos</string>
+    <string name="Version">Versión</string>
+    <string name="LogOut">Cerrar sesión</string>
+    <string name="DateOfBirth">Fecha de nacimiento</string>
+    <string name="security_detail">Sigue el enlace enviado a tu teléfono familiar, instala la aplicación pingo e ingresa el código</string>
+    <string name="share_information">Compartir información</string>
+
+    <string name="qr_detail">¡Este código conectará la aplicación pingo con tu aplicación para padres para encontrar amigos y todo comenzará a funcionar!</string>
+    <string name="share_code">Compartir código</string>
+    <string name="my_security">Mi código</string>
+    <string name="share_qr">Compartir QR</string>
+    <string name="share_with">Compartir con</string>
+    <string name="download_app">Descargar aplicación :</string>
+    <string name="start_join">Comenzar a unirse</string>
+    <string name="copied">¡Copiado!</string>
+
+    <string name="join_the_friend">Únase con la familia</string>
+    <string name="join_friend_title">Ingrese el código de la familia para unirse con la familia</string>
+    <string name="join_friend_detail">El código se puede obtener desde la aplicación de la familia que creó la conexión</string>
+    <string name="code">Código</string>
+    <string name="InvalidCode">El código no es válido</string>
+    <string name="join_with_friend">¡Únase con un amigo con éxito!</string>
+    <string name="invalid_friend_code">¡Código de amigo no válido!</string>
+    <string name="Summary"><u><i>Resumen </i></u></string>
+    <string name="Moving">En movimiento</string>
+    <string name="Step">Paso</string>
+    <string name="Distance">Distancia</string>
+
+    <string name="Recent">Reciente</string>
+
+    <string name="Gender">Sexo</string>
+    <string name="noData">No hay registros recientes</string>
+    <string name="NoChartData">No hay datos del gráfico</string>
+    <string name="DeletedSuccessfully">Eliminado correctamente</string>
+
+    <string name="January">Enero</string>
+    <string name="February">Febrero</string>
+    <string name="March">Marzo</string>
+    <string name="April">Abril</string>
+    <string name="May">Mayo</string>
+    <string name="June">Junio</string>
+    <string name="July">Julio</string>
+    <string name="August">Agosto</string>
+    <string name="September">Septiembre</string>
+    <string name="October">Octubre</string>
+    <string name="November">Noviembre</string>
+    <string name="December">Diciembre</string>
+    <string name="noStep">¡El sensor del contador de pasos no está disponible!</string>
+
+    <string name="friend_location">Ubicación del amigo</string>
+    <string name="start">Comenzar</string>
+    <string name="turn_off">Desactivar</string>
+    <string name="enable_sos">¿Quiere habilitar las alertas SOS para otros dispositivos?</string>
+    <string name="disable_sos">Seleccione el botón para desactivar las alertas SOS en otro dispositivo</string>
+    <string name="stop_sos">necesita su ayuda. ¡Venga a ver el estado y ayúdelo!</string>
+
+
+    <string name="bank">Banco</string>
+    <string name="find">Encuentra</string>
+    <string name="your_position">Tu posición</string>
+    <string name="detail2">Detalle</string>
+    <string name="address">Dirección</string>
+
+    <string name="detail"><u>detalle</u></string>
+    <string name="bus_stop">Parada de autobús</string>
+    <string name="petrol_station">Gasolinera</string>
+    <string name="cafe">Cafetería</string>
+    <string name="cinema">Cine</string>
+    <string name="SELECT_AVATAR">SELECCIONA AVATAR</string>
+    <string name="des_Dialog_avt">Elige el avatar que quieras y tus amigos verán esta interfaz en la pantalla de seguimiento en tiempo real</string>
+    <string name="Save_avatar">Guardar avatar</string>
+
+    <string name="coordinates">Coordenadas</string>
+
+    <string name="search_for_friends_on_the_map">Busca amigos en el mapa</string>
+    <string name="add_friend">Añadir amigo</string>
+    <string name="Friend">Amigo</string>
+    <string name="view_more">Ver más</string>
+    <string name="near_by_place">Lugar cercano</string>
+    <string name="header_warning_permission">Permiso de advertencia</string>
+    <string name="choose_a_map">Elige un mapa</string>
+    <string name="terrain">Terreno</string>
+    <string name="satellite">Satélite</string>
+    <string name="traffic">Tráfico</string>
+    <string name="transit">Tránsito</string>
+
+    <string name="connected_yourself">Ya te has conectado con esta persona</string>
+    <string name="qr_code">Código QR</string>
+    <string name="qr_instruct_2">El escaneo comenzará automáticamente</string>
+    <string name="qr_instruct_1">Coloca el código QR dentro del área</string>
+    <string name="qr_struct">Escanea el código QR para conectarte y rastrear la ubicación de tus seres queridos y amigos</string>
+    <string name="add_code">Añadir código</string>
+    <string name="add_image">Añadir imagen</string>
+    <string name="dialog_location">Para continuar, habilita la ubicación del dispositivo mediante los servicios de ubicación de Google</string>
+    <string name="no_results">Sin resultados</string>
+    <string name="turn_off_all_notification"><u>Desactivar todas las notificaciones</u></string>
+    <string name="Message_perLocation">Si habilitas el acceso a la ubicación en segundo plano, tu ubicación siempre se compartirá con tus amigos mientras ejecutas el programa en segundo plano. Tu ubicación se cancelará cuando la aplicación se cierre o no se utilice. Por favor, permite este permiso desde la configuración para continuar.</string>
+
+    <string name="toast_sos">Debes habilitar el modo de seguimiento antes de enviar la señal de sos</string>
+    <string name="tv_ADD">AGREGAR</string>
+    <string name="tv_me">Yo</string>
+    <string name="phone_number">Número de teléfono:</string>
+    <string name="turn_on_tracking">Activar seguimiento:</string>
+    <string name="re_name">Cambiar nombre</string>
+    <string name="des_dialog_rename">Crea tu propio apodo para tus amigos</string>
+    <string name="des_dialog_delete">¿Estás seguro de eliminar a este amigo tuyo?</string>
+
+    <string name="whoops">¡Ups!</string>
+    <string name="no_internet">No se encontró conexión a Internet. Comprueba tu conexión o vuelve a intentarlo.</string>
+    <string name="No_QR">No se encontró ningún código QR en la imagen</string>
+    <string name="Error_QR">Error al decodificar el código QR de la imagen</string>
+    <string name="find_users_by_phone_number">Buscar usuarios por número de teléfono</string>
+    <string name="scan_the_QR_code_to_add_friends">Escanear el código QR para agregar amigos</string>
+    <string name="detailed_information">Información detallada</string>
+
+    <string name="HealthInformation">Información de salud</string>
+    <string name="BMIInformation">Información de IMC</string>
+    <string name="GPSSettings">Configuración de GPS</string>
+    <string name="phone_tracking">Seguimiento de teléfono:</string>
+    <string name="qr_for_friends_to_connect">QR para que los amigos se conecten</string>
+    <string name="edit_information">Editar IInformación</string>
+    <string name="KM">KM</string>
+    <string name="KCAL">KCAL</string>
+    <string name="Chart">Gráfico</string>
+    <string name="ToastSignIn">El correo electrónico o la contraseña no pueden estar en blanco</string>
+    <string name="IncorrectSign">El correo electrónico o la contraseña son incorrectos</string>
+    <string name="LoggedSuccessfully">Se ha iniciado sesión correctamente</string>
+    <string name="EmailAlready">El correo electrónico ya existe</string>
+</resources>

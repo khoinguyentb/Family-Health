@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Next">Berikutnya</string>
+    <string name="desSplash">Tindakan ini dapat berisi iklan</string>
+    <string name="splash">Tindakan ini dapat berisi iklan</string>
+    <string name="Language">Bahasa</string>
+    <string name="NormalWeight">Berat badan normal</string>
+    <string name="Difference">Selisih</string>
+    <string name="BodyComposition">Komposisi Tubuh</string>
+    <string name="Calculator">Kalkulator</string>
+    <string name="Permission">Izin</string>
+    <string name="titleIntro1" translatable="false">Kalkulator BMI</string>
+    <string name="titleIntro2">Statistik</string>
+    <string name="titleIntro3">Simpan Data</string>
+    <string name="Female">Wanita</string>
+    <string name="Male">Pria</string>
+    <string name="Age">Usia</string>
+    <string name="Height">Tinggi Badan :</string>
+    <string name="Weight">Berat Badan :</string>
+    <string name="bmi_error">Silakan masukkan nilai sebenarnya</string>
+    <string name="desIntro1">Dengan menggunakan informasi berat badan dan tinggi badan, Anda dapat dengan mudah menghitung indeks massa tubuh dan melihat status Anda</string>
+    <string name="desIntro2">Memungkinkan statistik data yang dihitung. Dan semua informasi Anda dirahasiakan</string>
+    <string name="desIntro3">Simpan informasi Anda dan akses kapan pun Anda mau</string>
+    <string name="Exercise">Latihan</string>
+    <string name="BMI">BMI</string>
+    <string name="MAP">PETA</string>
+
+    <string name="Year">Tahun</string>
+    <string name="Month">Bulan</string>
+    <string name="Day">Tanggal</string>
+    <string name="Ok">OK</string>
+    <string name="Statistics">Statistik</string>
+    <string name="Daily">Harian</string>
+    <string name="Weekly">Mingguan</string>
+    <string name="Monthly">Bulanan</string>
+    <string name="Update">Pembaruan</string>
+
+
+    <string name="Adults">Dewasa</string>
+    <string name="Teenagers">Remaja</string>
+    <string name="Date">Tanggal</string>
+
+    <string name="Notification">Pemberitahuan</string>
+    <string name="Camera">Kamera</string>
+    <string name="Location">Lokasi</string>
+    <string name="permission13">memerlukan izin untuk menggunakan Pemberitahuan.</string>
+    <string name="permissionOther">memerlukan izin untuk menggunakan Penyimpanan.</string>
+    <string name="Continue">Lanjutkan</string>
+    <string name="setting">Pengaturan</string>
+    <string name="Agree">Setuju</string>
+    <string name="cancel">Batal</string>
+    <string name="title_dialog_permission">Izin Fitur</string>
+    <string name="content_dialog_permission">Anda telah memilih untuk tidak meminta izin penyimpanan dan pemberitahuan lagi. Silakan buka pengaturan aplikasi untuk memberikan izin. Apakah Anda menyukai aplikasi ini?</string>
+
+    //rate
+    <string name="title_rate_0">Beri tahu kami pengalaman Anda</string>
+    <string name="des_rate_0">Oh, tidak!</string>
+
+    <string name="title_rate_1">Tolong beri kami masukan</string>
+    <string name="des_rate_1">Oh, tidak!</string>
+
+    <string name="title_rate_2">Tolong beri kami masukan</string>
+    <string name="des_rate_2">Oh, tidak!</string>
+
+    <string name="title_rate_3">Tolong beri kami masukan</string>
+    <string name="des_rate_3">Kami juga mencintaimu!</string>
+
+    <string name="title_rate_4">Terima kasih atas masukan Anda</string>
+    <string name="des_rate_4">Kami juga mencintaimu!</string>
+
+    <string name="title_rate_5">Terima kasih atas masukan Anda</string>
+    <string name="des_rate_5">Nilai</string>
+    <string name="btn_rate">Keluar</string>
+    <string name="btn_exit">Sangat sangat kurang berat badan</string>
+
+    <string name="very_Severely_underweight">&gt;15,4</string>
+    <string name="tv_154">15,4 – 25,5</string>
+    <string name="tv_154_255">22,6 – 26,3</string>
+    <string name="tv_226_263">&gt;= 26,4</string>
+    <string name="tv_264">&gt; 16</string>
+
+
+    <string name="tv_16">Sangat kurus</string>
+    <string name="severely_underweight">16,0 – 16,9</string>
+    <string name="tv_16_169">Kurang berat badan</string>
+    <string name="underweight">17,0 – 18,4</string>
+    <string name="tv_17_184">Normal</string>
+    <string name="normal">18,5 – 24,9</string>
+    <string name="tv_185_249">Kelebihan berat badan</string>
+    <string name="overweight">25,0 – 29,9</string>
+    <string name="tv_25_299">Obesitas Kelas I</string>
+    <string name="obese_Class_I">30,0 – 34,9</string>
+    <string name="tv_30_349">Obesitas Kelas II</string>
+    <string name="obese_Class_II">35,0 – 39,9</string>
+    <string name="tv_35_399">Obesitas Kelas III</string>
+    <string name="obese_class_III">&gt;= 40,0</string>
+    <string name="tv_40">Tentang</string>
+
+    <string name="About">BMI untuk Dewasa</string>
+    <string name="BMIForAdults">(>21 tahun)</string>
+    <string name="BMIForAdults1">BMI untuk Remaja</string>
+    <string name="BMIForTeenagers">(&gt;=20 tahun)</string>
+    <string name="BMIForTeenagers1">Simpan</string>
+    <string name="Save">Sentimeter</string>
+
+    <string name="Centimeter">Kaki</string>
+    <string name="Feet">Kilogram</string>
+    <string name="Kilogram">Stone</string>
+    <string name="Stone">Pound</string>
+    <string name="Pound">Berhasil disimpan</string>
+
+    <string name="SavedSuccessfully">Hapus konfirmasi</string>
+    <string name="DeleteConfirm">Apakah Anda yakin ingin menghapus catatan ini? Hapus</string>
+    <string name="desDelete">Masuk sekarang</string>
+    <string name="Delete">Silakan masuk untuk melanjutkan aplikasi kami</string>
+
+    <string name="SignInNow">Atur Ulang Kata Sandi</string>
+    <string name="PleaseSignIn">Ambil kembali kata sandi Anda jika Anda lupa</string>
+    <string name="ResetPass">Masukkan email Anda…</string>
+    <string name="Forget">Masukkan kata sandi Anda</string>
+    <string name="hintUserName"><u>Lupa Kata Sandi?</u></string>
+    <string name="hintPass">Masuk</string>
+    <string name="ForgetPassword">Atur Ulang</string>
+    <string name="SignIn">Tidak punya akun?</string>
+    <string name="Reset"><u><i>Daftar </i></u></string>
+    <string name="DontHave">Sudah punya akun</string>
+    <string name="SignUp"><u><i>Masuk </i></u></string>
+    <string name="AlreadyHave">Daftar</string>
+    <string name="SignIn1">Daftar sekarang</string>
+    <string name="SignUp1">Silakan isi detail dan buat akun</string>
+    <string name="SignUpNow">Periksa email Anda untuk mengubah kata sandi Anda. Email Anda tidak valid</string>
+    <string name="PleaseSignUp">Nomor Telepon</string>
+    <string name="CheckMail">Masukkan nomor telepon Anda</string>
+    <string name="EmailValid">Email:</string>
+    <string name="PhoneNumber">Masukkan Email Anda</string>
+    <string name="hintEnterPhone">Nama pengguna</string>
+
+    <string name="Email">Masukkan nama pengguna Anda</string>
+    <string name="hintEnterEmail">Kata sandi</string>
+
+    <string name="UserName">Masukkan kata sandi Anda</string>
+    <string name="hintUserName1">Konfirmasi kata sandi</string>
+    <string name="PassWord">Konfirmasi kata sandi Anda</string>
+    <string name="hintPassWord">Pendaftaran Berhasil</string>
+    <string name="ConfirmPass">Pendaftaran gagal</string>
+    <string name="hintConfirmPass">Anda harus mengisi semua kolom informasi</string>
+
+    <string name="SignUpSuccess">Kata sandi tidak cocok</string>
+    <string name="SignUpFailed">Berikan Informasi</string>
+    <string name="NoEmpty">Avatar:</string>
+    <string name="Passwords_do_not_match">Nama:</string>
+    <string name="provide_information">Jenis Kelamin:</string>
+    <string name="avatar">Pria</string>
+    <string name="name">Wanita</string>
+    <string name="sex">Lainnya</string>
+    <string name="male">Nanti</string>
+    <string name="female">Simpan</string>
+    <string name="other">Masukkan nama panggilan teman Anda</string>
+    <string name="later">Tulis nama Anda di sini</string>
+    <string name="save">Masukkan nomor telepon Anda</string>
+    <string name="enter_friend_nickname">Masukkan nama gambar Anda 25 karakter atau kurang</string>
+    <string name="write_your_name_here">Nomor telepon tidak valid!</string>
+    <string name="input_your_phone_number">Masukkan nama Anda!</string>
+    <string name="over_25_char">Masukkan nomor telepon Anda!</string>
+    <string name="invalid_phone_number">Selamat datang kembali!</string>
+    <string name="enter_name">Pengaturan</string>
+    <string name="enter_phone_number">Bagikan</string>
+
+    <string name="tv_Welcome">Beri penilaian kepada kami</string>
+    <string name="Settings">Versi</string>
+    <string name="Share">Keluar</string>
+    <string name="Rate">Tanggal lahir</string>
+    <string name="Version">Ikuti tautan yang dikirim di ponsel keluarga Anda, instal aplikasi pingo, dan masukkan kode</string>
+    <string name="LogOut">Bagikan Informasi</string>
+    <string name="DateOfBirth">Kode ini akan menghubungkan aplikasi pingo dengan aplikasi parenting find your friend Anda dan semuanya akan mulai berfungsi!</string>
+    <string name="security_detail">Bagikan kode</string>
+    <string name="share_information">Kode Saya</string>
+
+    <string name="qr_detail">Bagikan QR</string>
+    <string name="share_code">Bagikan dengan</string>
+    <string name="my_security">Unduh aplikasi :</string>
+    <string name="share_qr">Mulai bergabung</string>
+    <string name="share_with">Disalin! Bergabung dengan Keluarga</string>
+    <string name="download_app">Masukkan kode Keluarga untuk bergabung dengan Keluarga</string>
+    <string name="start_join">Kode dapat diperoleh dari aplikasi Keluarga yang membuat koneksi</string>
+    <string name="copied">Kode</string>
+
+    <string name="join_the_friend">Kode tidak valid</string>
+    <string name="join_friend_title">Berhasil bergabung dengan teman!</string>
+    <string name="join_friend_detail">Kode Teman tidak valid!</string>
+    <string name="code"><u><i>Ringkasan</i></u></string>
+    <string name="InvalidCode">Pindah</string>
+    <string name="join_with_friend">Langkah</string>
+    <string name="invalid_friend_code">Jarak</string>
+    <string name="Summary">Terbaru</string>
+    <string name="Moving">Jenis Kelamin</string>
+    <string name="Step">Tidak ada catatan terbaru</string>
+    <string name="Distance">Tidak ada Data Bagan</string>
+
+    <string name="Recent">Berhasil dihapus</string>
+
+    <string name="Gender">Januari</string>
+    <string name="noData">Februari</string>
+    <string name="NoChartData">Maret</string>
+    <string name="DeletedSuccessfully">April</string>
+
+    <string name="January">Mei</string>
+    <string name="February">Juni</string>
+    <string name="March">Juli</string>
+    <string name="April">Agustus</string>
+    <string name="May">September</string>
+    <string name="June">Oktober</string>
+    <string name="July">November</string>
+    <string name="August">Desember</string>
+    <string name="September">Sensor Penghitung Langkah tidak tersedia!</string>
+    <string name="October">Lokasi Teman</string>
+    <string name="November">Mulai</string>
+    <string name="December">Matikan</string>
+    <string name="noStep">Apakah Anda ingin mengaktifkan peringatan SOS untuk perangkat lain?</string>
+
+    <string name="friend_location">Pilih tombol untuk menonaktifkan peringatan SOS di perangkat lain</string>
+    <string name="start">membutuhkan bantuan Anda. Datang dan lihat statusnya dan bantu mereka! Bank</string>
+    <string name="turn_off">Temukan</string>
+    <string name="enable_sos">Posisi Anda</string>
+    <string name="disable_sos">Detail</string>
+    <string name="stop_sos">Alamat</string>
+
+
+    <string name="bank"><u>detail</u></string>
+    <string name="find">Halte Bus</string>
+    <string name="your_position">Pom Bensin</string>
+    <string name="detail2">Kafe</string>
+    <string name="address">Bioskop</string>
+
+    <string name="detail">PILIH AVATAR</string>
+    <string name="bus_stop">Pilih avatar yang Anda inginkan dan teman-teman Anda akan melihat antarmuka ini di layar pelacak waktu nyata</string>
+    <string name="petrol_station">Simpan Avatar</string>
+    <string name="cafe">Koordinat</string>
+    <string name="cinema">Cari teman di peta</string>
+    <string name="SELECT_AVATAR">Tambahkan Teman</string>
+    <string name="des_Dialog_avt">Teman</string>
+    <string name="Save_avatar">Lihat Lainnya</string>
+
+    <string name="coordinates">Tempat Terdekat</string>
+
+    <string name="search_for_friends_on_the_map">Izin peringatan</string>
+    <string name="add_friend">Pilih Peta</string>
+    <string name="Friend">Medan</string>
+    <string name="view_more">Satelit</string>
+    <string name="near_by_place">Lalu Lintas</string>
+    <string name="header_warning_permission">Transit</string>
+    <string name="choose_a_map">Anda telah menghubungkan diri Anda dengan orang ini</string>
+    <string name="terrain">Kode QR</string>
+    <string name="satellite">Pemindaian akan dimulai secara otomatis</string>
+    <string name="traffic">Tempatkan kode QR di dalam area</string>
+    <string name="transit">Pindai kode QR untuk menghubungkan dan melacak lokasi orang yang Anda cintai dan teman-teman</string>
+
+    <string name="connected_yourself">Tambahkan Kode</string>
+    <string name="qr_code">Tambahkan Gambar</string>
+    <string name="qr_instruct_2">Untuk melanjutkan, aktifkan lokasi perangkat menggunakan layanan lokasi Google</string>
+    <string name="qr_instruct_1">Tidak Ada Hasil</string>
+    <string name="qr_struct"><u>Matikan semua notifikasi</u></string>
+    <string name="add_code">Jika Anda mengaktifkan akses lokasi latar belakang, lokasi Anda akan selalu dibagikan dengan teman-teman saat Anda menjalankan program di latar belakang. Lokasi Anda akan dihentikan saat aplikasi ditutup atau tidak digunakan. Harap berikan izin ini dari pengaturan untuk melanjutkan lebih lanjut. Anda harus mengaktifkan mode pelacakan sebelum mengirim sinyal sos</string>
+    <string name="add_image">TAMBAHKAN</string>
+    <string name="dialog_location">Saya</string>
+    <string name="no_results">Nomor telepon:</string>
+    <string name="turn_off_all_notification">Aktifkan Pelacakan:</string>
+    <string name="Message_perLocation">Ganti Nama</string>
+
+    <string name="toast_sos">Buat nama panggilan Anda sendiri untuk teman-teman Anda</string>
+    <string name="tv_ADD">Anda yakin ingin menghapus teman Anda ini?</string>
+    <string name="tv_me">Ups!</string>
+    <string name="phone_number">Tidak ditemukan koneksi internet. Periksa koneksi Anda atau coba lagi.</string>
+    <string name="turn_on_tracking">Tidak ditemukan kode QR dalam gambar</string>
+    <string name="re_name">Kesalahan saat mendekode kode QR dari gambar</string>
+    <string name="des_dialog_rename">Temukan pengguna berdasarkan nomor telepon</string>
+    <string name="des_dialog_delete">Pindai kode QR untuk menambahkan teman</string>
+
+    <string name="whoops">Informasi Terperinci</string>
+    <string name="no_internet">Informasi kesehatan</string>
+    <string name="No_QR">Informasi BMI</string>
+    <string name="Error_QR">Setelan GPS</string>
+    <string name="find_users_by_phone_number">Pelacakan telepon:</string>
+    <string name="scan_the_QR_code_to_add_friends">QR agar teman dapat terhubung</string>
+    <string name="detailed_information">Edit Information</string>
+
+    <string name="HealthInformation">KM</string>
+    <string name="BMIInformation">KCAL</string>
+    <string name="GPSSettings">Chart</string>
+    <string name="phone_tracking">Email atau kata sandi tidak boleh kosong</string>
+    <string name="qr_for_friends_to_connect">Email atau kata sandi salah</string>
+    <string name="edit_information">Berhasil login</string>
+    <string name="KM">Email sudah ada</string>
+    <string name="KCAL">undefined</string>
+    <string name="Chart">undefined</string>
+    <string name="ToastSignIn">undefined</string>
+    <string name="IncorrectSign">undefined</string>
+    <string name="LoggedSuccessfully">undefined</string>
+    <string name="EmailAlready">undefined</string>
+</resources>

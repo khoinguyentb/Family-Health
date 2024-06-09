@@ -32,11 +32,11 @@ import java.util.Locale
 @AndroidEntryPoint
 class ExerciseActivity : BaseActivity<ActivityExerciseBinding>() {
 
-    private var stepCount = 0
-    private var distanceInMeters = 0.0
-    private var distanceInKm = 0.0
-    private var caloriesBurned = 0.0
-    private val RECOGNITION_REQUEST_CODE = 100
+//    private var stepCount = 0
+//    private var distanceInMeters = 0.0
+//    private var distanceInKm = 0.0
+//    private var caloriesBurned = 0.0
+//    private val RECOGNITION_REQUEST_CODE = 100
     private val viewmodel : HealthyViewModel by viewModels()
     private var listHealthy = mutableListOf<HealthyModel>()
 
@@ -91,35 +91,42 @@ class ExerciseActivity : BaseActivity<ActivityExerciseBinding>() {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val currentDate = dateFormat.format(Date())
             viewmodel.getItemByDate(currentDate)
-            lifecycleScope.launch {
-                viewmodel.uiStateDate.collect{state ->
-                    when (state) {
-                        is UiState.Loading ->{}
-                        is UiState.Success<*> ->{
-                            healthyModel = state.data as HealthyModel
-                            binding.apply {
-                                tvStep.text = healthyModel.steps.toString()
-                                tvDistance.text = healthyModel.distance.toString() + getString(R.string.KM)
-                                tvMoving.text = healthyModel.calories.toString() + getString(R.string.KCAL)
+            try {
+                lifecycleScope.launch {
+                    viewmodel.uiStateDate.collect{state ->
+                        when (state) {
+                            is UiState.Loading ->{}
+                            is UiState.Success<*> ->{
+                                if (state.data != null){
+                                    healthyModel = state.data as HealthyModel
+                                    binding.apply {
+                                        tvStep.text = healthyModel.steps.toString()
+                                        tvDistance.text = healthyModel.distance.toString() + getString(R.string.KM)
+                                        tvMoving.text = healthyModel.calories.toString() + getString(R.string.KCAL)
+                                    }
+                                }
                             }
+                            is UiState.Error -> {}
                         }
-                        is UiState.Error -> {}
                     }
                 }
+
+                lifecycleScope.launch {
+                    viewmodel.getAll.collect{state ->
+                        when (state) {
+                            is UiState.Loading ->{}
+                            is UiState.Success<*> ->{
+                                listHealthy = state.data as MutableList<HealthyModel>
+                                lineChart(listHealthy)
+                            }
+                            is UiState.Error -> {}
+                        }
+                    }
+                }
+            }catch (e : Exception){
+                e.printStackTrace()
             }
 
-            lifecycleScope.launch {
-                viewmodel.getAll.collect{state ->
-                    when (state) {
-                        is UiState.Loading ->{}
-                        is UiState.Success<*> ->{
-                            listHealthy = state.data as MutableList<HealthyModel>
-                            lineChart(listHealthy)
-                        }
-                        is UiState.Error -> {}
-                    }
-                }
-            }
         }
     }
     override fun initListener() {

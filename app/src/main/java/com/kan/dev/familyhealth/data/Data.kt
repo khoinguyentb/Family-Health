@@ -70,7 +70,7 @@ class Data {
             SettingModel(R.drawable.language, R.string.Language),
             SettingModel(R.drawable.share, R.string.Share),
             SettingModel(R.drawable.rate, R.string.Rate),
-            SettingModel(R.drawable.ic_add_friend,R.string.Friend),
+            SettingModel(R.drawable.friend,R.string.Friend),
             SettingModel(R.drawable.version, R.string.Version),
             SettingModel(R.drawable.logout, R.string.LogOut),
         )

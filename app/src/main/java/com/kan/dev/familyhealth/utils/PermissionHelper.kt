@@ -10,6 +10,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.kan.dev.familyhealth.R
@@ -43,6 +44,11 @@ fun checkPer(permission: String?, context: Context?): Boolean {
 fun Activity.requestAppPermissionCamera(requestCode: Int) {
     ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), requestCode)
 }
+
+@RequiresApi(Build.VERSION_CODES.Q)
+fun Activity.requestAppPermissionRECOGNITION(requestCode: Int) {
+    ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACTIVITY_RECOGNITION), requestCode)
+}
 fun Activity.requestAppPermissionLocation(requestCode: Int) {
     if (Build.VERSION.SDK_INT >= 29){
         ActivityCompat.requestPermissions(this, arrayOf(
@@ -63,6 +69,18 @@ fun Activity.checkPermissionCamera(): Boolean {
         this,
         Manifest.permission.CAMERA
     ) == PackageManager.PERMISSION_GRANTED
+}
+
+
+fun Activity.checkPermissionRECOGNITION(): Boolean {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACTIVITY_RECOGNITION
+        ) == PackageManager.PERMISSION_GRANTED
+    } else {
+        true
+    }
 }
 
 @SuppressLint("InlinedApi")

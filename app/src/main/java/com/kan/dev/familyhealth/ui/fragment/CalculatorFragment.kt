@@ -275,6 +275,9 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(),IDateClickL
             KG.setOnClickListener(kgClickListener)
             LB.setOnClickListener(lbClickListener)
             Time.setOnClickListener(timeClickListener)
+            imgBack.setOnClickListener {
+                requireActivity().finish()
+            }
         }
     }
     private fun getCurrentDateFormatted(): String {

@@ -1,12 +1,15 @@
 package com.kan.dev.familyhealth.ui.activity.main
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.os.Build
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.data.RealtimeDAO
 import com.kan.dev.familyhealth.data.model.BMI
@@ -21,8 +24,11 @@ import com.kan.dev.familyhealth.ui.activity.ExerciseActivity
 import com.kan.dev.familyhealth.ui.activity.gps.GPSActivity
 import com.kan.dev.familyhealth.utils.Code
 import com.kan.dev.familyhealth.utils.MY_CODE
+import com.kan.dev.familyhealth.utils.checkPermissionRECOGNITION
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
+import com.kan.dev.familyhealth.utils.requestAppPermissionRECOGNITION
+import com.kan.dev.familyhealth.utils.showPermissionSettingsDialog
 import com.kan.dev.familyhealth.viewmodel.FriendViewModel
 import com.kan.dev.familyhealth.viewmodel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,7 +56,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private var isSos = true
     private var weight = 0f
     private var height = 0f
-
+    private val RECOGNITION_REQUEST_CODE = 100
     override fun initData() {
         receiver = InternetBroadcastReceiver()
         myCode = sharePre.getString(MY_CODE,"")!!
@@ -120,7 +126,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
         registerReceiver()
     }
+    @RequiresApi(Build.VERSION_CODES.Q)
+    override fun onStart() {
+        super.onStart()
+        if (!checkPermissionRECOGNITION()){
+            requestAppPermissionRECOGNITION(RECOGNITION_REQUEST_CODE)
+        }
+    }
 
+    override fun onResume() {
+        super.onResume()
+
+    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -234,6 +251,27 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                             }
                         }
                     } catch (_: Exception) {
+
+                    }
+                }
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when(requestCode){
+            RECOGNITION_REQUEST_CODE ->{
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    onStart()
+                } else {
+                    if (!shouldShowRequestPermissionRationale(Manifest.permission.ACTIVITY_RECOGNITION)) {
+                        showPermissionSettingsDialog()
                     }
                 }
             }
