@@ -91,7 +91,6 @@ class HealthyViewModel @Inject constructor(
             healthyModel = repository.getRecordByDate(currentDate)
             if (healthyModel == null) {
                 val newRecord = HealthyModel(0, 0f, 0f, currentDate)
-//                sharePre.putBoolean("reset")
                 val healthData = mapOf(
                     "steps" to 0,
                     "distance" to 0f,

@@ -2,9 +2,14 @@ package com.kan.dev.familyhealth.ui.activity.main
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.net.ConnectivityManager
 import android.os.Build
 import android.util.Log
@@ -30,10 +35,14 @@ import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.utils.requestAppPermissionRECOGNITION
 import com.kan.dev.familyhealth.utils.showPermissionSettingsDialog
 import com.kan.dev.familyhealth.viewmodel.FriendViewModel
+import com.kan.dev.familyhealth.viewmodel.HealthyViewModel
 import com.kan.dev.familyhealth.viewmodel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.HashMap
+import java.util.Locale
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -42,6 +51,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
     private lateinit var receiver: InternetBroadcastReceiver
     private val viewModel : FriendViewModel by viewModels()
+    private val viewModelHeal : HealthyViewModel by viewModels()
     private lateinit var myCode : String
     private var runnable: Runnable? = null
     private val viewModelSign : SignInViewModel by viewModels()
@@ -57,6 +67,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private var weight = 0f
     private var height = 0f
     private val RECOGNITION_REQUEST_CODE = 100
+
+
+
     override fun initData() {
         receiver = InternetBroadcastReceiver()
         myCode = sharePre.getString(MY_CODE,"")!!
@@ -277,4 +290,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
         }
     }
+
 }
