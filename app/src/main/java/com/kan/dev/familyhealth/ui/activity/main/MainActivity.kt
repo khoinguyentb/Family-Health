@@ -67,8 +67,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private var weight = 0f
     private var height = 0f
     private val RECOGNITION_REQUEST_CODE = 100
-
-
+    private var getHealthy = true
+    private var getBMI = true
+    private var getFriend = true
 
     override fun initData() {
         receiver = InternetBroadcastReceiver()
@@ -76,13 +77,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         RealtimeDAO.initRealtimeData()
         try {
             RealtimeDAO.getRealtimeData("$myCode/healthys") { snapshot ->
-                viewModelSign.deleteAllHealthy()
-                for (dataSnapshot in snapshot!!.children) {
-                    val model = dataSnapshot.getValue(HealthyModel::class.java)
-                    model?.let {
-                        viewModelSign.insertHealthy(model)
-                        Log.d("KanMobile","Kan")
+                if (getHealthy){
+                    viewModelSign.deleteAllHealthy()
+                    for (dataSnapshot in snapshot!!.children) {
+                        val model = dataSnapshot.getValue(HealthyModel::class.java)
+                        model?.let {
+                            viewModelSign.insertHealthy(model)
+                            Log.d("KanMobile","Kan")
+                        }
                     }
+                    getHealthy = false
                 }
             }
         }catch (e : Exception){
@@ -91,14 +95,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         try {
             RealtimeDAO.getRealtimeData("$myCode/BMI") { snapshot ->
-                viewModelSign.deleteAllBMI()
-                for (dataSnapshot in snapshot!!.children) {
-                    val model = dataSnapshot.getValue(BMI::class.java)
-                    model?.let {
-                        viewModelSign.insertBMI(model)
-                        Log.d("KanMobile","KanBMI")
+                if (getBMI){
+                    viewModelSign.deleteAllBMI()
+                    for (dataSnapshot in snapshot!!.children) {
+                        val model = dataSnapshot.getValue(BMI::class.java)
+                        model?.let {
+                            viewModelSign.insertBMI(model)
+                            Log.d("KanMobile","KanBMI")
+                        }
                     }
+                    getBMI = false
                 }
+
             }
 
         }catch (e : Exception){
@@ -107,14 +115,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         try {
             RealtimeDAO.getRealtimeData("$myCode/friends") { snapshot ->
-                viewModelSign.deleteAllFriend()
-                for (dataSnapshot in snapshot!!.children) {
-                    val model = dataSnapshot.getValue(FriendModel::class.java)
-                    model?.let {
-                        viewModelSign.insertFriend(model)
-                        Log.d("KanMobile","KanFriend")
+                if (getFriend){
+                    viewModelSign.deleteAllFriend()
+                    for (dataSnapshot in snapshot!!.children) {
+                        val model = dataSnapshot.getValue(FriendModel::class.java)
+                        model?.let {
+                            viewModelSign.insertFriend(model)
+                            Log.d("KanMobile","KanFriend")
+                        }
                     }
+                    getFriend = false
                 }
+
             }
         }catch (e : Exception){
             e.printStackTrace()

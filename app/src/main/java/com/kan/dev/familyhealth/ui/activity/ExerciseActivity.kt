@@ -154,16 +154,15 @@ class ExerciseActivity : BaseActivity<ActivityExerciseBinding>(), IMonthClickLis
                     }
                 }
 
-                lifecycleScope.launch {
-                    viewmodel.getAll.collect{state ->
-                        when (state) {
-                            is UiState.Loading ->{}
-                            is UiState.Success<*> ->{
-                                listHealthy = state.data as MutableList<HealthyModel>
-                                lineChart(listHealthy)
-                            }
-                            is UiState.Error -> {}
+                RealtimeDAO.getRealtimeData("$myCode/healthys") { snapshot ->
+                    for (dataSnapshot in snapshot!!.children) {
+                        val model = dataSnapshot.getValue(HealthyModel::class.java)
+                        model?.let {
+                            listHea.add(it)
                         }
+                    }
+                    if (listHea.isNotEmpty()) {
+                        lineChart(listHea)
                     }
                 }
             }catch (e : Exception){
