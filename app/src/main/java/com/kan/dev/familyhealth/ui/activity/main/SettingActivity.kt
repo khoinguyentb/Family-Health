@@ -17,7 +17,6 @@ import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.utils.shareApp
 import com.kan.dev.st048_bmicalculator.dialog.DialogRate
 import com.kan.dev.st048_bmicalculator.dialog.OnDialogDismissListener
-import com.lvt.ads.util.AppOpenManager
 
 
 class SettingActivity : BaseActivity<ActivitySettingBinding>(),ISettingClickListener,OnDialogDismissListener {
@@ -59,7 +58,6 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(),ISettingClickList
                     startActivity(Intent(this, LanguageActivity::class.java))
                 }
                 R.drawable.share -> {
-                    AppOpenManager.getInstance().disableAppResumeWithActivity(MainActivity::class.java)
                     shareApp(this)
                 }
                 R.drawable.rate -> {
@@ -84,7 +82,6 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(),ISettingClickList
 
     override fun onResume() {
         super.onResume()
-        AppOpenManager.getInstance().enableAppResumeWithActivity(MainActivity::class.java)
     }
 
     override fun onDialogDismiss() {

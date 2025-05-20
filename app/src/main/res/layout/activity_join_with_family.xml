@@ -184,15 +184,5 @@
         </LinearLayout>
     </ScrollView>
 
-    <FrameLayout
-        android:id="@+id/native_ads"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_weight="1">
-        <include layout="@layout/ads_shimmer_small_btn_ads_bottom" />
-    </FrameLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

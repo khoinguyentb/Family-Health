@@ -9,12 +9,10 @@ import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.data.RealtimeDAO
 import com.kan.dev.familyhealth.databinding.ActivityDetailInformationBinding
 import com.kan.dev.familyhealth.ui.activity.BMI.BMIInformationActivity
-import com.kan.dev.familyhealth.ui.activity.BMI.RecentActivity
 import com.kan.dev.familyhealth.ui.activity.ExerciseActivity
 import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,8 +39,6 @@ class DetailInformationActivity : BaseActivity<ActivityDetailInformationBinding>
 
     @SuppressLint("SetTextI18n")
     override fun initView() {
-        Admob.getInstance().loadBannerFragment(this, getString(R.string.banner_all), binding.includeBanner)
-
         RealtimeDAO.getOnetimeData(path) { snapshot ->
             val avt: Int = snapshot!!.child("avt").getValue(Int::class.java)!!
             val battery: Int = snapshot.child("battery").getValue(Int::class.java)!!

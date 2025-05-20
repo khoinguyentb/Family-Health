@@ -11,8 +11,6 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.google.android.gms.ads.nativead.NativeAd
-import com.google.android.gms.ads.nativead.NativeAdView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -32,8 +30,6 @@ import com.kan.dev.familyhealth.utils.QR_REQUEST_CODE
 import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.utils.toastDuration
 import com.kan.dev.familyhealth.viewmodel.FriendViewModel
-import com.lvt.ads.callback.NativeCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -70,24 +66,6 @@ class JoinWithFamilyActivity : BaseActivity<ActivityJoinWithFamilyBinding>() {
     }
 
     override fun initView() {
-        Admob.getInstance()
-            .loadNativeAd(this, getString(R.string.native_all), object : NativeCallback() {
-                override fun onNativeAdLoaded(nativeAd: NativeAd) {
-                    super.onNativeAdLoaded(nativeAd)
-                    val adView = LayoutInflater.from(
-                        applicationContext
-                    )
-                        .inflate(R.layout.ads_native_small_btn_ads_bottom, null) as NativeAdView
-                    binding.nativeAds.removeAllViews()
-                    binding.nativeAds.addView(adView)
-                    Admob.getInstance().pushAdsToViewCustom(nativeAd, adView)
-                }
-
-                override fun onAdFailedToLoad() {
-                    super.onAdFailedToLoad()
-                    binding.nativeAds.visibility = View.INVISIBLE
-                }
-            })
         RealtimeDAO.initRealtimeData()
         binding.btnStartJoin.isSelected = true
         binding.btnContinue.isSelected = true

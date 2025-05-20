@@ -47,8 +47,6 @@ import com.kan.dev.familyhealth.utils.months
 import com.kan.dev.familyhealth.utils.weekly
 import com.kan.dev.familyhealth.utils.years
 import com.kan.dev.familyhealth.viewmodel.BMIViewModel
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 
@@ -717,16 +715,11 @@ class StatisticFragment : BaseFragment<FragmentStatisticBinding>(),IRecentListen
     override fun clickRecent(item: BMI) {
         if (isClick) {
             isClick = false
-            Admob.getInstance().showInterAll(requireContext(), object : InterCallback() {
-                override fun onNextAction() {
-                    super.onNextAction()
-                    item.isRecent = true
-                    intent = Intent(requireContext(), CalculatorBMIActivity::class.java)
-                    intent.putExtra(BMIS, item)
-                    startActivity(intent)
-                }
-            })
-            handler.postDelayed(Runnable { com.kan.dev.familyhealth.utils.isClick = true }, 500)
+            item.isRecent = true
+            intent = Intent(requireContext(), CalculatorBMIActivity::class.java)
+            intent.putExtra(BMIS, item)
+            startActivity(intent)
+            handler.postDelayed(Runnable { isClick = true }, 500)
         }
     }
 

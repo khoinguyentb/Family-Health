@@ -2,13 +2,11 @@ package com.kan.dev.familyhealth.ui.activity.gps
 
 import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.adapter.PlaceAdapter
 import com.kan.dev.familyhealth.adapter.PlaceListener
 import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.data.Data.Companion.placeList
 import com.kan.dev.familyhealth.databinding.ActivityPlaceBinding
-import com.lvt.ads.util.Admob
 
 class PlaceActivity : BaseActivity<ActivityPlaceBinding>() {
     override fun setViewBinding(): ActivityPlaceBinding {
@@ -20,8 +18,7 @@ class PlaceActivity : BaseActivity<ActivityPlaceBinding>() {
     }
 
     override fun initView() {
-        Admob.getInstance()
-            .loadBannerFragment(this, getString(R.string.banner_all), binding.includeBanner)
+
         val intent = intent
         if (intent != null) {
             check = intent.getBooleanExtra("main", false)

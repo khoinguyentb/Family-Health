@@ -5,7 +5,6 @@ import android.content.ClipboardManager
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Handler
 import android.view.Gravity
 import android.widget.Toast
@@ -14,14 +13,11 @@ import com.google.zxing.WriterException
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.databinding.ActivityShareInformationBinding
-import com.kan.dev.familyhealth.utils.KEY_QR_BITMAP
 import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.generateQRCode
 import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.utils.toastDuration
-import com.lvt.ads.util.AppOpenManager
 import java.io.File
-import java.io.FileOutputStream
 import java.io.IOException
 
 class ShareInformationActivity : BaseActivity<ActivityShareInformationBinding>() {
@@ -111,8 +107,6 @@ class ShareInformationActivity : BaseActivity<ActivityShareInformationBinding>()
             }
 
             "security" -> {
-                AppOpenManager.getInstance()
-                    .disableAppResumeWithActivity(ShareInformationActivity::class.java)
                 if (settings) binding.btnContinue.isEnabled =
                     false else binding.btnSecurity.isEnabled =
                     false
@@ -130,8 +124,7 @@ class ShareInformationActivity : BaseActivity<ActivityShareInformationBinding>()
             }
 
             "qr" -> {
-                AppOpenManager.getInstance()
-                    .disableAppResumeWithActivity(ShareInformationActivity::class.java)
+
                 binding.btnSecurity.isEnabled = false
                 Handler().postDelayed({
                     binding.btnSecurity.isEnabled = true
@@ -152,7 +145,6 @@ class ShareInformationActivity : BaseActivity<ActivityShareInformationBinding>()
 
     override fun onResume() {
         super.onResume()
-        AppOpenManager.getInstance()
-            .enableAppResumeWithActivity(ShareInformationActivity::class.java)
+
     }
 }

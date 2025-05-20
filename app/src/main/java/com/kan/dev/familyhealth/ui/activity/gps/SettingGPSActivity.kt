@@ -25,9 +25,6 @@ import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.viewmodel.FriendViewModel
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
-import com.lvt.ads.util.AppOpenManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -67,7 +64,6 @@ class SettingGPSActivity : BaseActivity<ActivitySettingGpsactivityBinding>() {
 
     @SuppressLint("SetTextI18n")
     override fun initView() {
-        Admob.getInstance().loadCollapsibleBanner(this, getString(R.string.banner_collap), "bottom")
         binding.apply {
             btnQR.isSelected = true
 
@@ -134,18 +130,12 @@ class SettingGPSActivity : BaseActivity<ActivitySettingGpsactivityBinding>() {
             btnViewAddFriend.setOnClickListener {
                 if (isClick) {
                     isClick = false
-                    Admob.getInstance()
-                        .showInterAll(this@SettingGPSActivity, object : InterCallback() {
-                            override fun onNextAction() {
-                                super.onNextAction()
-                                startActivity(
-                                    Intent(
-                                        this@SettingGPSActivity,
-                                        FriendActivity::class.java
-                                    )
-                                )
-                            }
-                        })
+                    startActivity(
+                        Intent(
+                            this@SettingGPSActivity,
+                            FriendActivity::class.java
+                        )
+                    )
                     handler.postDelayed({ isClick = true }, 500)
                 }
             }
@@ -153,18 +143,12 @@ class SettingGPSActivity : BaseActivity<ActivitySettingGpsactivityBinding>() {
             btnViewPlace.setOnClickListener {
                 if (isClick) {
                     isClick = false
-                    Admob.getInstance()
-                        .showInterAll(this@SettingGPSActivity, object : InterCallback() {
-                            override fun onNextAction() {
-                                super.onNextAction()
-                                startActivity(
-                                    Intent(
-                                        this@SettingGPSActivity,
-                                        PlaceActivity::class.java
-                                    )
-                                )
-                            }
-                        })
+                    startActivity(
+                        Intent(
+                            this@SettingGPSActivity,
+                            PlaceActivity::class.java
+                        )
+                    )
                     handler.postDelayed({ isClick = true }, 500)
                 }
             }
@@ -200,7 +184,6 @@ class SettingGPSActivity : BaseActivity<ActivitySettingGpsactivityBinding>() {
 
     override fun onResume() {
         super.onResume()
-        AppOpenManager.getInstance().enableAppResumeWithActivity(SettingGPSActivity::class.java)
         getFriend()
         getPlace()
         binding.recyclerPlace.isNestedScrollingEnabled = false

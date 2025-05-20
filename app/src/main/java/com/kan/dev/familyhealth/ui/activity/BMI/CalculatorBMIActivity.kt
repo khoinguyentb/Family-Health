@@ -18,8 +18,6 @@ import com.kan.dev.familyhealth.utils.FEMALE
 import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.viewmodel.BMIViewModel
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.pow
 
@@ -142,7 +140,6 @@ class CalculatorBMIActivity : BaseActivity<ActivityCalculatorBmiactivityBinding>
     }
 
     override fun initView() {
-        Admob.getInstance().loadBanner(this, getString(R.string.banner_all))
         binding.apply {
             if (bmi.isRecent) {
                 icRecent.setImageResource(R.drawable.icdelete)
@@ -229,20 +226,12 @@ class CalculatorBMIActivity : BaseActivity<ActivityCalculatorBmiactivityBinding>
                     "isRecent" to bmi.isRecent
                 )
                 RealtimeDAO.pushRealtimeData(myCode + "/BMI/" + bmi.id,bMI){
-                    Admob.getInstance().setOpenActivityAfterShowInterAds(false)
-                    Admob.getInstance().showInterAll(this@CalculatorBMIActivity, object : InterCallback() {
-                        override fun onNextAction() {
-                            super.onNextAction()
-                            viewModel.insert(bmi)
-                            Toast.makeText(
-                                applicationContext,
-                                getString(R.string.SavedSuccessfully),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            finish()
-                            Admob.getInstance().setOpenActivityAfterShowInterAds(true)
-                        }
-                    })
+                    Toast.makeText(
+                        applicationContext,
+                        getString(R.string.SavedSuccessfully),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    finish()
                 }
             }
         }

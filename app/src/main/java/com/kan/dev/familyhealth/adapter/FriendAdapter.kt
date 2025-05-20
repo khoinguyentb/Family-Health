@@ -21,8 +21,6 @@ import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.SharePreferencesUtils
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 
 class FriendAdapter(
     private val context: Context,
@@ -64,12 +62,7 @@ class FriendAdapter(
                     ) else Color.parseColor("#FFA83BFD")
                 )
                 root.setOnClickListener {
-                    Admob.getInstance().showInterAll(context, object : InterCallback() {
-                        override fun onNextAction() {
-                            super.onNextAction()
-                            context.startActivity(Intent(context, FriendActivity::class.java))
-                        }
-                    })
+                    context.startActivity(Intent(context, FriendActivity::class.java))
                 }
             } else if (position == 1) {
                 if (type == "main" || type == "online") {

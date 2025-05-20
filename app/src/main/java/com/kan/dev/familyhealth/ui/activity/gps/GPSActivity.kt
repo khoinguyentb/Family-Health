@@ -32,7 +32,6 @@ import androidx.constraintlayout.helper.widget.MotionEffect
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.arsy.maps_library.MapRipple
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -89,9 +88,6 @@ import com.kan.dev.familyhealth.utils.formatDateFromLong
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.viewmodel.FriendViewModel
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
-import com.lvt.ads.util.AppOpenManager
 import com.squareup.okhttp.Callback
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
@@ -114,7 +110,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
     private var latLngList: ArrayList<LatLng> = ArrayList()
     private var mapBottomBehavior: BottomSheetBehavior<*>? = null
     private var detailBottomBehavior:BottomSheetBehavior<*>? = null
-    private var mapRipple: MapRipple? = null
+//    private var mapRipple: MapRipple? = null
     private val myCode : String by lazy {
         sharePre.getString(MY_CODE,"")!!
     }
@@ -157,8 +153,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
     }
 
     override fun initView() {
-        Admob.getInstance().loadInterAll(this, getString(R.string.inter_all))
-        Admob.getInstance().loadCollapsibleBanner(this, getString(R.string.banner_collap), "bottom")
         initDialog()
 //        getFriend()
         getPlace()
@@ -172,7 +166,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
         binding.apply {
             btnChooseMapType.setOnClickListener {
                 mapTypeDialog!!.show()
-                binding.includeBanner.visibility = View.INVISIBLE
                 DialogUtils.initView(this@GPSActivity)
             }
             btnSos.setOnClickListener { actionOpenSos() }
@@ -224,29 +217,19 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             mapBottomSheet.btnViewAddFriend.setOnClickListener {
                 if (isClick) {
                     isClick = false
-                    Admob.getInstance().showInterAll(this@GPSActivity, object : InterCallback() {
-                        override fun onNextAction() {
-                            super.onNextAction()
-                            startActivity(
-                                Intent(
-                                    applicationContext,
-                                    FriendActivity::class.java
-                                )
-                            )
-                        }
-                    })
+                    startActivity(
+                        Intent(
+                            applicationContext,
+                            FriendActivity::class.java
+                        )
+                    )
                     Handler().postDelayed({ isClick = true }, 500)
                 }
             }
             mapBottomSheet.btnViewPlace.setOnClickListener {
                 if (isClick) {
                     isClick = false
-                    Admob.getInstance().showInterAll(this@GPSActivity, object : InterCallback() {
-                        override fun onNextAction() {
-                            super.onNextAction()
-                            startActivity(Intent(applicationContext, PlaceActivity::class.java).putExtra("main", true))
-                        }
-                    })
+                    startActivity(Intent(applicationContext, PlaceActivity::class.java).putExtra("main", true))
                     handler.postDelayed({ isClick = true }, 500)
                 }
             }
@@ -265,7 +248,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
     override fun onResume() {
         super.onResume()
         check()
-        AppOpenManager.getInstance().enableAppResumeWithActivity(GPSActivity::class.java)
         if (mediaPlayer != null) {
             mediaPlayer!!.stop()
         }
@@ -319,7 +301,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
     @SuppressLint("PotentialBehaviorOverride")
     override fun onMapReady(p0: GoogleMap) {
         map = p0
-        mapRipple = MapRipple(map, DEFAULT_LATLNG, this)
+//        mapRipple = MapRipple(map, DEFAULT_LATLNG, this)
         map!!.mapType = sharePre.getInt(KEY_MAP, 1)
         map!!.uiSettings.isZoomControlsEnabled = false
         map!!.uiSettings.isMyLocationButtonEnabled = false
@@ -388,8 +370,6 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                     check = true
                 }
                 if (check) {
-                    AppOpenManager.getInstance()
-                        .disableAppResumeWithActivity(GPSActivity::class.java)
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                     val uri = Uri.fromParts("package", packageName, null)
                     intent.setData(uri)
@@ -397,8 +377,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                 } else {
                     initMap()
                     perDialog!!.dismiss()
-                    AppOpenManager.getInstance()
-                        .enableAppResumeWithActivity(GPSActivity::class.java)
+
                 }
             }
             override fun onDismiss() {}
@@ -410,11 +389,9 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                 DialogUtils.initView(this@GPSActivity)
                 sharePre.putInt(KEY_MAP, type)
                 map!!.mapType = type
-                binding.includeBanner.visibility = View.VISIBLE
             }
 
             override fun onClose() {
-                binding.includeBanner.visibility = View.VISIBLE
                 DialogUtils.initView(this@GPSActivity)
             }
         })
@@ -676,7 +653,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                                             }
                                             binding.viewSos.root.visibility = View.VISIBLE
                                             binding.viewSos.root.startAnimation(animation)
-                                            mapRipple!!.withLatLng(latLng)
+                                            /*mapRipple!!.withLatLng(latLng)
                                             mapRipple!!.withNumberOfRipples(3)
                                             mapRipple!!.withFillColor(Color.RED)
                                             mapRipple!!.withStrokeColor(Color.BLACK)
@@ -685,7 +662,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                                             mapRipple!!.withRippleDuration(2000)
                                             mapRipple!!.withTransparency(0.5f)
                                             mapRipple!!.stopRippleMapAnimation()
-                                            mapRipple!!.startRippleMapAnimation()
+                                            mapRipple!!.startRippleMapAnimation()*/
 
                                             binding.viewSos.recyclerView.layoutManager =
                                                 LinearLayoutManager(
@@ -1013,7 +990,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
                 updateRealtimeData(
                     myCode + "/friends/" + fri.code,
                     user1
-                ) { _ -> mapRipple!!.stopRippleMapAnimation() }
+                ) { _ -> /*mapRipple!!.stopRippleMapAnimation()*/ }
             }
         }
     }
@@ -1060,7 +1037,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
         if (sosList.size == 0) {
             mediaPlayer!!.stop()
             binding.viewSos.root.visibility = View.GONE
-            mapRipple!!.stopRippleMapAnimation()
+//            mapRipple!!.stopRippleMapAnimation()
         } else {
             mediaPlayer!!.start()
 
@@ -1170,7 +1147,7 @@ class GPSActivity : BaseActivity<ActivityGpsactivityBinding>(),OnMapReadyCallbac
             ) { _ -> }
             sosList.remove(friendModel)
             stopSOS()
-            mapRipple!!.stopRippleMapAnimation()
+//            mapRipple!!.stopRippleMapAnimation()
             Log.w("Sos", sosList.size.toString())
         } catch (e: java.lang.Exception) {
             e.printStackTrace()

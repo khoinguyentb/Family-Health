@@ -27,7 +27,6 @@ import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.viewmodel.FriendViewModel
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 
@@ -46,8 +45,6 @@ class FriendActivity : BaseActivity<ActivityFriendBinding>() {
     }
 
     override fun initView() {
-        Admob.getInstance()
-            .loadBannerFragment(this, getString(R.string.banner_all), binding.includeBanner)
         binding.btnQR.isSelected = true
         binding.edtSearch.clearFocus()
     }

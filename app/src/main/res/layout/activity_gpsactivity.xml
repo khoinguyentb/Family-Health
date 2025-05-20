@@ -84,18 +84,5 @@
     <include layout="@layout/bottom_sheet_detail"
         android:visibility="gone"
         android:id="@+id/detail_bottom"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="20dp">
-        <include
-            android:id="@+id/includeBanner"
-            layout="@layout/layout_banner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

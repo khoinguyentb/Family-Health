@@ -26,8 +26,6 @@ import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.initAvatarList
 import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.utils.toastDuration
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 
 class EditInformationActivity : BaseActivity<ActivityEditInformationBinding>() {
     override fun setViewBinding(): ActivityEditInformationBinding {
@@ -107,7 +105,6 @@ class EditInformationActivity : BaseActivity<ActivityEditInformationBinding>() {
     }
 
     override fun initView() {
-        Admob.getInstance().loadBannerFragment(this, getString(R.string.banner_all), binding.includeBanner)
     }
 
     override fun initListener() {
@@ -286,34 +283,27 @@ class EditInformationActivity : BaseActivity<ActivityEditInformationBinding>() {
             weight = binding.rulerWeight.value
             height = binding.rulerHeight.value
             dateOfBirth = binding.edtDatebirth.text.toString()
-            Admob.getInstance().setOpenActivityAfterShowInterAds(false)
-            Admob.getInstance().showInterAll(this, object : InterCallback() {
-                override fun onNextAction() {
-                    super.onNextAction()
-                    val users = mapOf(
-                        "name" to (name ?: ""),
-                        "avt" to avt,
-                        "phoneNumber" to (phoneNumber ?: ""),
-                        "weight" to (weight ?: ""),
-                        "height" to (height ?: ""),
-                        "dateOfBirth" to (dateOfBirth ?: ""),
-                        "gender" to (gender ?: ""),
-                        "checkCm" to checkCm,
-                        "checkSt" to checkSt,
-                        "checkLb" to checkLb,
-                        "checkKg" to checkKg,
-                    )
+            val users = mapOf(
+                "name" to (name ?: ""),
+                "avt" to avt,
+                "phoneNumber" to (phoneNumber ?: ""),
+                "weight" to (weight ?: ""),
+                "height" to (height ?: ""),
+                "dateOfBirth" to (dateOfBirth ?: ""),
+                "gender" to (gender ?: ""),
+                "checkCm" to checkCm,
+                "checkSt" to checkSt,
+                "checkLb" to checkLb,
+                "checkKg" to checkKg,
+            )
 
-                    RealtimeDAO.updateRealtimeData(
-                        myCode,
-                        users,
-                        RealtimeDAO.onSuccessListener {
-                            isClick = true
-                            Admob.getInstance().setOpenActivityAfterShowInterAds(true)
-                            finish()
-                        })
-                }
-            })
+            RealtimeDAO.updateRealtimeData(
+                myCode,
+                users,
+                RealtimeDAO.onSuccessListener {
+                    isClick = true
+                    finish()
+                })
         }
     }
 

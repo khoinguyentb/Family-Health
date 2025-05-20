@@ -4,8 +4,6 @@ import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.ValueEventListener
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.adapter.BMIInformationAdapter
 import com.kan.dev.familyhealth.adapter.IBMIRecentListener
@@ -14,11 +12,8 @@ import com.kan.dev.familyhealth.data.RealtimeDAO
 import com.kan.dev.familyhealth.data.RealtimeDAO.getRealtimeData
 import com.kan.dev.familyhealth.data.model.BMI
 import com.kan.dev.familyhealth.databinding.ActivityBmiinformationBinding
-import com.kan.dev.familyhealth.utils.BMIS
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 
 class BMIInformationActivity : BaseActivity<ActivityBmiinformationBinding>(), IBMIRecentListener {
     override fun setViewBinding(): ActivityBmiinformationBinding {
@@ -55,7 +50,6 @@ class BMIInformationActivity : BaseActivity<ActivityBmiinformationBinding>(), IB
     }
 
     override fun initView() {
-        Admob.getInstance().loadCollapsibleBanner(this,getString(R.string.banner_collap))
     }
 
     override fun initListener() {
@@ -70,13 +64,8 @@ class BMIInformationActivity : BaseActivity<ActivityBmiinformationBinding>(), IB
     override fun clickRecent(item: BMI) {
         if (isClick) {
             isClick = false
-            Admob.getInstance().showInterAll(this, object : InterCallback() {
-                override fun onNextAction() {
-                    super.onNextAction()
-                    item.isRecent = true
-                    startActivity(Intent(this@BMIInformationActivity, CalculatorBMIActivity::class.java).putExtra("BMIInformation", item))
-                }
-            })
+            item.isRecent = true
+            startActivity(Intent(this@BMIInformationActivity, CalculatorBMIActivity::class.java).putExtra("BMIInformation", item))
             handler.postDelayed(Runnable { isClick = true }, 500)
         }
     }

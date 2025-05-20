@@ -18,8 +18,6 @@ import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.viewmodel.BMIViewModel
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,7 +47,6 @@ class RecentActivity : BaseActivity<ActivityRecentBinding>(),IRecentListener {
     }
 
     override fun initView() {
-        Admob.getInstance().loadCollapsibleBanner(this, getString(R.string.banner_collap))
     }
 
     override fun initListener() {
@@ -66,15 +63,10 @@ class RecentActivity : BaseActivity<ActivityRecentBinding>(),IRecentListener {
     override fun clickRecent(item: BMI) {
         if (isClick) {
             isClick = false
-            Admob.getInstance().showInterAll(this, object : InterCallback() {
-                override fun onNextAction() {
-                    super.onNextAction()
-                    item.isRecent = true
-                    intent = Intent(this@RecentActivity, CalculatorBMIActivity::class.java)
-                    intent!!.putExtra(BMIS, item)
-                    startActivity(intent)
-                }
-            })
+            item.isRecent = true
+            intent = Intent(this@RecentActivity, CalculatorBMIActivity::class.java)
+            intent!!.putExtra(BMIS, item)
+            startActivity(intent)
             handler.postDelayed(Runnable { isClick = true }, 500)
         }
     }

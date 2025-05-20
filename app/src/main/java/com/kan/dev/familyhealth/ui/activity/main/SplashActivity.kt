@@ -9,8 +9,6 @@ import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.databinding.ActivitySplashBinding
 import com.kan.dev.familyhealth.utils.IS_LANGUAGE
 import com.kan.dev.familyhealth.viewmodel.SplashViewModel
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -22,7 +20,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     private lateinit var mAuth: FirebaseAuth
     private val viewModel : SplashViewModel by viewModels()
 
-    private var interCallBack: InterCallback? = null
     override fun initData() {
         mAuth = FirebaseAuth.getInstance()
         viewModel.isRateApp()
@@ -41,15 +38,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             finish()
             return
         }
-
-        Admob.getInstance().setTimeLimitShowAds(40000)
-        interCallBack = object : InterCallback() {
-            override fun onNextAction() {
-                super.onNextAction()
-                inten()
-            }
-        }
-        Admob.getInstance().loadSplashInterAds2(this, getString(R.string.inter_splash), 2000, interCallBack)
+        inten()
     }
 
 
@@ -57,7 +46,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
     override fun onResume() {
         super.onResume()
-        Admob.getInstance().onCheckShowSplashWhenFail(this, interCallBack, 2000)
     }
     fun inten() {
         startActivity()

@@ -1,24 +1,19 @@
 package com.kan.dev.familyhealth.ui.activity.interaction
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.Typeface
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatRadioButton
-import com.google.android.gms.ads.nativead.NativeAd
-import com.google.android.gms.ads.nativead.NativeAdView
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
-import com.google.zxing.WriterException
 import com.kan.dev.familyhealth.R
 import com.kan.dev.familyhealth.base.BaseActivity
 import com.kan.dev.familyhealth.data.RealtimeDAO
@@ -31,24 +26,17 @@ import com.kan.dev.familyhealth.dialog.DialogAvt
 import com.kan.dev.familyhealth.dialog.DialogDate
 import com.kan.dev.familyhealth.dialog.OnSaveListener
 import com.kan.dev.familyhealth.interfacces.IDateClickListener
+import com.kan.dev.familyhealth.ui.activity.main.MainActivity
 import com.kan.dev.familyhealth.utils.DATE_CHANGE
 import com.kan.dev.familyhealth.utils.FEMALE
-import com.kan.dev.familyhealth.utils.KEY_QR_BITMAP
 import com.kan.dev.familyhealth.utils.MALE
 import com.kan.dev.familyhealth.utils.MY_CODE
 import com.kan.dev.familyhealth.utils.OTHER
 import com.kan.dev.familyhealth.utils.PHONE_PATTERN
-import com.kan.dev.familyhealth.utils.generateQRCode
 import com.kan.dev.familyhealth.utils.handler
 import com.kan.dev.familyhealth.utils.initAvatarList
 import com.kan.dev.familyhealth.utils.isClick
 import com.kan.dev.familyhealth.utils.toastDuration
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.callback.NativeCallback
-import com.lvt.ads.util.Admob
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 
 
 class InformationActivity : BaseActivity<ActivityInformationBinding>(), IDateClickListener {
@@ -74,26 +62,6 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>(), IDateCli
     override fun initData() {
         dialogDate = DialogDate(this, this)
         binding.apply {
-            Admob.getInstance()
-                .loadNativeAd(this@InformationActivity, getString(R.string.native_all), object : NativeCallback() {
-                    override fun onNativeAdLoaded(nativeAd: NativeAd) {
-                        super.onNativeAdLoaded(nativeAd)
-                        val adView = LayoutInflater.from(
-                            applicationContext
-                        ).inflate(
-                                com.lvt.ads.R.layout.ads_native_small_btn_ads_bottom,
-                                null
-                            ) as NativeAdView
-                        binding.nativeAds.removeAllViews()
-                        binding.nativeAds.addView(adView)
-                        Admob.getInstance().pushAdsToViewCustom(nativeAd, adView)
-                    }
-
-                    override fun onAdFailedToLoad() {
-                        super.onAdFailedToLoad()
-                        binding.nativeAds.visibility = View.INVISIBLE
-                    }
-                })
             initRealtimeData()
             actionOnTextChange()
             sex = MALE
@@ -120,12 +88,16 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>(), IDateCli
 
     override fun initListener() {
         binding.apply {
-            btnSave.setOnClickListener { 
-                if (isClick) {
-                    isClick = false
-                    actionSave()
-                }
+            btnSave.setOnClickListener {
+                Log.d("TAG====", "initListener: ")
+                startActivity(Intent(this@InformationActivity,MainActivity::class.java))
+//                actionSave()
             }
+
+            binding.btnSave.setOnClickListener {
+                startActivity(Intent(this@InformationActivity,MainActivity::class.java))
+            }
+
             layoutMale.setOnClickListener { 
                 actionChooseGender(
                     MALE,
@@ -333,44 +305,38 @@ class InformationActivity : BaseActivity<ActivityInformationBinding>(), IDateCli
             weight = binding.rulerWeight.value
             height = binding.rulerHeight.value
             dateOfBirth = binding.edtDatebirth.text.toString()
-            Admob.getInstance().setOpenActivityAfterShowInterAds(false)
-            Admob.getInstance().showInterAll(this, object : InterCallback() {
-                override fun onNextAction() {
-                    super.onNextAction()
-                    val users = mapOf(
-                        "name" to (name ?: ""),
-                        "avt" to avt,
-                        "phoneNumber" to (phoneNumber ?: ""),
-                        "weight" to (weight ?: ""),
-                        "height" to (height ?: ""),
-                        "dateOfBirth" to (dateOfBirth ?: ""),
-                        "gender" to (sex ?: ""),
-                        "latLng" to "",
-                        "isSos" to false,
-                        "isTracking" to true,
-                        "lastActive" to "",
-                        "checkCm" to checkCm,
-                        "checkSt" to checkSt,
-                        "checkLb" to checkLb,
-                        "checkKg" to checkKg,
-                    )
+            val users = mapOf(
+                "name" to (name ?: ""),
+                "avt" to avt,
+                "phoneNumber" to (phoneNumber ?: ""),
+                "weight" to (weight ?: ""),
+                "height" to (height ?: ""),
+                "dateOfBirth" to (dateOfBirth ?: ""),
+                "gender" to (sex ?: ""),
+                "latLng" to "",
+                "isSos" to false,
+                "isTracking" to true,
+                "lastActive" to "",
+                "checkCm" to checkCm,
+                "checkSt" to checkSt,
+                "checkLb" to checkLb,
+                "checkKg" to checkKg,
+            )
 
-                    pushRealtimeData(code!!,users,RealtimeDAO.onSuccessListener{result ->
-                        isClick = true
-                        profileUpdates = UserProfileChangeRequest.Builder()
-                            .setDisplayName(code)
-                            .build()
-                        myUser!!.updateProfile(profileUpdates)
-                            .addOnCompleteListener(OnCompleteListener<Void?> { task ->
-                                if (task.isSuccessful) {
-                                    Log.d("KanMobile", "User profile updated.")
-                                }
-                            })
-                        sharePre.putString(MY_CODE,code)
-                        startActivity(Intent(this@InformationActivity, ShareInformationActivity::class.java))
-                        finish()
+            pushRealtimeData(code!!,users,RealtimeDAO.onSuccessListener{ _ ->
+                isClick = true
+                profileUpdates = UserProfileChangeRequest.Builder()
+                    .setDisplayName(code)
+                    .build()
+                myUser!!.updateProfile(profileUpdates)
+                    .addOnCompleteListener(OnCompleteListener<Void?> { task ->
+                        if (task.isSuccessful) {
+                            Log.d("KanMobile", "User profile updated.")
+                        }
                     })
-                }
+                sharePre.putString(MY_CODE,code)
+                startActivity(Intent(this@InformationActivity, ShareInformationActivity::class.java))
+                finish()
             })
         }
     }

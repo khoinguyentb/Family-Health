@@ -37,8 +37,6 @@ import com.kan.dev.familyhealth.utils.DialogUtils
 import com.kan.dev.familyhealth.utils.checkPer
 import com.kan.dev.familyhealth.utils.checkPerList
 import com.kan.dev.familyhealth.utils.handler
-import com.lvt.ads.util.Admob
-import com.lvt.ads.util.AppOpenManager
 import java.io.IOException
 
 class QRScanActivity : BaseActivity<ActivityQrscanBinding>() {
@@ -58,8 +56,7 @@ class QRScanActivity : BaseActivity<ActivityQrscanBinding>() {
     }
 
     override fun initView() {
-        Admob.getInstance()
-            .loadBannerFragment(this, getString(R.string.banner_all), binding.includeBanner)
+
         initDialog()
         scanner = CodeScanner(applicationContext, binding.scannerView)
         initImage()
@@ -107,8 +104,6 @@ class QRScanActivity : BaseActivity<ActivityQrscanBinding>() {
 
     override fun onResume() {
         super.onResume()
-        AppOpenManager.getInstance().enableAppResumeWithActivity(QRScanActivity::class.java)
-        AppOpenManager.getInstance().enableAppResumeWithActivity(MainActivity::class.java)
         if (scanner != null) {
             scanner!!.startPreview()
         }
@@ -140,8 +135,6 @@ class QRScanActivity : BaseActivity<ActivityQrscanBinding>() {
                     }
                 }
                 if (check) {
-                    AppOpenManager.getInstance()
-                        .disableAppResumeWithActivity(QRScanActivity::class.java)
                     val intent = Intent()
                     intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                     val uri = Uri.fromParts("package", packageName, null)
@@ -150,8 +143,6 @@ class QRScanActivity : BaseActivity<ActivityQrscanBinding>() {
                 } else {
                     initScanner()
                     perDialog!!.dismiss()
-                    AppOpenManager.getInstance()
-                        .enableAppResumeWithActivity(QRScanActivity::class.java)
                 }
             }
 

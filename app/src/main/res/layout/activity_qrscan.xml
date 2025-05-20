@@ -117,7 +117,7 @@
         android:layout_height="wrap_content"
         android:weightSum="2"
         android:id="@+id/layoutButton"
-        android:layout_above="@id/includeBanner"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="18dp"
         android:orientation="horizontal">
         <TextView
@@ -158,13 +158,5 @@
             android:fontFamily="@font/roboto"
             android:textStyle="bold"/>
     </LinearLayout>
-    <include
-        android:id="@+id/includeBanner"
-        layout="@layout/layout_banner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </RelativeLayout>
